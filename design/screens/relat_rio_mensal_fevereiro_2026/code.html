@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<!-- Mobile Container (iPhone 15 Pro Ratio) -->
+<div class="relative w-full max-w-[393px] bg-white dark:bg-slate-950 min-h-screen flex flex-col overflow-hidden shadow-2xl">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md px-6 pt-12 pb-4 flex items-center justify-between">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">chevron_left</span>
+</button>
+<div class="text-center">
+<h1 class="text-[22px] font-bold tracking-tight">Fevereiro 2026</h1>
+<p class="text-sm text-slate-500 dark:text-slate-400">Seu mês em resumo</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">calendar_today</span>
+</button>
+</header>
+<main class="flex-1 overflow-y-auto px-6 pb-24">
+<!-- Monthly Score Circular Ring -->
+<div class="mt-6 flex flex-col items-center">
+<div class="relative w-48 h-48 flex items-center justify-center">
+<!-- Circular Progress Background -->
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-slate-100 dark:text-slate-800" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="105" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-5xl font-bold text-slate-900 dark:text-white">81</span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-1">Score Vital</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-1.5 bg-primary/10 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-primary text-lg font-bold">trending_up</span>
+<p class="text-sm font-medium text-primary">6 pontos acima de janeiro</p>
+</div>
+</div>
+<!-- Dashboard Grid (2x2 Sparklines) -->
+<div class="mt-10 grid grid-cols-2 gap-4">
+<!-- Sono -->
+<div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-2">
+<span class="text-sm font-medium text-slate-500">Sono</span>
+<span class="text-lg font-bold text-slate-900 dark:text-white">74</span>
+</div>
+<div class="h-10 w-full flex items-end gap-1">
+<div class="flex-1 bg-primary/20 h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/20 h-[55%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/20 h-[50%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[65%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-[95%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- Nutrição -->
+<div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-2">
+<span class="text-sm font-medium text-slate-500">Nutrição</span>
+<span class="text-lg font-bold text-slate-900 dark:text-white">81</span>
+</div>
+<div class="h-10 w-full flex items-end gap-1">
+<div class="flex-1 bg-primary/40 h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[78%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[82%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-[81%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- Atividade -->
+<div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-2">
+<span class="text-sm font-medium text-slate-500">Atividade</span>
+<span class="text-lg font-bold text-slate-900 dark:text-white">83</span>
+</div>
+<div class="h-10 w-full flex items-end gap-1">
+<div class="flex-1 bg-primary/20 h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/20 h-[45%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/30 h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/60 h-[85%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-[95%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- Bem-estar -->
+<div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-2">
+<span class="text-sm font-medium text-slate-500">Bem-estar</span>
+<span class="text-lg font-bold text-slate-900 dark:text-white">72</span>
+</div>
+<div class="h-10 w-full flex items-end gap-1">
+<div class="flex-1 bg-amber-200 h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-amber-200 h-[65%] rounded-t-sm"></div>
+<div class="flex-1 bg-amber-200 h-[62%] rounded-t-sm"></div>
+<div class="flex-1 bg-amber-300 h-[68%] rounded-t-sm"></div>
+<div class="flex-1 bg-amber-400 h-[72%] rounded-t-sm"></div>
+<div class="flex-1 bg-amber-500 h-[75%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<!-- Destaques -->
+<section class="mt-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-amber-500 fill-icon">emoji_events</span>
+<h2 class="text-lg font-bold">Destaques do mês</h2>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50">
+<div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-xl">star</span>
+</div>
+<div>
+<p class="text-sm font-medium">Melhor semana de sono</p>
+<p class="text-xs text-slate-500">Semana 2</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50">
+<div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-600 dark:text-orange-400 text-xl">steps</span>
+</div>
+<div>
+<p class="text-sm font-medium">Recorde de passos</p>
+<p class="text-xs text-slate-500">14.200 em 18/fev</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50">
+<div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400 text-xl">restaurant</span>
+</div>
+<div>
+<p class="text-sm font-medium">Maior streak de refeições</p>
+<p class="text-xs text-slate-500">12 dias consecutivos</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Coach Insight -->
+<section class="mt-10 p-5 rounded-2xl bg-primary/5 border border-primary/10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">auto_awesome</span>
+<span class="text-sm font-bold text-primary uppercase tracking-wider">Vital Coach Insight</span>
+</div>
+<p class="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                    Seu progresso em Fevereiro foi excepcional. O aumento na consistência do sono impactou diretamente sua recuperação pós-treino, permitindo que você atingisse novos recordes de atividade física. Mantenha o foco na hidratação durante as refeições para elevar seu score de bem-estar em Março.
+                </p>
+</section>
+<!-- Action Buttons -->
+<div class="mt-8 space-y-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-slate-900 font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl">picture_as_pdf</span>
+                    Exportar PDF
+                </button>
+<button class="w-full bg-transparent border-2 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-900">
+<span class="material-symbols-outlined text-xl">share</span>
+                    Compartilhar com profissional
+                </button>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 px-4 pb-8 pt-3">
+<div class="flex justify-around items-center">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Início</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-[10px] font-medium">Atividade</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-icon">bar_chart</span>
+<span class="text-[10px] font-medium">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="text-[10px] font-medium">Coach</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

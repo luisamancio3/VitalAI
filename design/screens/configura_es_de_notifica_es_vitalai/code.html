@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI - Configurações de Notificação</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2DD4A8",
+                        "background-light": "#F7F8FA",
+                        "background-dark": "#12201c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ios-toggle:checked + div {
+            background-color: #2DD4A8;
+        }
+        .ios-toggle:checked + div > div {
+            transform: translateX(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Mobile Container (iPhone 15 Pro Ratio) -->
+<div class="mx-auto max-w-[393px] min-h-screen bg-background-light dark:bg-background-dark pb-10">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-4 py-4 bg-background-light/80 backdrop-blur-md">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200/50 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back_ios_new</span>
+</button>
+<h1 class="text-[17px] font-semibold text-slate-900 dark:text-slate-100">Notificações</h1>
+<div class="size-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="px-4 space-y-6">
+<!-- Section: Geral -->
+<section>
+<h2 class="px-1 mb-2 text-[13px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">Geral</h2>
+<div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<!-- Row 1: Notificações ativadas -->
+<div class="flex items-center justify-between p-4 border-b border-slate-50 dark:border-slate-700">
+<span class="text-[16px] font-medium">Notificações ativadas</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-[51px] h-[31px] bg-slate-200 dark:bg-slate-600 rounded-full transition-colors duration-200">
+<div class="absolute left-[2px] top-[2px] bg-white w-[27px] h-[27px] rounded-full shadow-md transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+<!-- Row 2: Limite Diário (Slider) -->
+<div class="p-4 border-b border-slate-50 dark:border-slate-700">
+<div class="flex justify-between mb-4">
+<span class="text-[16px] font-medium">Limite diário</span>
+<span class="text-[16px] font-semibold text-primary">6/dia</span>
+</div>
+<div class="relative flex items-center w-full h-6">
+<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="w-[45%] h-full bg-primary"></div>
+</div>
+<div class="absolute left-[45%] size-6 bg-white border-2 border-primary rounded-full shadow-sm -translate-x-1/2"></div>
+</div>
+</div>
+<!-- Row 3: Horário de silêncio -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">schedule</span>
+<span class="text-[16px] font-medium">Horário de silêncio</span>
+</div>
+<span class="text-[15px] text-slate-500">22:00 até 07:00</span>
+</div>
+</div>
+</section>
+<!-- Section: Por tipo -->
+<section>
+<h2 class="px-1 mb-2 text-[13px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">Por tipo</h2>
+<div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<!-- Item 1: Resumo matinal -->
+<div class="flex items-center justify-between p-4 border-b border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-500 text-[20px]">dark_mode</span>
+</div>
+<span class="text-[15px] font-medium">Resumo matinal de sono</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-[51px] h-[31px] bg-slate-200 dark:bg-slate-600 rounded-full transition-colors duration-200">
+<div class="absolute left-[2px] top-[2px] bg-white w-[27px] h-[27px] rounded-full shadow-md transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+<!-- Item 2: Sugestões de refeição -->
+<div class="flex items-center justify-between p-4 border-b border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-500 text-[20px]">restaurant</span>
+</div>
+<span class="text-[15px] font-medium">Sugestões de refeição</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-[51px] h-[31px] bg-slate-200 dark:bg-slate-600 rounded-full transition-colors duration-200">
+<div class="absolute left-[2px] top-[2px] bg-white w-[27px] h-[27px] rounded-full shadow-md transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+<!-- Item 3: Alerta de estresse -->
+<div class="flex items-center justify-between p-4 border-b border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-purple-500 text-[20px]">psychology</span>
+</div>
+<span class="text-[15px] font-medium">Alerta de estresse</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-[51px] h-[31px] bg-slate-200 dark:bg-slate-600 rounded-full transition-colors duration-200">
+<div class="absolute left-[2px] top-[2px] bg-white w-[27px] h-[27px] rounded-full shadow-md transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+<!-- Item 4: Lembrete de movimento -->
+<div class="flex items-center justify-between p-4 border-b border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-500 text-[20px]">directions_walk</span>
+</div>
+<span class="text-[15px] font-medium">Lembrete de movimento</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-[51px] h-[31px] bg-slate-200 dark:bg-slate-600 rounded-full transition-colors duration-200">
+<div class="absolute left-[2px] top-[2px] bg-white w-[27px] h-[27px] rounded-full shadow-md transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+<!-- Item 5: Hidratação -->
+<div class="flex items-center justify-between p-4 border-b border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-400 text-[20px]">water_drop</span>
+</div>
+<span class="text-[15px] font-medium">Lembrete de hidratação</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-[51px] h-[31px] bg-slate-200 dark:bg-slate-600 rounded-full transition-colors duration-200">
+<div class="absolute left-[2px] top-[2px] bg-white w-[27px] h-[27px] rounded-full shadow-md transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+<!-- Item 6: Detecção de refeição -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500 text-[20px]">flatware</span>
+</div>
+<span class="text-[15px] font-medium">Detecção de refeição</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-[51px] h-[31px] bg-slate-200 dark:bg-slate-600 rounded-full transition-colors duration-200">
+<div class="absolute left-[2px] top-[2px] bg-white w-[27px] h-[27px] rounded-full shadow-md transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Section: Feedback -->
+<section>
+<h2 class="px-1 mb-2 text-[13px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">Feedback</h2>
+<div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-500 text-[20px] fill-amber-500">star</span>
+</div>
+<span class="text-[15px] font-medium">Pedir avaliação após refeições</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-[51px] h-[31px] bg-slate-200 dark:bg-slate-600 rounded-full transition-colors duration-200">
+<div class="absolute left-[2px] top-[2px] bg-white w-[27px] h-[27px] rounded-full shadow-md transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Tab Indicator (iOS Style) -->
+<div class="mt-8 flex justify-center">
+<div class="w-32 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+</div>
+</div>
+</body></html>

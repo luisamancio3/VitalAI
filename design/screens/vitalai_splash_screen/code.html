@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#2bd4a7",
+                "background-light": "#f6f8f7",
+                "background-dark": "#12201c",
+              },
+              fontFamily: {
+                "display": ["Inter", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .splash-gradient {
+            background: linear-gradient(135deg, #2DD4A8 0%, #1FA88A 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark">
+<!-- iPhone 15 Pro Container (Approximate) -->
+<div class="relative mx-auto w-full max-w-[393px] h-screen max-h-[852px] flex flex-col items-center justify-center overflow-hidden splash-gradient shadow-2xl">
+<!-- Status Bar Area (Spacer) -->
+<div class="absolute top-0 w-full h-12 flex justify-between items-center px-8">
+<span class="text-white/90 text-sm font-semibold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-symbols-outlined text-white/90 text-sm">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-white/90 text-sm">wifi</span>
+<span class="material-symbols-outlined text-white/90 text-sm">battery_full</span>
+</div>
+</div>
+<!-- Main Content (Centered) -->
+<div class="flex flex-col items-center justify-center space-y-6 px-8 text-center">
+<!-- App Logo: Stylized heart with pulse line -->
+<div class="relative flex items-center justify-center w-24 h-24 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+<span class="material-symbols-outlined text-white text-[64px]" style="font-variation-settings: 'FILL' 1, 'wght' 200;">
+                    favorite
+                </span>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[40px] mt-1" style="font-variation-settings: 'wght' 500;">
+                        show_chart
+                    </span>
+</div>
+</div>
+<!-- Wordmark & Tagline -->
+<div class="space-y-2">
+<h1 class="text-white text-5xl font-bold tracking-tight font-display">
+                    VitalAI
+                </h1>
+<p class="text-white/90 text-lg font-normal font-display max-w-[240px] leading-snug">
+                    Seu companheiro proativo de saúde
+                </p>
+</div>
+</div>
+<!-- Loading Indicator / Progress Component -->
+<div class="absolute bottom-16 w-full px-12">
+<div class="flex flex-col gap-3">
+<div class="rounded-full bg-white/20 h-1 overflow-hidden">
+<div class="h-full bg-white rounded-full w-1/3"></div>
+</div>
+<p class="text-white/70 text-xs font-medium text-center uppercase tracking-widest">Iniciando sistema</p>
+</div>
+</div>
+<!-- Home Indicator (iPhone style) -->
+<div class="absolute bottom-2 w-32 h-1.5 bg-white/30 rounded-full"></div>
+<!-- Decorative Elements for Premium Feel -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-20 -left-20 w-64 h-64 bg-black/5 rounded-full blur-3xl"></div>
+</div>
+</body></html>

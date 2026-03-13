@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "secondary-blue": "#4A90D9",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "text-main": "#1A1A2E",
+                        "text-secondary": "#6B7280"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark flex justify-center items-center min-h-screen">
+<!-- iPhone 15 Pro Wrapper (Mobile Sim) -->
+<div class="relative w-[393px] h-[852px] bg-white overflow-hidden shadow-2xl rounded-[55px] border-[8px] border-slate-900 flex flex-col">
+<!-- Top App Bar Area -->
+<div class="flex items-center bg-white p-4 pb-2 mt-4 justify-between">
+<div class="text-text-main flex size-12 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-primary text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">VitalAI</h2>
+</div>
+<!-- Illustration Area (Top Half) -->
+<div class="flex-1 flex flex-col items-center justify-center px-8 bg-white relative">
+<div class="w-full h-full max-h-[380px] relative flex items-center justify-center">
+<!-- Phone Frame Illustration -->
+<div class="w-40 h-80 bg-slate-100 rounded-[2.5rem] border-4 border-slate-200 relative shadow-inner overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-slate-200 rounded-b-xl"></div>
+</div>
+<!-- Floating Notification Cards -->
+<!-- Sleep Summary Card -->
+<div class="absolute top-[15%] -left-2 w-48 bg-white rounded-xl p-3 shadow-lg border border-primary/10 flex items-center gap-3">
+<div class="size-8 bg-primary/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">bedtime</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-text-main">Resumo do Sono</p>
+<p class="text-[9px] text-text-secondary">7h 45m de sono profundo</p>
+</div>
+</div>
+<!-- Meal Suggestion Card -->
+<div class="absolute top-[45%] -right-4 w-52 bg-white rounded-xl p-3 shadow-lg border border-secondary-blue/10 flex items-center gap-3">
+<div class="size-8 bg-secondary-blue/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-blue text-lg">restaurant</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-text-main">Sugestão de Refeição</p>
+<p class="text-[9px] text-text-secondary">Poke de Salmão para energia</p>
+</div>
+</div>
+<!-- Stress Alert Card -->
+<div class="absolute bottom-[20%] -left-4 w-44 bg-white rounded-xl p-3 shadow-lg border border-primary/10 flex items-center gap-3">
+<div class="size-8 bg-primary/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">psychology</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-text-main">Alerta de Estresse</p>
+<p class="text-[9px] text-text-secondary">Hora de 2 min de respiração</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Text Content Area (Bottom Half) -->
+<div class="bg-white flex flex-col items-center px-8 pb-12 pt-6">
+<h1 class="text-text-main text-[22px] font-bold leading-tight tracking-[-0.015em] text-center mb-3">
+                Você não precisa abrir o app
+            </h1>
+<p class="text-text-secondary text-base font-normal leading-relaxed text-center mb-10">
+                Receba insights sobre sono, nutrição e estresse automaticamente — sem esforço.
+            </p>
+<!-- Page Indicator -->
+<div class="flex flex-row items-center justify-center gap-2 mb-12">
+<div class="h-2 w-2 rounded-full bg-slate-200"></div>
+<div class="h-2 w-6 rounded-full bg-primary"></div>
+<div class="h-2 w-2 rounded-full bg-slate-200"></div>
+</div>
+<!-- Action Button (Continue) -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-4 rounded-xl mb-6 shadow-md transition-all">
+                Continuar
+            </button>
+<!-- Login Link -->
+<a class="text-secondary-blue font-semibold text-sm hover:underline" href="#">
+                Já tenho conta
+            </a>
+</div>
+<!-- Home Indicator -->
+<div class="w-32 h-1 bg-slate-200 rounded-full mx-auto mb-2"></div>
+</div>
+</body></html>

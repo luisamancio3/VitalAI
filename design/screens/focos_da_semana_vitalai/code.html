@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f7f8fa",
+                        "background-dark": "#12201c",
+                        "text-main": "#1a1a2e",
+                        "text-sub": "#6b7280",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .ios-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex justify-center items-start">
+<!-- Mobile Container (iPhone 15 Pro Ratio) -->
+<div class="relative w-full max-w-[393px] min-h-screen bg-background-light dark:bg-background-dark flex flex-col overflow-hidden">
+<!-- Header -->
+<div class="flex items-center bg-white/80 backdrop-blur-md sticky top-0 z-10 px-4 py-4 justify-between border-b border-slate-100">
+<div class="text-text-main flex size-10 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-text-main text-lg font-bold leading-tight tracking-tight flex-1 text-center">VitalAI</h2>
+<div class="size-10"></div> <!-- Spacer -->
+</div>
+<!-- Content Section -->
+<div class="flex-1 px-5 pt-6 pb-24 overflow-y-auto">
+<h1 class="text-text-main text-[22px] font-bold leading-tight tracking-tight mb-6">
+                Seus 3 focos para a semana que vem
+            </h1>
+<!-- Goal Cards Stack -->
+<div class="flex flex-col gap-4">
+<!-- Card 1: Sleep (Blue) -->
+<div class="bg-white rounded-xl p-4 flex items-center justify-between ios-shadow border-l-4 border-blue-500">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-blue-50 shrink-0 size-12 text-blue-600">
+<span class="material-symbols-outlined text-[28px]">bedtime</span>
+</div>
+<div class="flex flex-col">
+<p class="text-text-main text-base font-semibold leading-snug">Dormir até 23h pelo menos 5 dias</p>
+<p class="text-text-sub text-sm font-normal mt-0.5">Suas melhores noites foram quando você dormiu antes das 23h</p>
+</div>
+</div>
+<div class="shrink-0 ml-2">
+<div class="size-6 rounded-full border-2 border-slate-200 flex items-center justify-center"></div>
+</div>
+</div>
+<!-- Card 2: Protein (Red) -->
+<div class="bg-white rounded-xl p-4 flex items-center justify-between ios-shadow border-l-4 border-red-500">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-red-50 shrink-0 size-12 text-red-600">
+<span class="material-symbols-outlined text-[28px]">restaurant</span>
+</div>
+<div class="flex flex-col">
+<p class="text-text-main text-base font-semibold leading-snug">Atingir 150g de proteína nos dias de treino</p>
+<p class="text-text-sub text-sm font-normal mt-0.5">Você ficou em 142g — faltam 8g, equivale a 1 ovo extra</p>
+</div>
+</div>
+<div class="shrink-0 ml-2">
+<div class="size-6 rounded-full border-2 border-slate-200 flex items-center justify-center"></div>
+</div>
+</div>
+<!-- Card 3: Water (Cyan) -->
+<div class="bg-white rounded-xl p-4 flex items-center justify-between ios-shadow border-l-4 border-cyan-400">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-cyan-50 shrink-0 size-12 text-cyan-500">
+<span class="material-symbols-outlined text-[28px]">water_drop</span>
+</div>
+<div class="flex flex-col">
+<p class="text-text-main text-base font-semibold leading-snug">Beber água a cada 2h nos dias de treino</p>
+<p class="text-text-sub text-sm font-normal mt-0.5">Seus dias de melhor HRV foram os com melhor hidratação</p>
+</div>
+</div>
+<div class="shrink-0 ml-2">
+<div class="size-6 rounded-full border-2 border-slate-200 flex items-center justify-center"></div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-10 flex flex-col gap-3">
+<button class="w-full bg-primary py-4 rounded-xl text-white font-bold text-base shadow-lg shadow-primary/20 hover:brightness-105 active:scale-[0.98] transition-all">
+                    Aceitar focos e começar a semana
+                </button>
+<button class="w-full bg-transparent border-2 border-slate-200 py-3.5 rounded-xl text-text-sub font-semibold text-sm flex items-center justify-center gap-2 hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    Exportar relatório (PDF)
+                </button>
+</div>
+<!-- Footer Message -->
+<div class="mt-12 text-center pb-8">
+<p class="text-text-sub text-sm font-medium flex items-center justify-center gap-1.5">
+                    Até domingo que vem. Boa semana, Luis! 
+                    <span class="material-symbols-outlined text-primary text-[18px] fill-1" style="font-variation-settings: 'FILL' 1">favorite</span>
+</p>
+</div>
+</div>
+<!-- Bottom Navigation Bar (Contextual) -->
+<div class="fixed bottom-0 left-0 right-0 max-w-[393px] mx-auto flex gap-2 border-t border-slate-100 bg-white/95 backdrop-blur-md px-4 pb-6 pt-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[26px]">home</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1">analytics</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Relatórios</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[26px]">fitness_center</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Treinos</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[26px]">person</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Perfil</p>
+</a>
+</div>
+</div>
+</body></html>

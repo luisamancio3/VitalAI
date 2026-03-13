@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .progress-ring { transform: rotate(-90deg); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-white text-slate-900 font-display">
+<div class="relative mx-auto max-w-[430px] min-h-screen bg-white pb-32">
+<!-- Top Bar -->
+<header class="flex items-center justify-between px-6 pt-8 pb-4">
+<h1 class="text-[22px] font-bold tracking-tight text-slate-900">Bom dia, Luis</h1>
+<div class="flex items-center gap-3">
+<button class="text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">settings</span>
+</button>
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold border-2 border-primary/10">
+                    L
+                </div>
+</div>
+</header>
+<!-- Summary Card -->
+<section class="px-6 py-2">
+<div class="bg-[#F7F8FA] rounded-xl p-6 shadow-sm flex items-center gap-8 border border-slate-100">
+<!-- Circular Progress -->
+<div class="relative flex items-center justify-center size-24 shrink-0">
+<svg class="progress-ring size-24">
+<circle class="text-slate-200" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="55" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<span class="absolute text-3xl font-bold text-slate-900">78</span>
+</div>
+<!-- Mini Metrics -->
+<div class="flex flex-col gap-3 flex-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">bedtime</span>
+<div>
+<p class="text-sm font-bold leading-none">6h48m</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Sono</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">waves</span>
+<div>
+<p class="text-sm font-bold leading-none">45ms</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">HRV</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">footprint</span>
+<div>
+<p class="text-sm font-bold leading-none">3.240</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Passos</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Daily Timeline -->
+<section class="px-6 pt-8">
+<h2 class="text-lg font-bold text-slate-900 mb-6">Timeline Diária</h2>
+<div class="relative ml-2">
+<!-- Vertical Line -->
+<div class="absolute left-0 top-2 bottom-0 w-[2px] bg-slate-100"></div>
+<!-- Timeline Items -->
+<div class="space-y-8">
+<!-- Item 1: Sono -->
+<div class="relative pl-8">
+<div class="absolute left-[-5px] top-2 size-3 rounded-full bg-primary ring-4 ring-white"></div>
+<p class="text-xs font-semibold text-slate-400 mb-1">07:12</p>
+<div class="bg-white border border-slate-100 rounded-lg p-4 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-500">
+<span class="material-symbols-outlined">bedtime</span>
+</div>
+<div>
+<h3 class="font-bold text-sm">Resumo do sono</h3>
+<p class="text-xs text-slate-500">Qualidade 72 • 6h48min</p>
+</div>
+</div>
+<a class="text-primary text-sm font-bold" href="#">Ver</a>
+</div>
+</div>
+</div>
+<!-- Item 2: Cafe da manha -->
+<div class="relative pl-8">
+<div class="absolute left-[-5px] top-2 size-3 rounded-full bg-slate-200 ring-4 ring-white"></div>
+<p class="text-xs font-semibold text-slate-400 mb-1">08:30</p>
+<div class="bg-white border border-slate-100 rounded-lg p-4 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-orange-50 flex items-center justify-center text-orange-500">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-sm">Café da manhã</h3>
+<p class="text-xs text-slate-500 mb-1">Ovo mexido, pão integral</p>
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined text-xs text-orange-400 fill-current">star</span>
+<span class="material-symbols-outlined text-xs text-orange-400 fill-current">star</span>
+<span class="material-symbols-outlined text-xs text-orange-400 fill-current">star</span>
+<span class="material-symbols-outlined text-xs text-orange-400 fill-current">star</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3: Sugestao AI -->
+<div class="relative pl-8">
+<div class="absolute left-[-5px] top-2 size-3 rounded-full bg-primary ring-4 ring-white"></div>
+<p class="text-xs font-semibold text-slate-400 mb-1">12:15</p>
+<div class="bg-primary/5 border border-primary/20 rounded-lg p-4 shadow-sm">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-bold text-sm">Sugestão de almoço</h3>
+<p class="text-xs text-slate-600">Frango grelhado com arroz</p>
+</div>
+</div>
+<button class="bg-primary text-white text-[11px] font-bold py-1.5 px-3 rounded-lg whitespace-nowrap">Ver receita</button>
+</div>
+</div>
+</div>
+<!-- Item 4: Movimento -->
+<div class="relative pl-8">
+<div class="absolute left-[-5px] top-2 size-3 rounded-full bg-slate-200 ring-4 ring-white"></div>
+<p class="text-xs font-semibold text-slate-400 mb-1">14:00</p>
+<div class="bg-white border border-slate-100 rounded-lg p-4 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">directions_walk</span>
+</div>
+<div>
+<h3 class="font-bold text-sm">Lembrete de movimento</h3>
+<p class="text-xs text-slate-400">90min inativo</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 5: Treino -->
+<div class="relative pl-8">
+<div class="absolute left-[-5px] top-2 size-3 rounded-full bg-primary ring-4 ring-white"></div>
+<p class="text-xs font-semibold text-slate-400 mb-1">18:30</p>
+<div class="bg-white border-l-4 border-l-primary border border-slate-100 rounded-lg p-4 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-green-50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">directions_run</span>
+</div>
+<div>
+<h3 class="font-bold text-sm">Treino detectado</h3>
+<p class="text-xs text-slate-500 font-medium">Corrida 42min • <span class="text-primary">380kcal</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 size-14 bg-primary text-white rounded-full shadow-lg shadow-primary/30 flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 mx-auto max-w-[430px] bg-white/80 backdrop-blur-lg border-t border-slate-100 px-6 py-3 pb-8">
+<div class="flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-current">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[10px] font-bold">Nutrição</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-bold">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Perfil</span>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

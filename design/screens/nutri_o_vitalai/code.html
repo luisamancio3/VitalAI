@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col items-center justify-start">
+<!-- Mobile Container (iPhone 15 Pro Ratio Approximation) -->
+<div class="relative w-full max-w-[393px] min-h-screen bg-white dark:bg-slate-950 shadow-2xl overflow-hidden flex flex-col">
+<!-- Top Bar -->
+<header class="flex items-center justify-between px-6 pt-12 pb-4 bg-white dark:bg-slate-950">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100 cursor-pointer">arrow_back</span>
+<h1 class="text-lg font-bold font-display">Nutrição</h1>
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100 cursor-pointer">calendar_today</span>
+</header>
+<!-- Date Selector -->
+<div class="flex items-center justify-between px-6 py-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-slate-400">chevron_left</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="text-sm font-bold text-slate-900 dark:text-slate-100">Hoje, 13 Mar</span>
+</div>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto px-4 pb-24 space-y-6">
+<!-- Macro Summary Card -->
+<section class="bg-white dark:bg-slate-900 rounded-[12px] p-4 shadow-sm border border-slate-100 dark:border-slate-800">
+<h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">Resumo de Macros</h3>
+<div class="grid grid-cols-4 gap-2">
+<!-- Proteina -->
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-red-500 text-lg">restaurant</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500">Proteína</span>
+<span class="text-[10px] font-bold">62g/150g</span>
+<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
+<div class="bg-red-500 h-full rounded-full" style="width: 41%;"></div>
+</div>
+</div>
+<!-- Carboidrato -->
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-yellow-600 text-lg">bakery_dining</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500">Carbo</span>
+<span class="text-[10px] font-bold">98g/250g</span>
+<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
+<div class="bg-yellow-500 h-full rounded-full" style="width: 39%;"></div>
+</div>
+</div>
+<!-- Gordura -->
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-500 text-lg">water_drop</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500">Gordura</span>
+<span class="text-[10px] font-bold">28g/70g</span>
+<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
+<div class="bg-blue-500 h-full rounded-full" style="width: 40%;"></div>
+</div>
+</div>
+<!-- Calorias -->
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">local_fire_department</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500">Calorias</span>
+<span class="text-[10px] font-bold">892/2200</span>
+<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full rounded-full" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Meal List -->
+<div class="space-y-4">
+<!-- Cafe da Manha -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Café da manhã</h4>
+<span class="text-xs text-slate-400">08:30</span>
+</div>
+<div class="flex gap-3 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 relative">
+<img class="size-16 rounded-lg object-cover" data-alt="Scrambled eggs on whole grain toast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6NXt8mR9Wm6m8c7vHG7dybMugnJzzBvi2iRxHVzIWoVUUDCv5zygbhKVJgS5s9RPEh1VhhFol14MYA32MBGmam1pDdPVC7kCT0zohkmGh-7k73eDdns47hh0k4PAxqwq8eQEbbhzMyV74swMQ9lixJ026tQOkM80uIsqxV8mIQ0DqtBCRGYbNXwN_1aG8Lkkak1ndZLBnLkB82bqgsZabH_-TmZufsIkQRl2RTQFoj3oMiK_UHu3eG8sWCet07B2PlInboGIZoTqo"/>
+<div class="flex-1">
+<h5 class="text-sm font-bold leading-tight">Ovo mexido com pão integral</h5>
+<p class="text-[11px] text-slate-500 mt-0.5">320kcal • P:22g C:35g G:12g</p>
+<div class="flex items-center gap-0.5 mt-1">
+<span class="material-symbols-outlined text-[14px] text-yellow-400 filled-icon">star</span>
+<span class="material-symbols-outlined text-[14px] text-yellow-400 filled-icon">star</span>
+<span class="material-symbols-outlined text-[14px] text-yellow-400 filled-icon">star</span>
+<span class="material-symbols-outlined text-[14px] text-yellow-400 filled-icon">star</span>
+</div>
+</div>
+<div class="absolute top-3 right-3 bg-primary/10 rounded-full p-0.5">
+<span class="material-symbols-outlined text-primary text-sm font-bold">check</span>
+</div>
+</div>
+</div>
+<!-- Almoco AI Suggestion -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Almoço</h4>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-xl p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm filled-icon">auto_awesome</span>
+<span class="text-xs font-bold text-primary uppercase tracking-wide">Sugestão da VitalAI</span>
+</div>
+<h5 class="text-sm font-bold mb-1">Frango grelhado com arroz e brócolis</h5>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 bg-primary text-white text-xs font-bold py-2 rounded-lg hover:brightness-95 transition-all">Aceitar</button>
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold py-2 rounded-lg hover:brightness-95 transition-all">Outra opção</button>
+</div>
+</div>
+</div>
+<!-- Lanche Placeholder -->
+<div class="space-y-2">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Lanche</h4>
+<div class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-3xl">restaurant</span>
+<button class="text-sm font-semibold text-primary">Registrar refeição</button>
+</div>
+</div>
+<!-- Jantar Placeholder -->
+<div class="space-y-2">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Jantar</h4>
+<div class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-3xl">restaurant</span>
+<button class="text-sm font-semibold text-primary">Registrar refeição</button>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="absolute bottom-24 right-6 size-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-10">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="absolute bottom-0 w-full bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 px-6 py-3 flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">home</span>
+<span class="text-[10px] font-medium text-slate-400">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined text-primary filled-icon">nutrition</span>
+<span class="text-[10px] font-bold text-primary">Nutrição</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">bar_chart</span>
+<span class="text-[10px] font-medium text-slate-400">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">person</span>
+<span class="text-[10px] font-medium text-slate-400">Perfil</span>
+</a>
+</nav>
+<!-- Screen Overlay Mockup Notch -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-950 rounded-b-2xl z-20"></div>
+</div>
+</body></html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>iPhone 15 Pro Lock Screen - VitalAI</title>
+<!-- Load Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Load Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            ios: {
+              glass: 'rgba(255, 255, 255, 0.15)',
+              glassHover: 'rgba(255, 255, 255, 0.25)',
+              textSecondary: '#EBEBF599',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-glass-effects">
+    .ios-blur {
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 0.5px solid rgba(255, 255, 255, 0.1);
+    }
+    .status-bar-icon {
+      filter: invert(1);
+    }
+    .wallpaper-gradient {
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 40%, #064e3b 100%);
+    }
+  </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen">
+<!-- BEGIN: PhoneFrame -->
+<div class="relative w-[393px] h-[852px] rounded-[55px] overflow-hidden border-[8px] border-[#1a1a1a] shadow-2xl wallpaper-gradient" data-purpose="device-frame">
+<!-- BEGIN: DynamicIsland -->
+<div class="absolute top-3 left-1/2 -translate-x-1/2 w-32 h-9 bg-black rounded-[20px] z-50" data-purpose="dynamic-island"></div>
+<!-- END: DynamicIsland -->
+<!-- BEGIN: StatusBar -->
+<div class="flex justify-between items-center px-10 pt-10 text-white text-[13px] font-semibold" data-purpose="status-bar">
+<span>9:41</span>
+<div class="flex gap-1.5 items-center">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16z"></path></svg>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+<div class="w-6 h-3 rounded-sm border border-white/50 relative">
+<div class="absolute inset-[1px] bg-white w-4/5 rounded-px"></div>
+</div>
+</div>
+</div>
+<!-- END: StatusBar -->
+<!-- BEGIN: ClockSection -->
+<section class="mt-12 text-center text-white" data-purpose="clock-date-container">
+<p class="text-[19px] font-medium tracking-tight mb-1">Quinta-feira, 13 de março</p>
+<h1 class="text-[96px] font-bold leading-none tracking-tighter">07:12</h1>
+</section>
+<!-- END: ClockSection -->
+<!-- BEGIN: NotificationSection -->
+<main class="absolute inset-x-0 bottom-[140px] px-4 space-y-4" data-purpose="notification-center">
+<!-- BEGIN: VitalAINotification -->
+<div class="ios-blur bg-ios-glass rounded-[28px] p-4 text-white shadow-lg" data-purpose="notification-card">
+<!-- Notification Header -->
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<!-- App Icon -->
+<div class="w-6 h-6 bg-emerald-500 rounded-md flex items-center justify-center">
+<svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</div>
+<span class="font-bold text-[13px] tracking-wide">VitalAI</span>
+</div>
+<span class="text-white/60 text-[12px]">agora</span>
+</div>
+<!-- Notification Body -->
+<div class="text-[14px] leading-snug font-medium mb-4">
+          Bom dia, Luis! Você dormiu 6h48min com qualidade 72. Seu HRV está um pouco abaixo do normal — café sugerido: ovo mexido com pão integral e uma fruta.
+        </div>
+<!-- Action Buttons -->
+<div class="flex gap-2">
+<button class="flex-1 py-2.5 ios-blur bg-white/10 rounded-xl text-[14px] font-semibold transition hover:bg-white/20">
+            Ver detalhes
+          </button>
+<button class="flex-1 py-2.5 ios-blur bg-white/10 rounded-xl text-[14px] font-semibold transition hover:bg-white/20">
+            Útil
+          </button>
+</div>
+</div>
+<!-- END: VitalAINotification -->
+</main>
+<!-- END: NotificationSection -->
+<!-- BEGIN: BottomControls -->
+<footer class="absolute bottom-12 inset-x-0 px-12 flex justify-between items-center" data-purpose="lock-screen-footer">
+<!-- Flashlight -->
+<button class="w-12 h-12 rounded-full ios-blur bg-black/30 flex items-center justify-center text-white">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</button>
+<!-- Home Indicator (Small bar) -->
+<div class="absolute bottom-[-16px] left-1/2 -translate-x-1/2 w-[134px] h-[5px] bg-white rounded-full"></div>
+<!-- Camera -->
+<button class="w-12 h-12 rounded-full ios-blur bg-black/30 flex items-center justify-center text-white">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</button>
+</footer>
+<!-- END: BottomControls -->
+</div>
+<!-- END: PhoneFrame -->
+</body></html>

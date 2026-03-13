@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI - Notificações</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "navy-custom": "#1A1A2E",
+                        "gray-custom": "#6B7280"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-white text-slate-900 font-display">
+<div class="relative flex min-h-screen w-full flex-col bg-white overflow-x-hidden max-w-md mx-auto">
+<!-- Top App Bar & Progress -->
+<div class="flex items-center bg-white p-4 pb-2 justify-between">
+<div class="text-navy-custom flex size-12 shrink-0 items-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-navy-custom text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">VitalAI</h2>
+</div>
+<div class="flex flex-col gap-3 p-4">
+<div class="flex gap-6 justify-between">
+<p class="text-navy-custom text-base font-medium leading-normal">Progresso da configuração</p>
+<p class="text-navy-custom text-sm font-normal leading-normal">4 de 5</p>
+</div>
+<div class="rounded-full bg-primary/20 h-2 w-full">
+<div class="h-2 rounded-full bg-primary" style="width: 80%;"></div>
+</div>
+</div>
+<!-- Illustration Area -->
+<div class="relative flex flex-col items-center justify-center py-10 px-4">
+<!-- Overlapping Notification Cards Representation -->
+<div class="relative w-full max-w-[280px] h-48">
+<!-- Bottom Card -->
+<div class="absolute top-4 left-4 right-4 h-24 bg-white/40 border border-primary/10 rounded-xl shadow-sm z-0"></div>
+<!-- Middle Card -->
+<div class="absolute top-2 left-2 right-2 h-24 bg-white/70 border border-primary/20 rounded-xl shadow-md z-10"></div>
+<!-- Top Main Card -->
+<div class="absolute top-0 left-0 right-0 bg-white border border-primary/30 p-4 rounded-xl shadow-lg z-20 flex gap-3 items-start">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-xl">notifications_active</span>
+</div>
+<div>
+<div class="h-2 w-24 bg-primary/20 rounded-full mb-2"></div>
+<div class="h-2 w-full bg-slate-100 rounded-full mb-2"></div>
+<div class="h-2 w-2/3 bg-slate-100 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Title & Subtitle -->
+<div class="px-6 text-center">
+<h1 class="text-navy-custom text-[22px] font-bold leading-tight tracking-tight mb-3">Insights que chegam até você</h1>
+<p class="text-gray-custom text-sm font-normal leading-relaxed px-2">
+                O VitalAI envia sugestões no momento certo — sem você precisar abrir o app. Você controla a frequência e os horários.
+            </p>
+</div>
+<!-- Realistic iOS Mockup Card -->
+<div class="mt-10 px-6">
+<div class="bg-gray-50 p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-2">
+<div class="flex justify-between items-center mb-1">
+<div class="flex items-center gap-2">
+<div class="size-5 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-white">bolt</span>
+</div>
+<span class="text-xs font-semibold text-slate-800 uppercase tracking-wider">VitalAI</span>
+</div>
+<span class="text-[10px] text-gray-custom">agora</span>
+</div>
+<p class="text-sm text-slate-800 leading-snug">
+<span class="font-bold">Bom dia!</span> Você dormiu 7h12min com qualidade 85. Café sugerido: ovos mexidos com pão integral.
+                </p>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-auto p-6 flex flex-col gap-4">
+<button class="w-full h-12 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform">
+                Ativar notificações
+            </button>
+<button class="w-full py-2 text-gray-custom text-sm font-medium text-center">
+                Agora não
+            </button>
+</div>
+<div class="h-6"></div>
+</div>
+</body></html>

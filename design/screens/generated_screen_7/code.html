@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI Watch Notification</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="watch-base-styles">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #1a1a1a; /* Dark background to simulate the environment */
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Simulation of the Apple Watch Series 9 44mm Frame */
+    .watch-frame {
+      width: 396px;
+      height: 484px;
+      background-color: #000000;
+      border-radius: 80px; /* Signature Apple Watch curvature */
+      border: 8px solid #222;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 24px 60px 24px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    }
+  </style>
+<style data-purpose="button-styling">
+    .btn-action {
+      width: 80px;
+      height: 80px;
+      border-radius: 9999px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.2s;
+    }
+    .btn-action:active {
+      opacity: 0.7;
+    }
+    .icon-svg {
+      width: 32px;
+      height: 32px;
+      stroke-width: 3;
+    }
+  </style>
+</head>
+<body>
+<!-- BEGIN: Watch Container -->
+<div class="watch-frame" data-purpose="apple-watch-face">
+<!-- BEGIN: Header Section -->
+<header class="flex flex-col items-center">
+<!-- VitalAI Logo -->
+<div class="w-10 h-10 bg-[#2DD4A8] rounded-full flex items-center justify-center mb-6" data-purpose="app-logo">
+<svg class="w-6 h-6" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+</svg>
+</div>
+</header>
+<!-- END: Header Section -->
+<!-- BEGIN: Content Section -->
+<main class="text-center" data-purpose="notification-body">
+<h1 class="text-white font-bold text-[18px] leading-tight">
+        Comendo agora?
+      </h1>
+</main>
+<!-- END: Content Section -->
+<!-- BEGIN: Action Buttons -->
+<footer class="flex justify-between w-full px-4" data-purpose="action-buttons">
+<!-- Affirmative Action (Sim) -->
+<button aria-label="Sim" class="btn-action bg-[#2DD4A8]" data-purpose="confirm-button">
+<svg class="icon-svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 24 24">
+<polyline points="20 6 9 17 4 12"></polyline>
+</svg>
+</button>
+<!-- Negative Action (Não) -->
+<button aria-label="Não" class="btn-action bg-[#333333]" data-purpose="cancel-button">
+<svg class="icon-svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+</footer>
+<!-- END: Action Buttons -->
+</div>
+<!-- END: Watch Container -->
+</body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>VitalAI - Relatório Nutricional</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Main Container (iPhone 15 Pro Ratio) -->
+<div class="relative mx-auto min-h-screen max-w-[393px] bg-white dark:bg-slate-950 shadow-2xl flex flex-col">
+<!-- Top Bar -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Relatório semanal</h1>
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">share</span>
+</button>
+</header>
+<!-- Navigation Tabs -->
+<nav class="flex border-b border-slate-100 dark:border-slate-800">
+<button class="flex-1 py-4 text-sm font-semibold text-slate-400 dark:text-slate-500 border-b-2 border-transparent">Sono</button>
+<button class="flex-1 py-4 text-sm font-bold text-slate-900 dark:text-white border-b-2 border-primary">Nutrição</button>
+<button class="flex-1 py-4 text-sm font-semibold text-slate-400 dark:text-slate-500 border-b-2 border-transparent">Atividade</button>
+</nav>
+<!-- Content Area -->
+<main class="flex-1 overflow-y-auto px-4 pb-24">
+<!-- Section Header -->
+<div class="flex items-center justify-between py-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">restaurant</span>
+<h2 class="text-[22px] font-bold">Nutrição</h2>
+</div>
+<div class="flex items-center justify-center h-10 w-10 rounded-full border-2 border-primary bg-primary/10">
+<span class="text-primary font-bold text-sm">81</span>
+</div>
+</div>
+<!-- Stacked Bar Chart Card -->
+<div class="bg-slate-50 dark:bg-slate-900 rounded-xl p-4 mb-6 relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Ingestão calórica diária</p>
+<div class="flex gap-2">
+<div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#EF4444]"></span><span class="text-[10px]">P</span></div>
+<div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#F59E0B]"></span><span class="text-[10px]">C</span></div>
+<div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#3B82F6]"></span><span class="text-[10px]">G</span></div>
+</div>
+</div>
+<div class="relative h-48 flex items-end justify-between px-2 gap-2 mb-2">
+<!-- Calorie Goal Line -->
+<div class="absolute w-full border-t border-dashed border-slate-300 dark:border-slate-600 top-1/4 left-0 z-0"></div>
+<!-- Bars -->
+<div class="flex flex-col flex-1 gap-0.5 z-10">
+<div class="flex flex-col-reverse h-32 rounded-sm overflow-hidden">
+<div class="bg-[#EF4444] h-1/3 w-full"></div>
+<div class="bg-[#F59E0B] h-1/2 w-full"></div>
+<div class="bg-[#3B82F6] h-1/6 w-full"></div>
+</div>
+<span class="text-center text-[11px] font-bold text-slate-500 mt-2">S</span>
+</div>
+<div class="flex flex-col flex-1 gap-0.5 z-10">
+<div class="flex flex-col-reverse h-36 rounded-sm overflow-hidden">
+<div class="bg-[#EF4444] h-1/4 w-full"></div>
+<div class="bg-[#F59E0B] h-2/4 w-full"></div>
+<div class="bg-[#3B82F6] h-1/4 w-full"></div>
+</div>
+<span class="text-center text-[11px] font-bold text-slate-500 mt-2">T</span>
+</div>
+<div class="flex flex-col flex-1 gap-0.5 z-10">
+<div class="flex flex-col-reverse h-28 rounded-sm overflow-hidden">
+<div class="bg-[#EF4444] h-1/3 w-full"></div>
+<div class="bg-[#F59E0B] h-1/3 w-full"></div>
+<div class="bg-[#3B82F6] h-1/3 w-full"></div>
+</div>
+<span class="text-center text-[11px] font-bold text-slate-500 mt-2">Q</span>
+</div>
+<div class="flex flex-col flex-1 gap-0.5 z-10">
+<div class="flex flex-col-reverse h-40 rounded-sm overflow-hidden">
+<div class="bg-[#EF4444] h-1/4 w-full"></div>
+<div class="bg-[#F59E0B] h-2/4 w-full"></div>
+<div class="bg-[#3B82F6] h-1/4 w-full"></div>
+</div>
+<span class="text-center text-[11px] font-bold text-slate-500 mt-2">Q</span>
+</div>
+<div class="flex flex-col flex-1 gap-0.5 z-10">
+<div class="flex flex-col-reverse h-32 rounded-sm overflow-hidden">
+<div class="bg-[#EF4444] h-1/2 w-full"></div>
+<div class="bg-[#F59E0B] h-1/4 w-full"></div>
+<div class="bg-[#3B82F6] h-1/4 w-full"></div>
+</div>
+<span class="text-center text-[11px] font-bold text-slate-500 mt-2">S</span>
+</div>
+<div class="flex flex-col flex-1 gap-0.5 z-10">
+<div class="flex flex-col-reverse h-24 rounded-sm overflow-hidden">
+<div class="bg-[#EF4444] h-1/3 w-full"></div>
+<div class="bg-[#F59E0B] h-1/2 w-full"></div>
+<div class="bg-[#3B82F6] h-1/6 w-full"></div>
+</div>
+<span class="text-center text-[11px] font-bold text-slate-500 mt-2">S</span>
+</div>
+<div class="flex flex-col flex-1 gap-0.5 z-10">
+<div class="flex flex-col-reverse h-36 rounded-sm overflow-hidden">
+<div class="bg-[#EF4444] h-1/3 w-full"></div>
+<div class="bg-[#F59E0B] h-1/3 w-full"></div>
+<div class="bg-[#3B82F6] h-1/3 w-full"></div>
+</div>
+<span class="text-center text-[11px] font-bold text-slate-500 mt-2">D</span>
+</div>
+</div>
+</div>
+<!-- Metrics List -->
+<div class="space-y-5 mb-8">
+<div>
+<div class="flex justify-between text-sm mb-1.5">
+<span class="text-slate-600 dark:text-slate-400 font-medium">Refeições registradas</span>
+<span class="font-bold">19/21 (90%)</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 90%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1.5">
+<span class="text-slate-600 dark:text-slate-400 font-medium">Média de proteína</span>
+<span class="font-bold">142g/dia (meta: 150g)</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1.5">
+<span class="text-slate-600 dark:text-slate-400 font-medium">Dias dentro da meta calórica</span>
+<span class="font-bold">5/7</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 71%"></div>
+</div>
+</div>
+</div>
+<!-- Coach Insight Card -->
+<div class="bg-primary/10 dark:bg-primary/5 rounded-xl p-4 mb-8 border border-primary/20">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">auto_awesome</span>
+<div>
+<p class="text-sm leading-relaxed text-slate-800 dark:text-slate-200">
+                            Excelente aderência ao registro de refeições essa semana! Sua proteína ficou consistentemente perto da meta. Nos dias de treino, aumente o carb em 15-20% para melhor recuperação.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Favorite Meals Section -->
+<div class="mb-6">
+<h3 class="text-[18px] font-semibold mb-4">Refeições favoritas da semana</h3>
+<div class="space-y-3">
+<!-- Card 1 -->
+<div class="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-100 dark:border-slate-800">
+<div class="w-16 h-16 rounded-lg bg-slate-200 overflow-hidden shrink-0">
+<img alt="Wrap de frango" class="w-full h-full object-cover" data-alt="Healthy chicken wrap with fresh greens and rice" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqQBQAjufoLLrqWvmf1MJv6lVIfMg-PXz9G9BEC1gXO9OGSzfL7jnlRqfYSUDj4-BOw_Jip5aXFE18y7lyyQqdD0suSGmNprsuGOMsiPclcIpKZAWOVWma0lriSNdjd46fbemviFy4Yto9lqpeLUr7zAb3QnDEkRQhAdgQD9OJcVIKtoe_rlpH12OSdXlldiFlScvKBpvOHPz5dR52OUPFkkLTtgVv289zeOKUhryE2V-iT3KuZXJFBwaMcRwW_XR0eNScGaca2Z41"/>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold truncate">Wrap de frango com arroz</h4>
+<div class="flex text-[#F59E0B]">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-100 dark:border-slate-800">
+<div class="w-16 h-16 rounded-lg bg-slate-200 overflow-hidden shrink-0">
+<img alt="Omelete" class="w-full h-full object-cover" data-alt="Fluffy omelette with side of sweet potatoes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1iLKj7LgrhwDLq6J1u5pSQtayyl8U-VrbEcS5nMNiMzyASRkzRApSyL4vooVc5pTD_sLYciXO6pU11syPNzCa0TdRcB7rGzgCZVIEbj31TDrkGT7pOg61tQQHNfUivjAFdho00byW7Lyrjl380x6vm_qXo48e1P65tMT9FuvZqAF7YB5PgkEIt4FoNGND3-hplbXjavcXSpSAk51gI38lj4VTfP1fsjz0awI225wqGnc1rPooM512FbK8CZzDM8gxH5pXg_lLrzpn"/>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold truncate">Omelete com batata doce</h4>
+<div class="flex text-[#F59E0B]">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm text-slate-300">star</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<div class="absolute bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 px-4 pb-8 pt-3 flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 flex-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[10px] font-medium">Hoje</span>
+</a>
+<a class="flex flex-col items-center gap-1 flex-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">bar_chart</span>
+<span class="text-[10px] font-bold">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1 flex-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-medium">Planos</span>
+</a>
+<a class="flex flex-col items-center gap-1 flex-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</div>
+</div>
+</body></html>

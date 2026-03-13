@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "vital-navy": "#1A1A2E",
+                        "vital-gray": "#6B7280",
+                        "vital-blue": "#4A90D9",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px",
+                    },
+                },
+            },
+        }
+    </script>
+<title>VitalAI - Crie sua conta</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased">
+<div class="relative flex min-h-screen w-full flex-col bg-white dark:bg-background-dark overflow-x-hidden max-w-md mx-auto">
+<!-- Header / Logo Section -->
+<div class="flex flex-col items-center pt-12 pb-8">
+<div class="text-primary flex size-12 shrink-0 items-center justify-center mb-2" data-icon="Pulse">
+<span class="material-symbols-outlined text-4xl font-bold">monitor_heart</span>
+</div>
+<h2 class="text-vital-navy dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">VitalAI</h2>
+</div>
+<!-- Title Section -->
+<div class="px-6 text-center mb-8">
+<h1 class="text-vital-navy dark:text-slate-100 text-[22px] font-bold leading-tight tracking-tight">Crie sua conta</h1>
+</div>
+<!-- Social Buttons Section -->
+<div class="flex flex-col gap-3 px-6 mb-6">
+<button class="flex h-12 w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-xl bg-black text-white text-sm font-semibold tracking-wide shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-xl">ios</span>
+<span class="truncate">Continuar com Apple</span>
+</button>
+<button class="flex h-12 w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-xl border border-slate-200 bg-white text-vital-navy text-sm font-semibold tracking-wide shadow-sm hover:bg-slate-50 transition-colors">
+<img alt="Google Logo" class="w-5 h-5" data-alt="Official Google icon with multi-color G logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChv_j0S0XUO8zhPV9ovVn5ELEGPnX9ELV4Vw5GCSeXNli_O87TlyKxe6EZyhaPwl_hHNO6hMv4a418z1pRKqKx8LXSBlJLYcRZaMQ_LW5SKdRYHlLQQf5TGwVqd30ZJoO5LmtSbkgU9jcdiE69pPTDBKwjaWXzGrWxY18bTz7qt0XnFwXsm9gx_OsvfZr6bdow7N8IBEO-PAtzTDbmc42UxnmjcVZVJqvtFWKCWkz9sO9CK2MnhEOQ6cR1Ox8hxNZgjPoPPW-fbBG2"/>
+<span class="truncate">Continuar com Google</span>
+</button>
+</div>
+<!-- Divider -->
+<div class="relative flex items-center px-6 mb-6">
+<div class="flex-grow border-t border-slate-200"></div>
+<span class="flex-shrink mx-4 text-vital-gray text-sm font-medium">ou</span>
+<div class="flex-grow border-t border-slate-200"></div>
+</div>
+<!-- Form Section -->
+<div class="flex flex-col gap-4 px-6 mb-8">
+<div class="flex flex-col gap-1.5">
+<label class="text-vital-navy dark:text-slate-300 text-sm font-semibold px-1">Email</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-vital-gray text-xl">mail</span>
+<input class="h-12 w-full pl-12 pr-4 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-vital-navy transition-all placeholder:text-vital-gray/60" placeholder="seu@email.com" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-vital-navy dark:text-slate-300 text-sm font-semibold px-1">Senha</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-vital-gray text-xl">lock</span>
+<input class="h-12 w-full pl-12 pr-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-vital-navy transition-all placeholder:text-vital-gray/60" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 text-vital-gray hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="px-6 mb-8">
+<button class="flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-primary text-white text-base font-bold tracking-wide shadow-lg shadow-primary/20 hover:brightness-105 active:scale-[0.98] transition-all">
+                Criar conta
+            </button>
+</div>
+<!-- Legal and Login Footer -->
+<div class="mt-auto px-8 pb-10 text-center flex flex-col gap-6">
+<p class="text-xs leading-relaxed text-vital-gray">
+                Ao criar conta, você concorda com os 
+                <a class="text-vital-blue underline underline-offset-2 font-medium" href="#">Termos de Uso</a> 
+                e 
+                <a class="text-vital-blue underline underline-offset-2 font-medium" href="#">Política de Privacidade</a>.
+            </p>
+<a class="text-vital-blue text-sm font-semibold hover:opacity-80 transition-opacity" href="#">
+                Já tenho conta? Entrar
+            </a>
+</div>
+</div>
+</body></html>

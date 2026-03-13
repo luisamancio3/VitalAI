@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#2bd4a7",
+                "background-light": "#f6f8f7",
+                "background-dark": "#12201c",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 flex justify-center items-center min-h-screen p-4">
+<!-- iPhone 15 Pro Wrapper -->
+<div class="relative w-[393px] h-[852px] bg-white dark:bg-slate-900 rounded-[3rem] shadow-2xl border-[8px] border-slate-800 overflow-hidden flex flex-col">
+<!-- Status Bar Space -->
+<div class="h-12 w-full flex items-end px-8 justify-between">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-icons-round text-[18px]">signal_cellular_4_bar</span>
+<span class="material-icons-round text-[18px]">wifi</span>
+<span class="material-icons-round text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Header -->
+<header class="px-6 pt-6 pb-2">
+<div class="flex items-center justify-between mb-6">
+<button class="w-10 h-10 flex items-center justify-start text-slate-900 dark:text-slate-100">
+<span class="material-icons-round">arrow_back_ios</span>
+</button>
+<h1 class="text-lg font-bold">Seus horários</h1>
+<div class="w-10"></div> <!-- Spacer -->
+</div>
+<!-- Progress Bar -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs font-medium text-slate-500">
+<span>Passo 5 de 5</span>
+<span class="text-primary">100%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full rounded-full"></div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 overflow-y-auto pt-4 pb-8">
+<!-- Clock Section -->
+<section class="mb-10">
+<h2 class="text-lg font-bold mb-8 leading-tight">Quando você prefere não ser interrompido?</h2>
+<div class="relative flex flex-col items-center">
+<!-- Circular Clock UI -->
+<div class="relative w-64 h-64 rounded-full border-[12px] border-slate-100 dark:border-slate-800 flex items-center justify-center">
+<!-- Shaded Arc (22:00 to 07:00) -->
+<div class="absolute inset-[-12px] rounded-full" style="background: conic-gradient(from 330deg, transparent 0deg, transparent 135deg, #475569 135deg, #475569 270deg, transparent 270deg);"></div>
+<!-- Active Arc (07:00 to 22:00) -->
+<div class="absolute inset-[-12px] rounded-full" style="background: conic-gradient(from 105deg, transparent 0deg, #2bd4a7 0deg, #2bd4a7 225deg, transparent 225deg);"></div>
+<!-- Inner Face -->
+<div class="z-10 bg-white dark:bg-slate-900 w-full h-full rounded-full shadow-inner flex flex-col items-center justify-center">
+<span class="material-icons-round text-slate-400 text-3xl mb-1">bedtime</span>
+<span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Duração</span>
+<span class="text-2xl font-bold">9h</span>
+</div>
+<!-- Handles (Visual Only) -->
+<div class="absolute top-[-12px] left-1/2 -translate-x-1/2 w-6 h-6 bg-white dark:bg-slate-900 border-4 border-slate-600 rounded-full z-20 shadow-md" style="transform: translate(-50%, 0) rotate(105deg) translateY(-120px);"></div>
+<div class="absolute top-[-12px] left-1/2 -translate-x-1/2 w-6 h-6 bg-white dark:bg-slate-900 border-4 border-primary rounded-full z-20 shadow-md" style="transform: translate(-50%, 0) rotate(330deg) translateY(-120px);"></div>
+</div>
+<div class="mt-8 bg-slate-50 dark:bg-slate-800/50 px-6 py-3 rounded-xl border border-slate-100 dark:border-slate-800">
+<p class="text-sm font-semibold text-slate-600 dark:text-slate-300">
+                            Silêncio das <span class="text-slate-900 dark:text-white font-bold">22:00</span> às <span class="text-slate-900 dark:text-white font-bold">07:00</span>
+</p>
+</div>
+</div>
+</section>
+<!-- Focus Mode Toggle -->
+<section class="mb-10">
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons-round text-xl">do_not_disturb_on</span>
+</div>
+<span class="font-medium text-[15px]">Respeitar modo Foco do iPhone</span>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Notification Count Slider -->
+<section class="mb-6">
+<h2 class="text-lg font-bold mb-6 leading-tight">Quantas notificações por dia?</h2>
+<div class="space-y-6 px-2">
+<div class="flex justify-center">
+<span class="text-primary font-bold text-lg bg-primary/10 px-4 py-1 rounded-full">Até 6 notificações por dia</span>
+</div>
+<div class="relative w-full h-8 flex items-center">
+<div class="absolute w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+<div class="absolute w-1/2 h-1.5 bg-primary rounded-full"></div>
+<!-- Slider Thumb -->
+<div class="absolute left-1/2 -translate-x-1/2 w-7 h-7 bg-white dark:bg-slate-900 border-4 border-primary rounded-full shadow-lg z-10"></div>
+<!-- Track markers -->
+<div class="absolute w-full flex justify-between px-1">
+<span class="text-[10px] font-bold text-slate-400 mt-8">2</span>
+<span class="text-[10px] font-bold text-slate-400 mt-8">4</span>
+<span class="text-[10px] font-bold text-slate-400 mt-8">6</span>
+<span class="text-[10px] font-bold text-slate-400 mt-8">8</span>
+<span class="text-[10px] font-bold text-slate-400 mt-8">10</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Button -->
+<footer class="p-6 pt-2 pb-10">
+<button class="w-full h-12 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:brightness-105 active:scale-[0.98] transition-all">
+                Começar a usar o VitalAI
+            </button>
+<!-- iPhone Indicator -->
+<div class="mt-8 flex justify-center">
+<div class="w-32 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "slate-custom": "#1A1A2E",
+                        "gray-custom": "#6B7280",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>VitalAI - Perfil</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-custom dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Header -->
+<header class="flex items-center bg-white dark:bg-slate-900 p-4 border-b border-primary/10">
+<div class="flex size-10 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-slate-custom dark:text-slate-100">arrow_back</span>
+</div>
+<h2 class="text-lg font-bold flex-1 text-center">VitalAI</h2>
+<div class="flex size-10 items-center justify-end">
+<span class="material-symbols-outlined text-slate-custom dark:text-slate-100">settings</span>
+</div>
+</header>
+<!-- Profile Section -->
+<main class="flex-1 overflow-y-auto pb-24">
+<div class="flex flex-col items-center pt-8 pb-6 bg-white dark:bg-slate-900 border-b border-primary/10">
+<div class="size-16 rounded-full bg-primary flex items-center justify-center mb-4 shadow-lg shadow-primary/20">
+<span class="text-white text-xl font-bold">LA</span>
+</div>
+<h1 class="text-lg font-bold text-slate-custom dark:text-slate-100">Luis Amancio</h1>
+<p class="text-sm text-gray-custom dark:text-slate-400 mb-3">luis@email.com</p>
+<div class="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Premium</span>
+</div>
+</div>
+<!-- Settings Groups -->
+<div class="px-4 py-6 space-y-6">
+<!-- Section: Conta -->
+<div>
+<h3 class="text-sm font-semibold text-gray-custom dark:text-slate-400 mb-2 px-1 uppercase tracking-wider">Conta</h3>
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-primary/5">
+<!-- Row: Perfil -->
+<button class="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border-b border-primary/5">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<span class="flex-1 text-left font-medium">Perfil de saúde</span>
+<span class="material-symbols-outlined text-gray-custom/40">chevron_right</span>
+</button>
+<!-- Row: Dispositivos -->
+<button class="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border-b border-primary/5">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">watch</span>
+</div>
+<div class="flex-1 text-left">
+<span class="font-medium block">Dispositivos conectados</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<div class="size-2 bg-primary rounded-full"></div>
+<span class="text-xs text-primary font-medium">Conectado</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-custom/40">chevron_right</span>
+</button>
+<!-- Row: Notificações -->
+<button class="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border-b border-primary/5">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</div>
+<span class="flex-1 text-left font-medium">Notificações</span>
+<span class="material-symbols-outlined text-gray-custom/40">chevron_right</span>
+</button>
+<!-- Row: Plano -->
+<button class="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+</div>
+<span class="flex-1 text-left font-medium">Plano e assinatura</span>
+<span class="material-symbols-outlined text-gray-custom/40">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Section: Dados -->
+<div>
+<h3 class="text-sm font-semibold text-gray-custom dark:text-slate-400 mb-2 px-1 uppercase tracking-wider">Dados</h3>
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-primary/5">
+<button class="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border-b border-primary/5">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">download</span>
+</div>
+<span class="flex-1 text-left font-medium">Exportar meus dados</span>
+<span class="material-symbols-outlined text-gray-custom/40">chevron_right</span>
+</button>
+<button class="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">shield</span>
+</div>
+<span class="flex-1 text-left font-medium">Privacidade</span>
+<span class="material-symbols-outlined text-gray-custom/40">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Section: Suporte -->
+<div>
+<h3 class="text-sm font-semibold text-gray-custom dark:text-slate-400 mb-2 px-1 uppercase tracking-wider">Suporte</h3>
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-primary/5">
+<button class="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border-b border-primary/5">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">help</span>
+</div>
+<span class="flex-1 text-left font-medium">Ajuda e suporte</span>
+<span class="material-symbols-outlined text-gray-custom/40">chevron_right</span>
+</button>
+<button class="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">info</span>
+</div>
+<div class="flex-1 text-left">
+<span class="font-medium block">Sobre o VitalAI</span>
+<span class="text-xs text-gray-custom dark:text-slate-500">v1.0.0</span>
+</div>
+<span class="material-symbols-outlined text-gray-custom/40">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Sign Out Button -->
+<button class="w-full py-4 mt-4 text-rose-500 font-bold bg-white dark:bg-slate-900 rounded-xl border border-rose-100 dark:border-rose-900/30 active:bg-rose-50 transition-colors">
+                Sair da conta
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 border-t border-primary/10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-2 pb-6 pt-3 flex justify-around">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-gray-custom group-hover:text-primary transition-colors">home</span>
+<span class="text-[10px] font-medium text-gray-custom group-hover:text-primary">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-gray-custom group-hover:text-primary transition-colors">restaurant</span>
+<span class="text-[10px] font-medium text-gray-custom group-hover:text-primary">Nutrição</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-gray-custom group-hover:text-primary transition-colors">bar_chart</span>
+<span class="text-[10px] font-medium text-gray-custom group-hover:text-primary">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined text-primary fill-[1]">person</span>
+<span class="text-[10px] font-bold text-primary">Perfil</span>
+</a>
+</nav>
+</body></html>

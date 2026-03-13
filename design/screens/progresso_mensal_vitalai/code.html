@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2bd4a7",
+              "background-light": "#f6f8f7",
+              "background-dark": "#12201c",
+              "accent-yellow": "#FFC107",
+              "text-main": "#1A1A2E",
+              "text-secondary": "#6B7280"
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-container {
+            background: linear-gradient(180deg, rgba(43, 212, 167, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex justify-center items-center p-4">
+<!-- iPhone 15 Pro Frame Emulator (Simplified) -->
+<div class="relative w-[393px] h-[852px] bg-white dark:bg-slate-900 rounded-[55px] shadow-2xl overflow-hidden border-[8px] border-slate-800 flex flex-col">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-8 pt-2">
+<span class="text-sm font-semibold text-text-main dark:text-slate-100">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-base">wifi</span>
+<span class="material-symbols-outlined text-base">battery_full</span>
+</div>
+</div>
+<!-- Header -->
+<header class="flex items-center bg-white dark:bg-slate-900 px-6 py-4 justify-between">
+<div class="text-text-main dark:text-slate-100 flex size-10 items-center justify-center rounded-full bg-primary/10">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-text-main dark:text-slate-100 text-lg font-bold leading-tight flex-1 text-center">VitalAI</h2>
+<div class="flex w-10 items-center justify-end">
+<div class="text-text-main dark:text-slate-100">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto px-6 pb-20">
+<h1 class="text-text-main dark:text-slate-100 text-[22px] font-bold leading-tight tracking-tight pt-4 pb-3">
+                Progresso em relação ao seu objetivo
+            </h1>
+<!-- Badge -->
+<div class="flex pb-6">
+<div class="flex h-8 items-center gap-x-2 rounded-full bg-primary px-4 py-1 text-white shadow-sm">
+<span class="material-symbols-outlined text-[18px]">fitness_center</span>
+<p class="text-xs font-semibold uppercase tracking-wider">Ganho de massa muscular</p>
+</div>
+</div>
+<!-- Progress Cards -->
+<div class="space-y-4">
+<!-- Card 1: Proteína -->
+<div class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-4 rounded-xl shadow-sm">
+<div class="flex justify-between items-end mb-2">
+<div>
+<p class="text-text-secondary dark:text-slate-400 text-xs font-medium uppercase tracking-wide">Alimentação</p>
+<h3 class="text-text-main dark:text-slate-100 text-base font-semibold">Média de proteína</h3>
+</div>
+<div class="text-right">
+<span class="text-text-main dark:text-slate-100 font-bold">138g/dia</span>
+<p class="text-text-secondary dark:text-slate-400 text-[10px]">150g meta</p>
+</div>
+</div>
+<div class="h-2.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 92%;"></div>
+</div>
+</div>
+<!-- Card 2: Treinos -->
+<div class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-4 rounded-xl shadow-sm">
+<div class="flex justify-between items-end mb-2">
+<div>
+<p class="text-text-secondary dark:text-slate-400 text-xs font-medium uppercase tracking-wide">Atividade</p>
+<h3 class="text-text-main dark:text-slate-100 text-base font-semibold">Treinos por semana</h3>
+</div>
+<div class="text-right">
+<span class="text-text-main dark:text-slate-100 font-bold">3.2</span>
+<p class="text-text-secondary dark:text-slate-400 text-[10px]">4 meta</p>
+</div>
+</div>
+<div class="h-2.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-accent-yellow rounded-full" style="width: 80%;"></div>
+</div>
+</div>
+<!-- Card 3: Sono -->
+<div class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-4 rounded-xl shadow-sm">
+<div class="flex justify-between items-end mb-2">
+<div>
+<p class="text-text-secondary dark:text-slate-400 text-xs font-medium uppercase tracking-wide">Recuperação</p>
+<h3 class="text-text-main dark:text-slate-100 text-base font-semibold">Qualidade do sono</h3>
+</div>
+<div class="text-right">
+<span class="text-text-main dark:text-slate-100 font-bold">74</span>
+<p class="text-text-secondary dark:text-slate-400 text-[10px]">80 meta</p>
+</div>
+</div>
+<div class="h-2.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 92%;"></div>
+</div>
+</div>
+</div>
+<!-- Evolution Chart Section -->
+<div class="mt-8">
+<h3 class="text-text-main dark:text-slate-100 text-lg font-semibold mb-4">Evolução do Score Vital</h3>
+<div class="chart-container rounded-xl p-4 border border-slate-100 dark:border-slate-700">
+<div class="flex items-end justify-between h-32 px-4 relative">
+<!-- Simulated Y Axis -->
+<div class="absolute left-0 h-full flex flex-col justify-between text-[10px] text-slate-400 -ml-2">
+<span>100</span>
+<span>50</span>
+<span>0</span>
+</div>
+<!-- Line Chart Simulation -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M 20 70 L 50 45 L 80 20" fill="none" stroke="#2bd4a7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<circle cx="20" cy="70" fill="#2bd4a7" r="4"></circle>
+<circle cx="50" cy="45" fill="#2bd4a7" r="4"></circle>
+<circle cx="80" cy="20" fill="#2bd4a7" r="4"></circle>
+</svg>
+<!-- X Axis Labels -->
+<div class="absolute bottom-[-24px] w-full flex justify-between px-10 text-xs font-medium text-text-secondary">
+<span>Dez</span>
+<span>Jan</span>
+<span>Fev</span>
+</div>
+</div>
+<!-- Chart Values Overlay -->
+<div class="mt-12 flex justify-between px-8 text-xs font-bold text-text-main dark:text-slate-100">
+<span>68</span>
+<span>75</span>
+<span>81</span>
+</div>
+</div>
+</div>
+<!-- AI Coach Feedback -->
+<div class="mt-8 bg-primary/5 dark:bg-primary/10 rounded-xl p-4 border-l-4 border-primary">
+<div class="flex items-start gap-3">
+<div class="bg-primary text-white rounded-lg p-1.5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+</div>
+<p class="text-sm text-text-secondary dark:text-slate-300 leading-relaxed italic">
+                        "Seu progresso é consistente. Para atingir a meta de treinos, tente agendar as sessões de HIIT na agenda. Sua nutrição e sono estão excelentes para hipertrofia."
+                    </p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="absolute bottom-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 px-6 pb-6 pt-2 flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Início</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">monitoring</span>
+<span class="text-[10px] font-medium">Progresso</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="text-[10px] font-medium">Treinos</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</nav>
+<!-- Home Indicator -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+</div>
+</body></html>

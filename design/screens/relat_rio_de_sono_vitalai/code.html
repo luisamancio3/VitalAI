@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .chart-bar-green { @apply bg-primary; }
+        .chart-bar-yellow { @apply bg-yellow-400; }
+        .chart-bar-red { @apply bg-red-400; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Header Section -->
+<div class="bg-white dark:bg-slate-900 sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center p-4 justify-between">
+<button class="text-slate-900 dark:text-slate-100 flex items-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-6">Relatório semanal</h2>
+</div>
+<!-- Tabs -->
+<div class="flex px-4 gap-8">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-2" href="#">
+<p class="text-sm font-bold tracking-wide">Sono</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 pb-3 pt-2" href="#">
+<p class="text-sm font-bold tracking-wide">Atividade</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 pb-3 pt-2" href="#">
+<p class="text-sm font-bold tracking-wide">Nutrição</p>
+</a>
+</div>
+</div>
+<!-- Main Content -->
+<main class="p-4 space-y-6 max-w-md mx-auto">
+<!-- Section Header with Score -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="text-primary bg-primary/10 flex items-center justify-center rounded-lg size-10">
+<span class="material-symbols-outlined">bedtime</span>
+</div>
+<h1 class="text-[22px] font-bold">Sono</h1>
+</div>
+<div class="flex flex-col items-end">
+<div class="bg-primary text-white text-sm font-bold h-10 w-10 rounded-full flex items-center justify-center shadow-lg shadow-primary/20">
+                    72
+                </div>
+<span class="text-[10px] uppercase font-bold text-slate-400 mt-1">Score</span>
+</div>
+</div>
+<!-- Sleep Duration Chart -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm">
+<h3 class="text-sm font-semibold text-slate-500 mb-4 uppercase tracking-wider">Duração do Sono</h3>
+<div class="relative h-48 flex items-end justify-between gap-2 px-2">
+<!-- Goal Line -->
+<div class="absolute w-full border-t border-dashed border-slate-300 top-[22%] z-0">
+<span class="absolute -top-3 right-0 text-[10px] text-slate-400 font-medium">Meta: 7h</span>
+</div>
+<!-- Bars (Seg-Dom) -->
+<div class="flex flex-col items-center flex-1 gap-2 z-10">
+<div class="w-full bg-yellow-400 rounded-t-md" style="height: 68%;"></div>
+<span class="text-[10px] font-medium text-slate-400">Seg</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 z-10">
+<div class="w-full bg-primary rounded-t-md" style="height: 78%;"></div>
+<span class="text-[10px] font-medium text-slate-400">Ter</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 z-10">
+<div class="w-full bg-primary rounded-t-md" style="height: 84%;"></div>
+<span class="text-[10px] font-medium text-slate-400">Qua</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 z-10">
+<div class="w-full bg-yellow-400 rounded-t-md" style="height: 72%;"></div>
+<span class="text-[10px] font-medium text-slate-400">Qui</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 z-10">
+<div class="w-full bg-red-400 rounded-t-md" style="height: 57%;"></div>
+<span class="text-[10px] font-medium text-slate-400">Sex</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 z-10">
+<div class="w-full bg-primary rounded-t-md" style="height: 80%;"></div>
+<span class="text-[10px] font-medium text-slate-400">Sáb</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 z-10">
+<div class="w-full bg-primary rounded-t-md" style="height: 75%;"></div>
+<span class="text-[10px] font-medium text-slate-400">Dom</span>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center text-xs">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>12 Out - 18 Out</span>
+</div>
+<div class="font-bold text-primary">Qua: 7h 34m</div>
+</div>
+</div>
+<!-- HRV Trend Chart -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm">
+<h3 class="text-sm font-semibold text-slate-500 mb-2 uppercase tracking-wider">Tendência HRV</h3>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs text-slate-400">HRV noturno (ms)</span>
+<span class="text-xs font-bold text-primary">Média: 42ms</span>
+</div>
+<!-- Simple Line Chart Representation -->
+<div class="relative h-24 overflow-hidden">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0,30 Q15,25 30,15 T60,20 T90,35 T100,30" fill="none" stroke="#2bd4a7" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<circle cx="0" cy="30" fill="#2bd4a7" r="1.5"></circle>
+<circle cx="30" cy="15" fill="#2bd4a7" r="1.5"></circle>
+<circle cx="60" cy="20" fill="#2bd4a7" r="1.5"></circle>
+<circle cx="90" cy="35" fill="#2bd4a7" r="1.5"></circle>
+</svg>
+<div class="absolute inset-0 flex justify-between items-end opacity-10 pointer-events-none">
+<div class="h-full border-l border-slate-900"></div>
+<div class="h-full border-l border-slate-900"></div>
+<div class="h-full border-l border-slate-900"></div>
+<div class="h-full border-l border-slate-900"></div>
+</div>
+</div>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-50 dark:border-slate-800">
+<p class="text-[11px] font-medium text-slate-400 uppercase">Média duração</p>
+<p class="text-lg font-bold mt-1">6h 52min</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-50 dark:border-slate-800">
+<p class="text-[11px] font-medium text-slate-400 uppercase">Qualidade</p>
+<p class="text-lg font-bold mt-1 text-primary">72/100</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-50 dark:border-slate-800">
+<p class="text-[11px] font-medium text-slate-400 uppercase">Melhor Noite</p>
+<p class="text-sm font-bold mt-1">Quarta <span class="text-slate-400 font-normal">(7h34m)</span></p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-50 dark:border-slate-800">
+<p class="text-[11px] font-medium text-slate-400 uppercase">Pior Noite</p>
+<p class="text-sm font-bold mt-1 text-red-500">Sexta <span class="text-slate-400 font-normal">(5h12m)</span></p>
+</div>
+</div>
+<!-- Coach Insight -->
+<div class="bg-primary/10 border border-primary/20 p-4 rounded-xl">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">temp_preferences_eco</span>
+<span class="text-sm font-bold text-slate-800 dark:text-slate-100">VitalAI Insight</span>
+</div>
+<p class="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                Sua semana de sono foi razoável mas com uma queda significativa na sexta. Seu HRV ficou abaixo da sua baseline em 3 das 7 noites. Tente manter um horário mais consistente para dormir.
+            </p>
+</div>
+<!-- Footer Hint -->
+<div class="flex justify-center items-center gap-2 py-4">
+<p class="text-xs text-slate-400 font-medium">Deslize para Nutrição</p>
+<span class="material-symbols-outlined text-slate-400 text-sm">arrow_forward</span>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 px-6 py-3 flex justify-between items-center max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Início</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">bar_chart</span>
+<span class="text-[10px] font-medium">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px] font-medium">Coach</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</nav>
+<!-- Placeholder for scrolling -->
+<div class="h-20"></div>
+</body></html>

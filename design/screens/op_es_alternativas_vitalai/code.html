@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "accent-blue": "#4A90D9",
+                        "text-dark": "#1A1A2E",
+                        "text-gray": "#6B7280"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-100 flex justify-center items-center min-h-screen">
+<!-- iPhone 15 Pro Mockup Container -->
+<div class="relative w-[393px] h-[852px] bg-background-light dark:bg-background-dark shadow-2xl rounded-[55px] overflow-hidden border-[8px] border-slate-900 flex flex-col">
+<!-- Status Bar Space -->
+<div class="h-11 w-full flex justify-center items-end pb-1">
+<div class="w-32 h-7 bg-black rounded-full"></div>
+</div>
+<!-- Top App Bar -->
+<div class="flex items-center px-4 py-4 bg-background-light dark:bg-background-dark">
+<button class="text-text-dark dark:text-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold text-text-dark dark:text-slate-100 pr-8">Outras opções</h1>
+</div>
+<!-- Subtitle with AI Sparkle -->
+<div class="px-4 pb-4 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px] leading-none">auto_awesome</span>
+<p class="text-text-gray text-[14px] font-normal leading-tight">
+                Todas com proteína e carb para recuperação
+            </p>
+</div>
+<!-- Meal List Scrollable Area -->
+<div class="flex-1 overflow-y-auto px-4 pb-6 space-y-3">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg shadow-sm flex items-center gap-3 border border-slate-100 dark:border-slate-700">
+<div class="size-20 bg-cover bg-center rounded-[8px] shrink-0" data-alt="Healthy chicken omelette with sweet potatoes" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2e0WuaajDv9b98ocmyWyH5nOpaevyReBd-m7uDe7Jqqmyb1klvcKyGWsRm5MHrUZJAO0Ht9n8TCuO6oUweOpIbx1Ji2n8oPIAMIGy-h-MOOxw46EpDlq7NnKeJpFnbE33I6EvXQ2v2WRErLbA41bkHRgLxySEZVFayg9Aq9hxzJVcTdbsuvZcHBkL7TgEIZ3qsVNAs54FZ60-j0U5GTNR3ADAynsA1ZKbix5oInOs8TStVY2vEpMrZ9FJr8bxlosZ9ooX-JYzCqQp')"></div>
+<div class="flex-1 flex flex-col gap-1">
+<h3 class="text-text-dark dark:text-slate-100 text-[16px] font-semibold leading-tight">Omelete de frango com batata doce</h3>
+<div class="flex items-center gap-1 text-text-gray dark:text-slate-400">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="text-[12px]">20 min</span>
+</div>
+<p class="text-text-gray dark:text-slate-400 text-[12px]">P:38g C:45g G:14g • 460kcal</p>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg shadow-sm flex items-center gap-3 border border-slate-100 dark:border-slate-700">
+<div class="size-20 bg-cover bg-center rounded-[8px] shrink-0" data-alt="Fresh tuna and quinoa bowl with greens" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDV0K5iudkN19CMEvpni_0H8gJlGmZkp5PbVeSZYGiV1zO3ErX3QaoXX1smIpDWby-L9dbUTvGPfdGi0DjtAFDD5oqs12K4YwfPjPU0YQlnvcwVL05HreaIw7iqe4YuDLADJQhMa0Ji6Z98NpvCcCgOaCI43u0fMg8Y7hLcJT5f-ys_kEBpGGE8Ql_lrvTr2GYIuEj3F0IP2M3RkctqPf6IskZbzSM-mecoSFZs9fr7F1uKRk2UcAAW9A5zzdVcx4kCEQznYrvKbsZe')"></div>
+<div class="flex-1 flex flex-col gap-1">
+<h3 class="text-text-dark dark:text-slate-100 text-[16px] font-semibold leading-tight">Bowl de atum com quinoa</h3>
+<div class="flex items-center gap-1 text-text-gray dark:text-slate-400">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="text-[12px]">15 min</span>
+</div>
+<p class="text-text-gray dark:text-slate-400 text-[12px]">P:32g C:40g G:10g • 380kcal</p>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg shadow-sm flex items-center gap-3 border border-slate-100 dark:border-slate-700">
+<div class="size-20 bg-cover bg-center rounded-[8px] shrink-0" data-alt="Healthy whole grain chicken sandwich" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsx0rOPJxpgNxUkdE7wZg11a3T__JAlCxdb8NP3g44wtdY-YwlvgmV1QywRAWDajRKY2vll3GuAepLi7Cz17bid2iCHpig-sJ43FWheKiC0k1AFsDLyRG2yjTOSjNjJSHsvN0s7ag6aqZf0U_Q94X0fhGpJrtGJbhVUD8To6UE9ao46hZWyrtqpkFBRDyLPSDlPP4vU3e5Do7aQpFElkxnS98FdTqFn5eZ-PXf7LenNdjxW5thP_yg151qRm5K11-Ou74TjhNiqA7v')"></div>
+<div class="flex-1 flex flex-col gap-1">
+<h3 class="text-text-dark dark:text-slate-100 text-[16px] font-semibold leading-tight">Sanduíche natural de frango</h3>
+<div class="flex items-center gap-1 text-text-gray dark:text-slate-400">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="text-[12px]">10 min</span>
+</div>
+<p class="text-text-gray dark:text-slate-400 text-[12px]">P:28g C:35g G:8g • 320kcal</p>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<!-- Card 4 -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg shadow-sm flex items-center gap-3 border border-slate-100 dark:border-slate-700">
+<div class="size-20 bg-cover bg-center rounded-[8px] shrink-0" data-alt="Banana and oat protein shake" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgE5WEYYgp-u9dagLAgKpaBP5K2f7iN66GHTzJrvzXYwo4n52e1z87OPefeqimm_bsXn8lqS_W2VJDGrjV4SQrlbWQJlxj7FJhn5DSMe0zE-qFtG_PCDF8qnLB_h0GbpeZlU4wqj1MRi_KGpdAGPL0nZBf0U_2XFXwpgFIixaYGN-A2VvuSd9GZ_uYn2Ndvi_rIQbwgNU8O4tQ8RKF3KgoJGohbfSxugPwxBo9ZuIZHYoQ0bVtbMwsy9jv0FcrRoD9m_QiLRl9g7sp')"></div>
+<div class="flex-1 flex flex-col gap-1">
+<h3 class="text-text-dark dark:text-slate-100 text-[16px] font-semibold leading-tight">Shake proteico com banana e aveia</h3>
+<div class="flex items-center gap-1 text-text-gray dark:text-slate-400">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="text-[12px]">5 min</span>
+</div>
+<p class="text-text-gray dark:text-slate-400 text-[12px]">P:25g C:50g G:6g • 350kcal</p>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="p-8 text-center bg-background-light dark:bg-background-dark">
+<button class="text-accent-blue font-medium text-[14px] active:opacity-70 transition-opacity">
+                Nenhuma me agrada — registrar refeição manual
+            </button>
+</div>
+<!-- Home Indicator -->
+<div class="h-8 flex justify-center items-center pb-2">
+<div class="w-32 h-1 bg-slate-900/20 rounded-full"></div>
+</div>
+</div>
+</body></html>

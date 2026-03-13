@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI iPhone Lock Screen</title>
+<!-- BEGIN: Scripts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          },
+          colors: {
+            iosGray: '#8E8E93',
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Scripts -->
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="glassmorphism-and-effects">/* Simulating iOS glassmorphism blur */
+.glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2)
+    }
+.button-glass {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px)
+    }
+/* iPhone screen dimensions and wallpaper */
+.iphone-screen {
+    width: 393px;
+    height: 852px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(to bottom, #FFD194, #D1913C);
+    /* Sunny warm tone fallback */
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB6-fX9k-yIvr5guQqiX2iQa2T_46GiL-BkBv-_dSvLORl0d5TpmsBi9Tfh2zHMvsteD9ZtnCShPxrsKuJPO_2OoxPdS5pgkA8Z4Zb5KIt82SO8mUx7BgBWVT6F0L9-Ae5hI3AkBFExgsknUvbYmoOfgDFMIAfNNKC83fyxqul213FCZRepRwmmgJnENozz1mIC0Bunzsu9xCYjjalYDKRQz1EFiTy9VADq6Gf7Y3ZOltH2k4SccejDb6ZVMxiJ1eYxeFGFhSD1ibQO);
+    /* Sunny daytime wallpaper */
+    background-size: cover;
+    background-position: center
+    }
+/* Dynamic Island Simulation */
+.dynamic-island {
+    width: 126px;
+    height: 37px;
+    background: black;
+    border-radius: 20px;
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translatex(-50%)
+    }
+/* Shadow for notification card */
+.ios-shadow {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)
+    }</style>
+<!-- END: Custom Styles -->
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<!-- BEGIN: Device Frame -->
+<main class="iphone-screen rounded-[55px] border-[8px] border-black shadow-2xl relative">
+<!-- BEGIN: Top System UI -->
+<div class="absolute inset-x-0 top-0 h-12 flex items-center justify-between px-8 text-white text-xs font-semibold z-10" data-purpose="top-ui">
+<span>16:10</span>
+<div class="dynamic-island"></div>
+<div class="flex gap-1.5 items-center">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 21c-4.411 0-8-3.589-8-8 0-3.35 2.072-6.221 5-7.411v2.223A6 6 0 0 0 12 19c3.309 0 6-2.691 6-6 0-1.285-.405-2.476-1.093-3.455l1.682-1.411A7.947 7.947 0 0 1 20 13c0 4.411-3.589 8-8 8z"></path></svg>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M2 10h1v10H2V10zm4-4h1v14H6V6zm4-4h1v18h-1V2zm4 4h1v14h-1V6zm4 4h1v10h-1V10z"></path></svg>
+</div>
+</div>
+<!-- END: Top System UI -->
+<!-- BEGIN: Clock Section -->
+<header class="mt-28 text-center text-white" data-purpose="lockscreen-clock">
+<p class="text-[1.2rem] font-medium tracking-tight mb-1">Terça-feira, 24 de Outubro</p>
+<h1 class="text-[5rem] font-semibold leading-none tracking-tighter">16:10</h1>
+</header>
+<!-- END: Clock Section -->
+<!-- BEGIN: Notification Section -->
+<section class="absolute bottom-16 inset-x-0 px-4" data-purpose="notification-container">
+<!-- BEGIN: VitalAI Notification -->
+<article class="glass ios-shadow rounded-[28px] p-4 flex flex-col gap-3">
+<!-- Header: App Icon and Label -->
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-2">
+<!-- App Icon Container -->
+<div class="w-6 h-6 bg-green-500 rounded-md flex items-center justify-center text-white">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+<path d="M3.22 12H9.5l.5-1 2 4.5 2-7 .5 3.5h5.28"></path>
+</svg>
+</div>
+<span class="font-bold text-[13px] text-gray-900 tracking-wide uppercase">VitalAI</span>
+</div>
+<span class="text-iosGray text-[12px]">agora</span>
+</div>
+<!-- Body Message -->
+<div class="text-[14.5px] leading-[1.3] text-gray-900" data-purpose="notification-body">
+          Dia quente + treino pesado = hidratação redobrada. Já bebeu água nas últimas 2 horas?
+        </div>
+<!-- Expanded Action Buttons -->
+<nav class="flex gap-2 mt-1" data-purpose="notification-actions">
+<button class="flex-1 py-3 button-glass rounded-2xl text-[15px] font-semibold text-gray-900 active:opacity-60 transition-opacity">
+            Já bebi
+          </button>
+<button class="flex-1 py-3 button-glass rounded-2xl text-[15px] font-semibold text-gray-900 active:opacity-60 transition-opacity">
+            Vou beber agora
+          </button>
+</nav>
+</article>
+<!-- END: VitalAI Notification -->
+</section>
+<!-- END: Notification Section -->
+<!-- BEGIN: Bottom Flashlight/Camera -->
+<div class="absolute bottom-8 inset-x-8 flex justify-between items-center text-white">
+<div class="w-12 h-12 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+</div>
+<div class="w-12 h-12 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M16.88 3.549L16.12 3H7.88l-.76.549L5 7H2v13a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7h-3l-2.12-3.451zM12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"></path></svg>
+</div>
+</div>
+<!-- END: Bottom Flashlight/Camera -->
+<!-- Home Indicator -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-white rounded-full"></div>
+</main>
+<!-- END: Device Frame -->
+</body></html>

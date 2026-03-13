@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "text-main": "#1A1A2E",
+                        "text-sub": "#6B7280",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>VitalAI - Relatórios</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main">
+<div class="relative mx-auto min-h-screen max-w-[393px] bg-background-light dark:bg-background-dark shadow-2xl flex flex-col">
+<!-- Top Bar -->
+<header class="sticky top-0 z-10 bg-background-light/80 backdrop-blur-md px-4 pt-12 pb-4">
+<div class="flex items-center justify-between">
+<div class="w-10"></div>
+<h1 class="text-lg font-bold text-text-main dark:text-slate-100">Relatórios</h1>
+<div class="w-10 flex justify-end">
+<span class="material-symbols-outlined text-text-main">more_horiz</span>
+</div>
+</div>
+</header>
+<!-- Tabs -->
+<div class="px-4 bg-background-light dark:bg-background-dark">
+<div class="flex border-b border-primary/10">
+<button class="flex-1 py-3 text-sm font-semibold border-b-2 border-primary text-primary">
+                    Semanais
+                </button>
+<button class="flex-1 py-3 text-sm font-medium text-text-sub border-b-2 border-transparent hover:text-text-main transition-colors">
+                    Mensais
+                </button>
+</div>
+</div>
+<!-- Content -->
+<main class="flex-1 px-4 py-6 space-y-4 overflow-y-auto">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-primary/5">
+<div class="flex justify-between items-start mb-3">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<h2 class="text-[18px] font-semibold text-text-main dark:text-slate-100">Semana 10</h2>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Novo</span>
+</div>
+<p class="text-[14px] text-text-sub">3 a 9 de março de 2026</p>
+</div>
+<div class="relative flex items-center justify-center w-12 h-12">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-primary/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="3"></circle>
+<circle class="text-primary" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="27.6" stroke-width="3"></circle>
+</svg>
+<span class="absolute text-sm font-bold text-text-main dark:text-slate-100">78</span>
+</div>
+</div>
+<div class="pt-3 border-t border-primary/5">
+<p class="text-[14px] leading-relaxed text-text-main dark:text-slate-200">
+                        Sua semana de sono melhorou <span class="text-primary font-semibold">8%</span> em relação à anterior
+                    </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-primary/5">
+<div class="flex justify-between items-start mb-3">
+<div class="space-y-1">
+<h2 class="text-[18px] font-semibold text-text-main dark:text-slate-100">Semana 9</h2>
+<p class="text-[14px] text-text-sub">24 fev a 2 de março de 2026</p>
+</div>
+<div class="relative flex items-center justify-center w-12 h-12">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-primary/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="3"></circle>
+<circle class="text-primary" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="31.4" stroke-width="3"></circle>
+</svg>
+<span class="absolute text-sm font-bold text-text-main dark:text-slate-100">75</span>
+</div>
+</div>
+<div class="pt-3 border-t border-primary/5">
+<p class="text-[14px] leading-relaxed text-text-main dark:text-slate-200">
+                        3 treinos completados, proteína dentro da meta
+                    </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-primary/5">
+<div class="flex justify-between items-start mb-1">
+<div class="space-y-1">
+<h2 class="text-[18px] font-semibold text-text-main dark:text-slate-100">Semana 8</h2>
+<p class="text-[14px] text-text-sub">17 a 23 de fevereiro de 2026</p>
+</div>
+<div class="relative flex items-center justify-center w-12 h-12">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-primary/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="3"></circle>
+<circle class="text-primary" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="36.4" stroke-width="3"></circle>
+</svg>
+<span class="absolute text-sm font-bold text-text-main dark:text-slate-100">71</span>
+</div>
+</div>
+</div>
+<!-- Image placeholder for aesthetics -->
+<div class="mt-4 rounded-xl overflow-hidden h-32 relative bg-primary/5">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent z-10"></div>
+<div class="p-4 relative z-20 h-full flex flex-col justify-center">
+<p class="text-primary font-bold text-lg">VitalAI Pro</p>
+<p class="text-text-sub text-xs">Desbloqueie insights mais profundos</p>
+</div>
+<div class="absolute right-0 top-0 h-full w-1/2 bg-cover bg-center" data-alt="Abstract green and blue color gradient background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA46TTitR7t3CIz24yQ-2iwIPEkiuWXadRhTijr9zAdQGDLhSsfTIB28tFAMHgdHjM_DehVXBNz3B5eqll6C-X5fyD2_9CwLXldMaKcEMTxbQ3xC5GfFTksvl5YsZJCkVFnDlO19--Kt9UBYxFD40anjQeoSafDU9aZMTnd686JslCb12mrLl1w4vthqIz2LE1ixG1RZiY1jyzdHV40FKkFhFAqkNIwEGvRVoJTrjt8T5hpsSNb7NZVLK3zC0-d048Ltw5G6iVxnzTf')"></div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="sticky bottom-0 bg-white dark:bg-slate-950 border-t border-primary/5 px-6 pb-8 pt-3 flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">home</span>
+<span class="text-[10px] font-medium text-text-sub group-hover:text-primary">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">nutrition</span>
+<span class="text-[10px] font-medium text-text-sub group-hover:text-primary">Nutrição</span>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined text-primary fill-1">description</span>
+<span class="text-[10px] font-bold text-primary">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">person</span>
+<span class="text-[10px] font-medium text-text-sub group-hover:text-primary">Perfil</span>
+</a>
+</nav>
+<!-- Home Indicator (iOS style) -->
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-200 dark:bg-slate-800 rounded-full"></div>
+</div>
+</body></html>

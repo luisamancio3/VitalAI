@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "slate-custom": "#1A1A2E",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+        .fill-icon { font-variation-settings: 'FILL' 1; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark flex justify-center items-center min-h-screen">
+<!-- iPhone 15 Pro Wrapper (Simulated) -->
+<div class="relative w-[393px] h-[852px] bg-white dark:bg-slate-900 overflow-hidden shadow-2xl rounded-[55px] border-[8px] border-slate-800 flex flex-col">
+<!-- Status Bar Area -->
+<div class="h-11 w-full flex justify-between items-center px-8 shrink-0">
+<span class="text-xs font-bold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-symbols-outlined text-sm">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-sm">wifi</span>
+<span class="material-symbols-outlined text-sm">battery_full</span>
+</div>
+</div>
+<!-- Header -->
+<div class="flex items-center bg-white dark:bg-slate-900 px-4 py-2 justify-between shrink-0">
+<div class="text-slate-custom dark:text-slate-100 flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-custom dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">VitalAI</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex items-center justify-center rounded-full size-10 bg-transparent text-slate-custom dark:text-slate-100">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Main Content (Scrollable) -->
+<div class="flex-1 overflow-y-auto no-scrollbar">
+<!-- Camera Capture Section -->
+<div class="relative w-full aspect-[4/3] bg-slate-200 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Plate of white rice, chicken and salad" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDODUTxq867QFulYr3updnstWhTPMPgJwINj3dZk6STGQTAHRXH4f0uE3QGlS7F_t9EwNznvT_V8d8iFG2601MqGuDwwAXhmYBFqB54c1qyMDWm2mY8taZfJHJcBfRRzUlt-RtUsnTyLGGsLKfPuYD4o_zpNWR3Kj0q4bNrEEb6Egn2v1Wjt9S1doXTI2TvroH2c689YHv5ou1hiIFc_XBmMukL3zCQBg9fgXEhNqN_Wb0FgPCW1GMg9zSBWRzv5FQG6eMpMYJUY-sv')"></div>
+<!-- AI Detection Boxes -->
+<div class="absolute inset-0 pointer-events-none">
+<!-- Rice Box -->
+<div class="absolute top-1/4 left-1/4 w-32 h-24 border-2 border-primary/60 bg-primary/10 rounded-lg flex items-start p-1">
+<span class="bg-primary text-white text-[8px] px-1 rounded-sm font-bold uppercase">Arroz</span>
+</div>
+<!-- Chicken Box -->
+<div class="absolute top-1/2 right-10 w-28 h-20 border-2 border-orange-400/60 bg-orange-400/10 rounded-lg flex items-start p-1">
+<span class="bg-orange-400 text-white text-[8px] px-1 rounded-sm font-bold uppercase">Frango</span>
+</div>
+<!-- Salad Box -->
+<div class="absolute bottom-10 left-1/3 w-24 h-16 border-2 border-emerald-400/60 bg-emerald-400/10 rounded-lg flex items-start p-1">
+<span class="bg-emerald-400 text-white text-[8px] px-1 rounded-sm font-bold uppercase">Salada</span>
+</div>
+</div>
+</div>
+<!-- Recognition Results -->
+<div class="bg-white dark:bg-slate-900 rounded-t-[32px] -mt-6 relative z-10 px-6 pt-8 pb-32">
+<h3 class="text-slate-custom dark:text-slate-100 text-lg font-semibold mb-5">Alimentos identificados</h3>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined fill-icon">check_circle</span>
+</div>
+<span class="text-slate-custom dark:text-slate-100 font-medium">Arroz branco</span>
+</div>
+<span class="text-slate-500 dark:text-slate-400 text-sm">45g carb, 4g prot</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined fill-icon">check_circle</span>
+</div>
+<span class="text-slate-custom dark:text-slate-100 font-medium">Frango grelhado</span>
+</div>
+<span class="text-slate-500 dark:text-slate-400 text-sm">32g prot, 3g gord</span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined fill-icon">check_circle</span>
+</div>
+<span class="text-slate-custom dark:text-slate-100 font-medium">Salada mista</span>
+</div>
+<span class="text-slate-500 dark:text-slate-400 text-sm">2g carb, 1g gord</span>
+</div>
+<!-- Divider -->
+<div class="h-px bg-slate-100 dark:bg-slate-800 my-2 w-full"></div>
+<!-- Total Row -->
+<div class="flex items-center justify-between pt-2">
+<span class="text-slate-custom dark:text-slate-100 font-bold">Total estimado</span>
+<span class="text-slate-custom dark:text-slate-100 font-bold">420kcal | P:36g C:47g G:12g</span>
+</div>
+<!-- Macro Pills -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-4">
+<div class="flex items-center gap-1.5 px-3 py-2 bg-rose-50 dark:bg-rose-500/10 rounded-full shrink-0 border border-rose-100 dark:border-rose-500/20">
+<span class="material-symbols-outlined text-rose-500 text-lg fill-icon">nutrition</span>
+<span class="text-xs font-semibold text-rose-700 dark:text-rose-400">36g Prot</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 rounded-full shrink-0 border border-amber-100 dark:border-amber-500/20">
+<span class="material-symbols-outlined text-amber-500 text-lg fill-icon">grain</span>
+<span class="text-xs font-semibold text-amber-700 dark:text-amber-400">47g Carb</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-2 bg-sky-50 dark:bg-sky-500/10 rounded-full shrink-0 border border-sky-100 dark:border-sky-500/20">
+<span class="material-symbols-outlined text-sky-500 text-lg fill-icon">opacity</span>
+<span class="text-xs font-semibold text-sky-700 dark:text-sky-400">12g Gord</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-2 bg-primary/10 rounded-full shrink-0 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-lg fill-icon">bolt</span>
+<span class="text-xs font-semibold text-primary/80">420 Kcal</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Action Buttons -->
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 space-y-3 pb-10">
+<button class="w-full h-12 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+                Confirmar
+            </button>
+<button class="w-full h-12 bg-transparent border-2 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 font-bold rounded-xl transition-all hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95">
+                Corrigir
+            </button>
+</div>
+<!-- iPhone Notch/Island -->
+<div class="absolute top-2 left-1/2 -translate-x-1/2 w-28 h-7 bg-slate-800 rounded-full"></div>
+<!-- Navigation Bar -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-slate-800/20 rounded-full"></div>
+</div>
+<!-- Hidden Bottom Nav Component Structure for styling reference -->
+<div class="hidden">
+<div class="flex gap-2 border-t border-slate-100 bg-white px-4 pb-3 pt-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-xs font-medium">Início</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<p class="text-xs font-medium">Diário</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-icon">scan</span>
+<p class="text-xs font-medium">IA</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-xs font-medium">Perfil</p>
+</a>
+</div>
+</div>
+</body></html>

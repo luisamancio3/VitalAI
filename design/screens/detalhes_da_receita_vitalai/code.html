@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "dark-blue": "#1A1A2E"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative mx-auto max-w-[430px] min-h-screen bg-white dark:bg-slate-900 shadow-2xl flex flex-col overflow-hidden">
+<!-- Header Overlay -->
+<div class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 bg-gradient-to-b from-black/40 to-transparent">
+<button class="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto pb-32 hide-scrollbar">
+<!-- Hero Image Section -->
+<div class="relative h-[380px] w-full">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Delicious grilled chicken and rice wrap with fresh vegetables" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACf4ge6Jivqe8GKw7K2t-6jD5wF8L3k7GIKO57CllKMadEc5d_FBlNIJMs5YhURNB_2p0cgXLHR8xJwWcTZXGj4QKVgaxDk7jGWVb-pSPVkKfrvZyk6nUeQj8xq0lcf1AuRxmN9BYyl7Spn9sEinxgESGxJcznjwp63_lq36pi5VeR8eNr9yOF9mnfhn65SyJwxUII3jPxOcyHcskMmfsJH09IPcGbDKbyk91-5EQn_Sq9mxXo0LN8keQWeEVsPzXFc2iDi_oMb4HH');">
+</div>
+</div>
+<!-- Content Area -->
+<div class="px-5 -mt-8 relative z-20 bg-white dark:bg-slate-900 rounded-t-[2.5rem] pt-8">
+<!-- Title & Tags -->
+<div class="space-y-4">
+<h1 class="text-[26px] font-bold leading-tight text-dark-blue dark:text-white">Wrap de frango com arroz</h1>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-1.5 bg-primary text-white text-sm font-semibold rounded-full shadow-sm shadow-primary/20">Pós-treino</span>
+<span class="px-4 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">schedule</span> 15 min
+                        </span>
+<span class="px-4 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">fitness_center</span> Alto em proteína
+                        </span>
+</div>
+</div>
+<!-- Nutritional Info -->
+<div class="mt-8">
+<h3 class="text-lg font-bold text-dark-blue dark:text-white mb-4">Informação nutricional</h3>
+<div class="grid grid-cols-5 gap-2 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase font-bold text-slate-400">Calorias</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200">530</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase font-bold text-slate-400">Prot.</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200">45g</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase font-bold text-slate-400">Carb.</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200">62g</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase font-bold text-slate-400">Gord.</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200">12g</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase font-bold text-slate-400">Fibra</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200">4g</span>
+</div>
+</div>
+</div>
+<!-- Servings Adjuster -->
+<div class="mt-8 flex items-center justify-between">
+<h3 class="text-lg font-semibold text-dark-blue dark:text-white">Ingredientes</h3>
+<div class="flex items-center gap-3 bg-slate-100 dark:bg-slate-800 rounded-full px-3 py-1">
+<button class="size-7 flex items-center justify-center bg-white dark:bg-slate-700 rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined text-xl">remove</span>
+</button>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200">1 porção</span>
+<button class="size-7 flex items-center justify-center bg-white dark:bg-slate-700 rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+</div>
+<!-- Ingredients Checklist -->
+<div class="mt-4 space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="size-6 rounded border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<span class="text-slate-600 dark:text-slate-400">1 tortilha integral grande</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="size-6 rounded bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<span class="text-slate-400 line-through">150g peito de frango grelhado</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="size-6 rounded border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<span class="text-slate-600 dark:text-slate-400">1/2 xícara arroz cozido</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="size-6 rounded border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<span class="text-slate-600 dark:text-slate-400">Alface, tomate, cenoura ralada</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="size-6 rounded border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<span class="text-slate-600 dark:text-slate-400">1 colher de requeijão light</span>
+</label>
+</div>
+<!-- Preparation Steps -->
+<div class="mt-8">
+<h3 class="text-lg font-semibold text-dark-blue dark:text-white mb-4">Modo de preparo</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<span class="flex-none size-7 bg-primary/10 text-primary font-bold rounded-full flex items-center justify-center">1</span>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Grelhe o frango temperado com sal e pimenta por 5 minutos de cada lado até dourar bem.
+                            </p>
+</div>
+<div class="flex gap-4">
+<span class="flex-none size-7 bg-primary/10 text-primary font-bold rounded-full flex items-center justify-center">2</span>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Aqueça a tortilha no microondas por 20 segundos para ficar maleável.
+                            </p>
+</div>
+<div class="flex gap-4">
+<span class="flex-none size-7 bg-primary/10 text-primary font-bold rounded-full flex items-center justify-center">3</span>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Monte: espalhe o requeijão, adicione o arroz, o frango fatiado e os vegetais frescos.
+                            </p>
+</div>
+<div class="flex gap-4">
+<span class="flex-none size-7 bg-primary/10 text-primary font-bold rounded-full flex items-center justify-center">4</span>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Enrole a tortilha firmemente fechando as pontas e corte ao meio na diagonal.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Action -->
+<div class="absolute bottom-0 left-0 right-0 p-5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 flex gap-3">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center transition-all">
+                Fiz essa refeição
+            </button>
+<button class="size-14 flex-none border-2 border-slate-100 dark:border-slate-800 text-slate-600 dark:text-slate-400 rounded-xl flex items-center justify-center hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</body></html>

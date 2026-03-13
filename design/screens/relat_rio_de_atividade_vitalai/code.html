@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400,500,600,700,FILL@0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "slate-900": "#0f172a",
+                        "slate-100": "#f1f5f9",
+                        "slate-500": "#64748b",
+                        "slate-200": "#e2e8f0",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-[430px] mx-auto bg-white dark:bg-slate-900 min-h-screen shadow-2xl flex flex-col relative overflow-hidden">
+<header class="pt-12 px-4 pb-2 sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-10">
+<div class="flex items-center justify-between mb-4">
+<button class="w-10 h-10 flex items-center justify-start text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold">Relatório semanal</h1>
+<div class="w-10"></div>
+</div>
+<div class="flex border-b border-slate-200 dark:border-slate-800">
+<a class="flex-1 text-center pb-3 border-b-2 border-primary text-primary font-bold text-sm" href="#">Atividade</a>
+<a class="flex-1 text-center pb-3 border-b-2 border-transparent text-slate-500 font-bold text-sm" href="#">Sono</a>
+<a class="flex-1 text-center pb-3 border-b-2 border-transparent text-slate-500 font-bold text-sm" href="#">Nutrição</a>
+</div>
+</header>
+<main class="flex-1 px-4 py-6 space-y-8 overflow-y-auto pb-24">
+<section class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary fill-icon">directions_run</span>
+</div>
+<h2 class="text-[22px] font-bold">Atividade</h2>
+</div>
+<div class="flex items-center gap-2 bg-primary/10 px-3 py-1 rounded-full">
+<span class="text-xs font-bold text-primary">SCORE</span>
+<span class="text-lg font-bold text-primary">85</span>
+</div>
+</section>
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<h3 class="text-sm font-medium text-slate-500 uppercase tracking-wider">Calorias diárias</h3>
+<p class="text-xs font-bold text-slate-400">Meta: 550kcal</p>
+</div>
+<div class="relative h-40 flex items-end justify-between px-2">
+<div class="absolute w-full border-t border-dashed border-slate-300 top-1/4 z-0"></div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-8 bg-primary/40 rounded-t-md h-24"></div>
+<span class="text-xs font-medium text-slate-500">S</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-8 bg-primary rounded-t-md h-32"></div>
+<span class="text-xs font-medium text-slate-500">T</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-8 bg-primary rounded-t-md h-28"></div>
+<span class="text-xs font-medium text-slate-500">Q</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-8 bg-primary/40 rounded-t-md h-20"></div>
+<span class="text-xs font-medium text-slate-500">Q</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-8 bg-primary rounded-t-md h-36"></div>
+<span class="text-xs font-medium text-slate-500">S</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-8 bg-primary/40 rounded-t-md h-16"></div>
+<span class="text-xs font-medium text-slate-500">S</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-8 bg-primary rounded-t-md h-30"></div>
+<span class="text-xs font-medium text-slate-500">D</span>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-background-light dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+<p class="text-xs font-medium text-slate-500 mb-1">Passos médios</p>
+<p class="text-lg font-bold">8.420<span class="text-xs font-normal text-slate-400">/dia</span></p>
+</div>
+<div class="bg-background-light dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+<p class="text-xs font-medium text-slate-500 mb-1">Minutos ativos</p>
+<p class="text-lg font-bold">187<span class="text-xs font-normal text-slate-400">/semana</span></p>
+</div>
+</section>
+<section class="bg-primary/5 rounded-xl p-4 border border-primary/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-lg">auto_awesome</span>
+<span class="text-xs font-bold text-primary uppercase">VitalAI Coach</span>
+</div>
+<p class="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                    3 treinos na semana com boa variedade. Sua FC pós-treino voltou ao normal mais rápido na quarta do que na segunda — sinal de que seu condicionamento está melhorando.
+                </p>
+</section>
+<section class="space-y-4">
+<h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider">Histórico de Treinos</h3>
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 flex items-center justify-between shadow-sm border-l-4 border-primary dark:border-primary">
+<div class="flex items-center gap-4">
+<div class="bg-slate-100 dark:bg-slate-700 p-2 rounded-lg">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">fitness_center</span>
+</div>
+<div>
+<p class="font-bold text-sm">Seg — Musculação</p>
+<p class="text-xs text-slate-500">55min • 420kcal</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 flex items-center justify-between shadow-sm border-l-4 border-primary dark:border-primary">
+<div class="flex items-center gap-4">
+<div class="bg-slate-100 dark:bg-slate-700 p-2 rounded-lg">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">directions_run</span>
+</div>
+<div>
+<p class="font-bold text-sm">Qua — Corrida</p>
+<p class="text-xs text-slate-500">42min • 380kcal</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 flex items-center justify-between shadow-sm border-l-4 border-primary dark:border-primary">
+<div class="flex items-center gap-4">
+<div class="bg-slate-100 dark:bg-slate-700 p-2 rounded-lg">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">local_fire_department</span>
+</div>
+<div>
+<p class="font-bold text-sm">Sex — HIIT</p>
+<p class="text-xs text-slate-500">30min • 310kcal</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+</section>
+</main>
+<nav class="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 px-6 pb-8 pt-3 flex justify-between">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[10px] font-medium">Hoje</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-icon">bar_chart</span>
+<span class="text-[10px] font-bold">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="text-[10px] font-medium">Treinos</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</nav>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-900/20 dark:bg-white/20 rounded-full"></div>
+</div>
+</body></html>

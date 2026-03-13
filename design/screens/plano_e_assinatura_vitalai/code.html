@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI - Plano e Assinatura</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f7f8fa",
+                        "background-dark": "#12201c",
+                        "vital-navy": "#1a1a2e",
+                        "vital-gray": "#6b7280"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .check-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex justify-center items-start">
+<!-- iPhone 15 Pro Sized Container -->
+<div class="relative w-full max-w-[393px] min-h-screen bg-background-light dark:bg-background-dark shadow-2xl overflow-hidden flex flex-col">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-10 flex items-center bg-background-light/80 backdrop-blur-md px-4 py-4 justify-between border-b border-gray-100 dark:border-white/10">
+<button class="text-vital-navy dark:text-slate-100 flex size-10 items-center justify-center hover:bg-gray-100 dark:hover:bg-white/5 rounded-full transition-colors">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h2 class="text-vital-navy dark:text-slate-100 text-[18px] font-semibold leading-tight tracking-tight flex-1 text-center pr-10">
+                Plano e assinatura
+            </h2>
+</div>
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto px-5 pt-6 pb-12 space-y-8">
+<!-- Section 1: Current Plan Card -->
+<section>
+<div class="relative overflow-hidden rounded-xl border-2 border-primary bg-[#f0fdf9] dark:bg-primary/10 p-5 shadow-sm">
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary text-white">
+                                Premium
+                            </span>
+</div>
+<div class="space-y-1">
+<h3 class="text-vital-navy dark:text-slate-100 text-[22px] font-bold">R$ 39/mes</h3>
+<p class="text-vital-gray dark:text-slate-400 text-sm">Próximo pagamento: 12 de abril de 2026</p>
+</div>
+<button class="w-full mt-2 py-2.5 px-4 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary/5 transition-colors text-sm">
+                            Gerenciar assinatura
+                        </button>
+</div>
+</div>
+</section>
+<!-- Section 2: Benefits List -->
+<section class="space-y-4">
+<h3 class="text-vital-navy dark:text-slate-100 text-[16px] font-semibold">Seu plano inclui:</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined check-fill text-primary text-[20px]">check_circle</span>
+<p class="text-vital-navy dark:text-slate-300 text-sm font-normal">Proatividade completa ao longo do dia</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined check-fill text-primary text-[20px]">check_circle</span>
+<p class="text-vital-navy dark:text-slate-300 text-sm font-normal">Loop de feedback nutricional</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined check-fill text-primary text-[20px]">check_circle</span>
+<p class="text-vital-navy dark:text-slate-300 text-sm font-normal">Relatório semanal completo</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined check-fill text-primary text-[20px]">check_circle</span>
+<p class="text-vital-navy dark:text-slate-300 text-sm font-normal">Histórico ilimitado</p>
+</div>
+</div>
+</section>
+<!-- Section 3: Upgrade Section -->
+<section class="space-y-4">
+<div class="bg-white dark:bg-white/5 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/10">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Quer mais?</p>
+<h3 class="text-vital-navy dark:text-slate-100 text-[18px] font-semibold mb-3">Pro — R$ 79/mes</h3>
+<ul class="space-y-2 mb-6">
+<li class="flex items-center gap-2 text-vital-gray dark:text-slate-400 text-sm">
+<span class="size-1 bg-primary rounded-full"></span>
+                            Relatório mensal
+                        </li>
+<li class="flex items-center gap-2 text-vital-gray dark:text-slate-400 text-sm">
+<span class="size-1 bg-primary rounded-full"></span>
+                            Exportação PDF
+                        </li>
+<li class="flex items-center gap-2 text-vital-gray dark:text-slate-400 text-sm">
+<span class="size-1 bg-primary rounded-full"></span>
+                            Suporte prioritário
+                        </li>
+</ul>
+<button class="w-full py-3.5 bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/20 hover:brightness-105 active:scale-[0.98] transition-all">
+                        Upgrade para Pro
+                    </button>
+</div>
+</section>
+<!-- Footer Action -->
+<footer class="pt-4 flex justify-center">
+<button class="text-[#ef4444] text-sm font-medium hover:underline decoration-2 underline-offset-4">
+                    Cancelar assinatura
+                </button>
+</footer>
+</div>
+<!-- Navigation Bar (Mockup Style) -->
+<div class="h-8 bg-background-light dark:bg-background-dark w-full flex justify-center items-end pb-2">
+<div class="w-32 h-1 bg-vital-navy/10 dark:bg-white/10 rounded-full"></div>
+</div>
+</div>
+</body></html>

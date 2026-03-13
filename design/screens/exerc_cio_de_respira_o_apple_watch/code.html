@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#2bd4a7",
+                "background-light": "#000000",
+                "background-dark": "#000000",
+              },
+              fontFamily: {
+                "display": ["Inter", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Watch Frame Simulation */
+        .watch-frame {
+            width: 396px;
+            height: 484px;
+            background-color: #000000;
+            border: 8px solid #222;
+            border-radius: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .gradient-circle {
+            background: radial-gradient(circle, rgba(43, 212, 167, 0.4) 0%, rgba(74, 144, 217, 0.1) 70%, transparent 100%);
+        }
+        .glow {
+            filter: blur(15px);
+            opacity: 0.6;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display">
+<!-- Apple Watch 44mm Container -->
+<div class="watch-frame flex flex-col items-center justify-between py-6 px-4">
+<!-- Top Bar -->
+<div class="flex items-center w-full justify-between pt-2">
+<div class="text-slate-400">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</div>
+<h2 class="text-slate-100 text-sm font-bold tracking-tight">VitalAI</h2>
+<div class="text-primary">
+<span class="material-symbols-outlined text-[20px]">battery_charging_80</span>
+</div>
+</div>
+<!-- Central Breathing Animation Area -->
+<div class="relative flex flex-1 items-center justify-center w-full">
+<!-- Concentric Circles (Expanded State) -->
+<!-- Largest Outer Glow -->
+<div class="absolute w-64 h-64 rounded-full gradient-circle glow"></div>
+<!-- Layer 3 -->
+<div class="absolute w-56 h-56 rounded-full border border-primary/20 bg-primary/5"></div>
+<!-- Layer 2 -->
+<div class="absolute w-44 h-44 rounded-full border-2 border-primary/40 bg-primary/10"></div>
+<!-- Inner Layer (Main Gradient) -->
+<div class="absolute w-32 h-32 rounded-full bg-gradient-to-br from-[#2DD4A8] to-[#4A90D9] shadow-[0_0_30px_rgba(45,212,168,0.5)]"></div>
+<!-- Abstract Content Placeholder for description requirement -->
+<div class="hidden" data-alt="Calming green and blue concentric gradient circles for meditation"></div>
+</div>
+<!-- Text Labels -->
+<div class="flex flex-col items-center gap-1 mb-8">
+<h2 class="text-slate-100 text-[18px] font-medium leading-tight tracking-tight">Inspire...</h2>
+<p class="text-slate-400 text-[14px] font-normal">4:32</p>
+</div>
+<!-- Footer Action -->
+<div class="w-full flex justify-center pb-2">
+<button class="text-slate-500 text-[13px] font-semibold hover:text-slate-300 transition-colors">
+                Encerrar
+            </button>
+</div>
+</div>
+</body></html>

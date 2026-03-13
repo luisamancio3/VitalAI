@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "brand-dark": "#1A1A2E",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-white text-brand-dark antialiased">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-32">
+<!-- Header & Progress -->
+<header class="sticky top-0 z-20 bg-white/80 backdrop-blur-md px-4 pt-6 pb-4">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-brand-dark cursor-pointer">arrow_back</span>
+<h1 class="text-lg font-bold">VitalAI</h1>
+<div class="w-6"></div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<p class="text-brand-dark text-base font-bold leading-none">Seu perfil de saúde</p>
+<p class="text-brand-dark/60 text-xs font-medium leading-none">Passo 4 de 5</p>
+</div>
+<div class="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 80%;"></div>
+</div>
+</div>
+</header>
+<main class="flex flex-col gap-8 px-4 py-2">
+<!-- Section 1: Objectives -->
+<section class="flex flex-col gap-4">
+<h2 class="text-[18px] font-semibold text-brand-dark">Qual seu objetivo principal?</h2>
+<div class="grid grid-cols-2 gap-3">
+<!-- Selected Card -->
+<div class="flex flex-col gap-3 p-4 rounded-xl border-2 border-primary bg-primary/10 transition-all">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white">fitness_center</span>
+</div>
+<p class="text-sm font-bold leading-tight">Ganhar massa muscular</p>
+</div>
+<!-- Other Cards -->
+<div class="flex flex-col gap-3 p-4 rounded-xl border border-slate-200 bg-white hover:border-primary/50 transition-all">
+<div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-dark">scale</span>
+</div>
+<p class="text-sm font-bold leading-tight">Emagrecer</p>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-xl border border-slate-200 bg-white hover:border-primary/50 transition-all">
+<div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-dark">bolt</span>
+</div>
+<p class="text-sm font-bold leading-tight">Melhorar performance</p>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-xl border border-slate-200 bg-white hover:border-primary/50 transition-all">
+<div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-dark">favorite</span>
+</div>
+<p class="text-sm font-bold leading-tight">Saúde geral</p>
+</div>
+</div>
+</section>
+<!-- Section 2: Dietary Restrictions -->
+<section class="flex flex-col gap-4">
+<h2 class="text-[18px] font-semibold text-brand-dark">Alguma restrição alimentar?</h2>
+<div class="flex flex-wrap gap-2">
+<div class="px-4 py-2 rounded-full bg-primary text-white text-sm font-medium border border-primary">
+                        Sem glúten
+                    </div>
+<div class="px-4 py-2 rounded-full bg-white text-brand-dark/70 text-sm font-medium border border-slate-200">
+                        Vegetariano
+                    </div>
+<div class="px-4 py-2 rounded-full bg-white text-brand-dark/70 text-sm font-medium border border-slate-200">
+                        Vegano
+                    </div>
+<div class="px-4 py-2 rounded-full bg-white text-brand-dark/70 text-sm font-medium border border-slate-200">
+                        Sem lactose
+                    </div>
+<div class="px-4 py-2 rounded-full bg-white text-brand-dark/70 text-sm font-medium border border-slate-200">
+                        Low carb
+                    </div>
+<div class="px-4 py-2 rounded-full bg-white text-brand-dark/70 text-sm font-medium border border-slate-200">
+                        Sem frutos do mar
+                    </div>
+</div>
+<div class="relative group mt-1">
+<input class="w-full h-12 px-4 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm transition-all placeholder:text-slate-400" placeholder="Outra restrição" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">add_circle</span>
+</div>
+</section>
+<!-- Section 3: Cooking Level -->
+<section class="flex flex-col gap-4">
+<h2 class="text-[18px] font-semibold text-brand-dark">Na cozinha, você é...</h2>
+<div class="flex flex-col gap-3">
+<!-- Option 1 -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white cursor-pointer transition-all hover:border-primary/50">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-slate-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-dark">skillet</span>
+</div>
+<div class="flex flex-col">
+<p class="font-bold text-sm">Prático</p>
+<p class="text-xs text-brand-dark/60 leading-tight">Prefiro receitas de até 15min</p>
+</div>
+</div>
+<!-- Selected Option -->
+<div class="flex items-center gap-4 p-4 rounded-xl border-2 border-primary bg-primary/10 cursor-pointer transition-all">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">cooking</span>
+</div>
+<div class="flex flex-col">
+<p class="font-bold text-sm">Intermediário</p>
+<p class="text-xs text-brand-dark/60 leading-tight">Cozinho bem, aceito receitas de até 30min</p>
+</div>
+</div>
+<!-- Option 3 -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white cursor-pointer transition-all hover:border-primary/50">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-slate-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-dark">restaurant_menu</span>
+</div>
+<div class="flex flex-col">
+<p class="font-bold text-sm">Chef</p>
+<p class="text-xs text-brand-dark/60 leading-tight">Adoro cozinhar, pode mandar receitas elaboradas</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Sticky Footer -->
+<footer class="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-slate-100 flex flex-col gap-3 items-center z-30">
+<button class="w-full h-14 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:brightness-105 active:scale-[0.98] transition-all">
+                Continuar
+            </button>
+<button class="text-brand-dark/60 text-sm font-semibold hover:text-brand-dark transition-colors py-1">
+                Pular esta etapa
+            </button>
+<!-- Safe Area Indicator for iPhone -->
+<div class="h-4"></div>
+</footer>
+</div>
+</body></html>

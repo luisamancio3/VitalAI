@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI Apple Watch Interface</title>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for SF Compact feel (Inter is a close web-safe alternative) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .sf-compact-emulation {
+      letter-spacing: -0.01em;
+    }
+  </style>
+<style data-purpose="watch-frame-layout">
+    /* Apple Watch Series 9 44mm Frame Emulation */
+    .watch-frame {
+      width: 396px;
+      height: 484px;
+      background-color: #000000;
+      border: 12px solid #222222;
+      border-radius: 55px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    /* Simple Bezel highlights */
+    .watch-frame::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 43px;
+      border: 1px solid rgba(255,255,255,0.05);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="sf-compact-emulation">
+<!-- BEGIN: Watch Container -->
+<div class="watch-frame" id="watch-screen">
+<!-- BEGIN: Header Logo -->
+<header class="w-full flex justify-center pt-2 pb-4" data-purpose="app-identity">
+<div class="w-6 h-6 bg-[#2DD4A8] rounded-full flex items-center justify-center">
+<span class="text-black font-bold text-[10px]">V</span>
+</div>
+</header>
+<!-- END: Header Logo -->
+<!-- BEGIN: Vitality Score -->
+<main class="flex-grow flex flex-col items-center justify-center w-full" data-purpose="main-score-display">
+<div class="relative flex items-center justify-center" style="width: 180px; height: 180px;">
+<!-- Progress Ring SVG -->
+<svg class="absolute inset-0 transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background Track -->
+<circle cx="50" cy="50" fill="transparent" r="45" stroke="rgba(45, 212, 168, 0.15)" stroke-width="3"></circle>
+<!-- 70% Fill Ring -->
+<circle cx="50" cy="50" fill="transparent" r="45" stroke="#2DD4A8" stroke-dasharray="282.7" stroke-dashoffset="84.8" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<!-- Score Text -->
+<div class="text-center">
+<span class="text-[44px] font-bold text-white leading-none">78</span>
+</div>
+</div>
+</main>
+<!-- END: Vitality Score -->
+<!-- BEGIN: Secondary Metrics -->
+<section class="w-full flex justify-between px-6 py-4" data-purpose="health-metrics-row">
+<!-- Sleep Metric -->
+<div class="flex items-center space-x-1">
+<svg class="w-3 h-3 text-white opacity-80" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 12.75A9 9 0 1 1 11.25 3a.75.75 0 0 0-.096 1.493 7.5 7.5 0 0 0 8.353 8.353.75.75 0 0 0 1.493-.096Z"></path>
+</svg>
+<span class="text-[12px] text-white font-medium">6h48m</span>
+</div>
+<!-- HRV Metric -->
+<div class="flex items-center space-x-1">
+<svg class="w-3 h-3 text-white opacity-80" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M3 12h3l3-9 6 18 3-9h3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-[12px] text-white font-medium">45ms</span>
+</div>
+<!-- Steps Metric -->
+<div class="flex items-center space-x-1">
+<svg class="w-3 h-3 text-white opacity-80" fill="currentColor" viewbox="0 0 24 24">
+<path d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.63a.75.75 0 0 1 0 1.298l-9.75 5.63a.75.75 0 0 1-.712 0l-9.75-5.63a.75.75 0 0 1 0-1.298l9.75-5.63Z"></path>
+<path d="M11.644 12.09a.75.75 0 0 1 .712 0l9.75 5.63a.75.75 0 0 1 0 1.297l-9.75 5.63a.75.75 0 0 1-.712 0l-9.75-5.63a.75.75 0 0 1 0-1.297l9.75-5.63Z"></path>
+</svg>
+<span class="text-[12px] text-white font-medium">3.2k</span>
+</div>
+</section>
+<!-- END: Secondary Metrics -->
+<!-- BEGIN: Footer Insight Card -->
+<footer class="w-full px-4 pb-4" data-purpose="suggestion-card">
+<div class="bg-[#1C1C1E] rounded-2xl p-3 flex items-center space-x-3 w-full border border-white/5">
+<div class="text-[#2DD4A8]">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+<path d="M6 22h2V10c0-2.209-1.791-4-4-4s-4 1.791-4 4v12h2v-6h4v6zm13-20c-2.209 0-4 1.791-4 4v10c0 1.657-1.343 3-3 3h-1v2h1c2.761 0 5-2.239 5-5V6c0-1.103.897-2 2-2s2 .897 2 2v16h2V6c0-2.209-1.791-4-4-4z"></path>
+</svg>
+</div>
+<span class="text-[14px] text-gray-300 font-medium">Almoço sugerido: 12:30</span>
+</div>
+</footer>
+<!-- END: Footer Insight Card -->
+</div>
+<!-- END: Watch Container -->
+</body></html>

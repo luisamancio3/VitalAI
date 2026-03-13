@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "slate-900": "#1a1a2e",
+                        "slate-500": "#6b7280",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>VitalAI - Conectar Smartwatch</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased">
+<div class="relative mx-auto h-[852px] w-[393px] overflow-hidden bg-white shadow-2xl">
+<!-- Top App Bar & Progress -->
+<header class="flex flex-col px-6 pt-12 pb-4">
+<div class="flex items-center justify-between mb-6">
+<button class="text-slate-900 flex items-center justify-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-slate-900 text-lg font-bold">VitalAI</h2>
+<div class="w-6"></div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<p class="text-slate-900 text-sm font-medium">Etapa 3 de 5</p>
+<p class="text-slate-500 text-xs">60%</p>
+</div>
+<div class="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 60%;"></div>
+</div>
+</div>
+</header>
+<main class="flex flex-col px-6 overflow-y-auto h-[calc(100%-180px)] pb-20">
+<!-- Illustration Area -->
+<div class="flex justify-center py-6">
+<div class="relative w-48 h-48 bg-primary/5 rounded-full flex items-center justify-center">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full opacity-50"></div>
+<!-- Mock Illustration with icons -->
+<div class="relative flex items-center gap-4">
+<div class="w-16 h-28 bg-slate-900 rounded-xl border-2 border-slate-900 flex flex-col p-1">
+<div class="w-full h-1 bg-slate-800 rounded-full mb-1"></div>
+<div class="flex-1 bg-slate-100 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">vitals</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 items-center">
+<span class="material-symbols-outlined text-primary animate-pulse">settings_input_antenna</span>
+</div>
+<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white">watch</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Header -->
+<div class="text-center mb-6">
+<h1 class="text-slate-900 text-[22px] font-bold leading-tight mb-2">Conecte seu smartwatch</h1>
+<p class="text-slate-500 text-sm leading-relaxed px-2">
+                    O VitalAI precisa acessar seus dados de saúde para gerar insights personalizados. Seus dados nunca saem do seu aparelho sem sua permissão.
+                </p>
+</div>
+<!-- Data Permissions List -->
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<span class="text-slate-900 text-sm font-medium">Frequência cardíaca</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">waves</span>
+</div>
+<span class="text-slate-900 text-sm font-medium">Variabilidade cardíaca (HRV)</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">bedtime</span>
+</div>
+<span class="text-slate-900 text-sm font-medium">Sono</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">directions_run</span>
+</div>
+<span class="text-slate-900 text-sm font-medium">Atividade física</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<span class="text-slate-900 text-sm font-medium">Nível de estresse</span>
+</div>
+</div>
+<!-- Security Badge -->
+<div class="flex items-center justify-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary text-sm">lock</span>
+<p class="text-primary text-[11px] font-semibold uppercase tracking-wider">Seus dados são processados no seu dispositivo</p>
+</div>
+</main>
+<!-- Bottom Actions -->
+<footer class="absolute bottom-0 left-0 w-full p-6 bg-white/90 backdrop-blur-md">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl transition-colors mb-4 flex items-center justify-center gap-2">
+                Conectar Apple Health
+            </button>
+<button class="w-full text-slate-500 text-sm font-medium py-2">
+                Pular por enquanto
+            </button>
+</footer>
+</div>
+</body></html>

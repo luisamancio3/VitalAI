@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "success": "#2DD4A8",
+                        "warning-bg": "#FEF3C7",
+                        "warning-text": "#92400E",
+                        "warning-accent": "#F59E0B"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-slate-100">
+<div class="relative flex h-screen max-w-[430px] mx-auto flex-col overflow-hidden bg-white dark:bg-background-dark shadow-2xl border-x border-slate-200 dark:border-slate-800">
+<!-- Warning Banner -->
+<div class="bg-warning-bg px-4 py-3 flex items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-warning-accent text-xl" data-icon="watch_off">watch_off</span>
+<p class="text-[11px] font-medium leading-tight text-warning-text">
+                    Apple Watch desconectado. Reconecte para continuar recebendo insights.
+                </p>
+</div>
+<button class="text-xs font-bold text-warning-accent whitespace-nowrap">Reconectar</button>
+</div>
+<!-- Header -->
+<div class="flex items-center justify-between px-5 pt-6 pb-4">
+<h1 class="text-[22px] font-bold tracking-tight">Bom dia, Luis</h1>
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400" data-icon="settings">settings</span>
+</button>
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center border-2 border-primary/10">
+<span class="text-primary font-bold text-lg">L</span>
+</div>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-5 pb-24">
+<!-- Summary Card -->
+<div class="bg-slate-50 dark:bg-slate-900/50 rounded-xl p-5 mb-6 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-6">
+<!-- Circular Progress Ring -->
+<div class="relative size-20 flex items-center justify-center">
+<svg class="size-full -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-slate-200 dark:stroke-slate-700" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
+<circle class="stroke-success" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100" stroke-dashoffset="22" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-bold leading-none">78</span>
+<span class="text-[8px] uppercase font-bold tracking-wider text-slate-400">Score</span>
+</div>
+</div>
+<!-- Mini Metrics -->
+<div class="flex-1 grid grid-cols-1 gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500 text-sm" data-icon="bedtime">bedtime</span>
+<span class="text-xs font-medium text-slate-500">Sono</span>
+</div>
+<span class="text-xs font-bold">7h 42m</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-pink-500 text-sm" data-icon="favorite">favorite</span>
+<span class="text-xs font-medium text-slate-500">HRV</span>
+</div>
+<span class="text-xs font-bold">48ms</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500 text-sm" data-icon="steps">steps</span>
+<span class="text-xs font-medium text-slate-500">Passos</span>
+</div>
+<span class="text-xs font-bold">4.201</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline -->
+<div class="space-y-4 relative before:absolute before:inset-0 before:ml-3 before:h-full before:w-0.5 before:bg-slate-100 dark:before:bg-slate-800">
+<!-- Sleep -->
+<div class="relative pl-10">
+<div class="absolute left-1.5 top-1.5 size-3 rounded-full bg-blue-500 border-4 border-white dark:border-background-dark"></div>
+<div class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">07:12</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-4 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-bold text-sm">Resumo do Sono</h3>
+<span class="material-symbols-outlined text-blue-500 text-sm" data-icon="nights_stay">nights_stay</span>
+</div>
+<p class="text-xs text-slate-500">Você dormiu 7h42m. Qualidade restauradora acima da média (82%).</p>
+</div>
+</div>
+<!-- Breakfast -->
+<div class="relative pl-10">
+<div class="absolute left-1.5 top-1.5 size-3 rounded-full bg-orange-400 border-4 border-white dark:border-background-dark"></div>
+<div class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">08:30</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-4 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-bold text-sm">Café da Manhã</h3>
+<span class="material-symbols-outlined text-orange-400 text-sm" data-icon="breakfast_dining">breakfast_dining</span>
+</div>
+<p class="text-xs text-slate-500">Iogurte grego, granola e frutas vermelhas registrados.</p>
+</div>
+</div>
+<!-- Lunch Suggestion -->
+<div class="relative pl-10">
+<div class="absolute left-1.5 top-1.5 size-3 rounded-full bg-primary border-4 border-white dark:border-background-dark"></div>
+<div class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">12:15</div>
+<div class="bg-primary/5 border border-primary/20 p-4 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-sm text-primary">Sugestão Nutricional</h3>
+<span class="material-symbols-outlined text-primary text-xs" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+<p class="text-xs text-slate-700 dark:text-slate-300">Baseado no seu treino planejado: Bowl de Quinoa com Salmão para energia sustentada.</p>
+</div>
+</div>
+<!-- Movement -->
+<div class="relative pl-10">
+<div class="absolute left-1.5 top-1.5 size-3 rounded-full bg-success border-4 border-white dark:border-background-dark"></div>
+<div class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">14:00</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-4 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-bold text-sm">Hora de se mexer</h3>
+<span class="material-symbols-outlined text-success text-sm" data-icon="directions_walk">directions_walk</span>
+</div>
+<p class="text-xs text-slate-500">Você está sentado há 2 horas. Que tal uma caminhada de 5 minutos?</p>
+</div>
+</div>
+<!-- Workout -->
+<div class="relative pl-10">
+<div class="absolute left-1.5 top-1.5 size-3 rounded-full bg-purple-500 border-4 border-white dark:border-background-dark"></div>
+<div class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">18:30</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-4 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-bold text-sm">Treino Detectado</h3>
+<span class="material-symbols-outlined text-purple-500 text-sm" data-icon="fitness_center">fitness_center</span>
+</div>
+<p class="text-xs text-slate-500">Musculação (Membros Superiores) identificado pelo Apple Watch.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button -->
+<button class="absolute bottom-24 right-6 size-14 rounded-full bg-success text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+<!-- Bottom Navigation -->
+<nav class="absolute bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 pb-8 pt-2 flex justify-around items-center">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-success" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold text-success">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors" data-icon="nutrition">nutrition</span>
+<span class="text-[10px] font-medium text-slate-400 group-hover:text-primary transition-colors">Nutrição</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors" data-icon="bar_chart">bar_chart</span>
+<span class="text-[10px] font-medium text-slate-400 group-hover:text-primary transition-colors">Relatórios</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors" data-icon="person">person</span>
+<span class="text-[10px] font-medium text-slate-400 group-hover:text-primary transition-colors">Perfil</span>
+</a>
+</nav>
+<!-- Dynamic Island Indicator (Safe Area) -->
+<div class="absolute top-2 left-1/2 -translate-x-1/2 w-32 h-8 bg-black rounded-full pointer-events-none opacity-90 hidden sm:block"></div>
+<!-- Home Indicator -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full"></div>
+</div>
+</body></html>

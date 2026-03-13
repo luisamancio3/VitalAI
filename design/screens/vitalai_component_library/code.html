@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI Component Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Top Navigation Bar -->
+<nav class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between px-4 h-16 max-w-2xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">arrow_back</span>
+<h1 class="text-lg font-bold tracking-tight">VitalAI Component Library</h1>
+</div>
+<button class="p-2 hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</nav>
+<main class="max-w-2xl mx-auto p-4 pb-32 space-y-12">
+<!-- Introduction -->
+<header>
+<p class="text-slate-500 dark:text-slate-400">Comprehensive design system for the VitalAI health coaching platform. Consistent spacing, accessible colors, and modern UI patterns.</p>
+</header>
+<!-- Buttons Section -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-2">1. Buttons</h2>
+<div class="space-y-8">
+<!-- Large Buttons -->
+<div class="space-y-3">
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Large (48px)</p>
+<div class="flex flex-col gap-3">
+<button class="h-[48px] px-6 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-all">Primary Button</button>
+<button class="h-[48px] px-6 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary/5 transition-all">Secondary Button</button>
+<button class="h-[48px] px-6 text-primary font-bold rounded-xl hover:bg-primary/10 transition-all">Ghost Button</button>
+<button class="h-[48px] px-6 bg-slate-200 text-slate-400 font-bold rounded-xl cursor-not-allowed" disabled="">Disabled Button</button>
+</div>
+</div>
+<!-- Medium Buttons -->
+<div class="space-y-3">
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Medium (40px)</p>
+<div class="flex flex-wrap gap-3">
+<button class="h-[40px] px-5 bg-primary text-white font-semibold rounded-lg">Primary</button>
+<button class="h-[40px] px-5 border-2 border-primary text-primary font-semibold rounded-lg">Secondary</button>
+<button class="h-[40px] px-5 text-primary font-semibold rounded-lg">Ghost</button>
+</div>
+</div>
+<!-- Small Buttons -->
+<div class="space-y-3">
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Small (32px)</p>
+<div class="flex flex-wrap gap-3">
+<button class="h-[32px] px-4 bg-primary text-white text-sm font-semibold rounded-lg">Primary</button>
+<button class="h-[32px] px-4 border border-primary text-primary text-sm font-semibold rounded-lg">Secondary</button>
+<button class="h-[32px] px-4 text-primary text-sm font-semibold rounded-lg">Ghost</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Input Fields Section -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-2">2. Input Fields</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<div class="space-y-1">
+<label class="text-sm font-medium">Default</label>
+<input class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all dark:bg-background-dark dark:border-slate-800" placeholder="Enter name..." type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-sm font-medium">Focused State</label>
+<input class="w-full px-4 py-3 rounded-lg border-2 border-primary ring-1 ring-primary outline-none dark:bg-background-dark" type="text" value="Active interaction"/>
+</div>
+</div>
+<div class="space-y-4">
+<div class="space-y-1">
+<label class="text-sm font-medium">Error State</label>
+<input class="w-full px-4 py-3 rounded-lg border border-red-500 focus:ring-1 focus:ring-red-500 outline-none dark:bg-background-dark" type="email" value="invalid-email@"/>
+<p class="text-xs text-red-500">Please enter a valid email address.</p>
+</div>
+<div class="space-y-1">
+<label class="text-sm font-medium">Disabled</label>
+<input class="w-full px-4 py-3 rounded-lg bg-slate-100 border border-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-900 dark:border-slate-800" disabled="" placeholder="Can't touch this" type="text"/>
+</div>
+</div>
+<div class="space-y-1 md:col-span-2">
+<label class="text-sm font-medium">With Icons</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none dark:bg-background-dark dark:border-slate-800" placeholder="Search recipes..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Star Rating Section -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-2">3. Star Rating</h2>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-amber-400 fill-icon">star</span>
+<span class="material-symbols-outlined text-amber-400 fill-icon">star</span>
+<span class="material-symbols-outlined text-amber-400 fill-icon">star</span>
+<span class="material-symbols-outlined text-amber-400 fill-icon">star</span>
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700">star</span>
+<span class="ml-2 text-sm text-slate-500">4.0 (128 reviews)</span>
+</div>
+</section>
+<!-- Chips/Tags Section -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-2">4. Chips &amp; Tags</h2>
+<div class="space-y-4">
+<div class="flex flex-wrap gap-2">
+<p class="w-full text-xs font-semibold text-slate-400 uppercase">Selectable</p>
+<button class="px-4 py-1.5 rounded-full border border-primary text-primary text-sm font-medium hover:bg-primary/5 transition-colors">Vegetarian</button>
+<button class="px-4 py-1.5 rounded-full bg-primary text-white text-sm font-medium">Keto Friendly</button>
+<button class="px-4 py-1.5 rounded-full border border-primary text-primary text-sm font-medium hover:bg-primary/5 transition-colors">Vegan</button>
+</div>
+<div class="flex flex-wrap gap-2">
+<p class="w-full text-xs font-semibold text-slate-400 uppercase">Static Labels</p>
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium">Gluten Free</span>
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium">Dairy Free</span>
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium">Nut Free</span>
+</div>
+</div>
+</section>
+<!-- Macro Pills Section -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-2">5. Macro Pills</h2>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 rounded-full border border-red-100 dark:border-red-900/50">
+<span class="material-symbols-outlined text-[18px]">egg</span>
+<span class="text-sm font-bold">45g</span>
+<span class="text-xs opacity-75">Protein</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 rounded-full border border-amber-100 dark:border-amber-900/50">
+<span class="material-symbols-outlined text-[18px]">bakery_dining</span>
+<span class="text-sm font-bold">60g</span>
+<span class="text-xs opacity-75">Carbs</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 rounded-full border border-blue-100 dark:border-blue-900/50">
+<span class="material-symbols-outlined text-[18px]">oil_barrel</span>
+<span class="text-sm font-bold">15g</span>
+<span class="text-xs opacity-75">Fat</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 rounded-full border border-emerald-100 dark:border-emerald-900/50">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span class="text-sm font-bold">500kcal</span>
+<span class="text-xs opacity-75">Calories</span>
+</div>
+</div>
+</section>
+<!-- Toggles Section -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-2">6. Toggle Switches</h2>
+<div class="space-y-4">
+<label class="flex items-center gap-3 cursor-pointer">
+<div class="relative inline-flex items-center">
+<div class="w-11 h-6 bg-primary rounded-full"></div>
+<div class="absolute left-6 w-4 h-4 bg-white rounded-full transition-all"></div>
+</div>
+<span class="text-sm font-medium">Daily Reminders On</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<div class="relative inline-flex items-center">
+<div class="w-11 h-6 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+<div class="absolute left-1 w-4 h-4 bg-white rounded-full transition-all"></div>
+</div>
+<span class="text-sm font-medium text-slate-500">Sound Effects Off</span>
+</label>
+</div>
+</section>
+<!-- Progress Bars Section -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-2">7. Progress Bars</h2>
+<div class="space-y-8">
+<!-- Linear -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-semibold">
+<span>Daily Goal</span>
+<span>75%</span>
+</div>
+<div class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 75%"></div>
+</div>
+</div>
+<!-- Circular -->
+<div class="flex items-center gap-8">
+<div class="relative size-20">
+<svg class="size-full -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-slate-200 dark:stroke-slate-800" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100" stroke-dashoffset="35" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-xs font-bold">65%</span>
+</div>
+</div>
+<div class="text-sm">
+<p class="font-bold">Water Intake</p>
+<p class="text-slate-500 text-xs">1.5L of 2.5L reached</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Card Section -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-2">8. Content Card</h2>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 space-y-3">
+<div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<h3 class="text-lg font-bold">Health Tip of the Day</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    Staying hydrated throughout the day can significantly improve your metabolic rate and cognitive function. Aim for at least 8 glasses of water.
+                </p>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+                    Read More <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 pb-safe">
+<div class="flex justify-around items-center h-20 max-w-2xl mx-auto px-4">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-icon">restaurant</span>
+<span class="text-[10px] font-bold">Nutricao</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-[10px] font-medium">Relatorios</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>iPhone 15 Pro Lock Screen - VitalAI</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  </style>
+<style data-purpose="ios-effects">/* Glassmorphism for iOS Notification */
+.ios-glass {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 0.5px solid rgba(255, 255, 255, 0.2)
+    }
+/* Button blur effect */
+.ios-button-glass {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px)
+    }
+/* Gradient for wallpaper */
+.wallpaper-gradient {
+    background: linear-gradient(180deg, #1a1c2c 0%, #0d0e14 100%);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1
+    }
+/* Subtle texture overlay */
+.wallpaper-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCfsopxFiHXSpxKDGWuRBoTjx-n3WuqbNo4rgy0iXdStZ5dno3Jp6tRVdKSDej3qN9g38aEtmjoh5Imm6MeS4JC5ylb5biHzzsaGRzCMriC3roboKMGoHEuKZcIMCae6hAtrn0LDzB_UxwPAbg_FvkwiJHovk5-j_YyFhSnwhtf-ENreyHpue38m-3hSxeyxbX8c7M_lg_niYrZUrAbEqYzA0UzoPp3w6u9vz0TQ8xKP7XtsRJu6t3HHZTZmXpakEfe5oD7zCEj5kzs);
+    opacity: 0.05;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1
+    }
+/* Time shadow */
+.ios-time-shadow {
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3)
+    }</style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-black overflow-hidden">
+<!-- BEGIN: Phone Frame Simulation (Mobile Viewport) -->
+<main class="relative w-full max-w-[393px] h-screen max-h-[852px] shadow-2xl overflow-hidden flex flex-col items-center">
+<!-- BEGIN: Wallpaper Background -->
+<div class="wallpaper-gradient"></div>
+<div class="wallpaper-overlay"></div>
+<!-- END: Wallpaper Background -->
+<!-- BEGIN: Status Bar -->
+<header class="w-full flex justify-between px-8 pt-4 items-end z-10 text-white font-semibold text-sm" data-purpose="status-bar">
+<div class="flex-1">
+<!-- Carrier / Left space -->
+</div>
+<!-- Dynamic Island Position -->
+<div class="w-32 h-8 bg-black rounded-[30px] absolute left-1/2 -translate-x-1/2 top-3"></div>
+<div class="flex gap-1.5 items-center flex-1 justify-end">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 21l-12-18h24z"></path></svg>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M2 10h18v10h-18z"></path></svg>
+</div>
+</header>
+<!-- END: Status Bar -->
+<!-- BEGIN: Lock Screen Time & Date -->
+<section class="mt-14 text-center z-10 text-white" data-purpose="lock-screen-info">
+<p class="text-[20px] font-medium tracking-tight mb-1 ios-time-shadow">Quinta-feira, 13 de março</p>
+<h1 class="text-[96px] font-bold tracking-tighter leading-none ios-time-shadow">21:45</h1>
+</section>
+<!-- END: Lock Screen Time & Date -->
+<!-- BEGIN: Notification Container -->
+<section class="w-full px-4 mt-8 flex flex-col gap-4 z-20" data-purpose="notification-center">
+<!-- Notification Card -->
+<div class="ios-glass rounded-[28px] overflow-hidden flex flex-col">
+<!-- Header Info -->
+<div class="px-4 pt-4 pb-2 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<!-- Green VitalAI Icon Placeholder -->
+<div class="w-5 h-5 bg-green-500 rounded-md flex items-center justify-center">
+<span class="text-[10px] text-white font-bold">V</span>
+</div>
+<span class="text-[13px] font-semibold text-white uppercase tracking-wider opacity-90">VitalAI</span>
+</div>
+<span class="text-[12px] text-white opacity-70">agora</span>
+</div>
+<!-- Notification Body -->
+<div class="px-4 pb-4">
+<p class="text-[15px] leading-tight text-white font-medium">
+            Percebi que você está com o estresse um pouco elevado agora. Que tal 5 minutos de respiração antes de dormir? Seu sono vai agradecer.
+          </p>
+</div>
+<!-- Action Buttons (Expanded Style) -->
+<div class="border-t border-white/10 flex flex-col">
+<button class="w-full py-4 text-[17px] font-semibold text-white ios-button-glass border-b border-white/10 active:opacity-70 transition-opacity">
+            Iniciar respiração
+          </button>
+<button class="w-full py-4 text-[17px] font-normal text-white ios-button-glass active:opacity-70 transition-opacity">
+            Agora não
+          </button>
+</div>
+</div>
+<!-- END: Notification Card -->
+</section>
+<!-- END: Notification Container -->
+<!-- BEGIN: Lock Screen Shortcuts -->
+<footer class="absolute bottom-12 w-full flex justify-between px-10 items-center z-10" data-purpose="lock-screen-footer">
+<div class="w-12 h-12 rounded-full ios-glass flex items-center justify-center text-white">
+<!-- Flashlight icon -->
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="w-12 h-12 rounded-full ios-glass flex items-center justify-center text-white">
+<!-- Camera icon -->
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</footer>
+<!-- END: Lock Screen Shortcuts -->
+<!-- BEGIN: Home Indicator -->
+<div class="absolute bottom-2 w-32 h-1.5 bg-white rounded-full left-1/2 -translate-x-1/2 z-30"></div>
+<!-- END: Home Indicator -->
+</main>
+<!-- END: Phone Frame Simulation -->
+</body></html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI Apple Watch Face - Infograph Modular</title>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#2DD4A8',
+            oled: '#000000',
+          },
+          fontFamily: {
+            'sf-compact': ['SF Compact Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="watch-frame-and-typography">
+    body {
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+      font-family: 'sf-compact', sans-serif;
+    }
+
+    /* Simulate the 44mm Apple Watch Screen dimensions */
+    .watch-screen {
+      width: 396px;
+      height: 484px;
+      background-color: #000000;
+      border-radius: 80px; /* High curvature for Series 9 look */
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5), inset 0 0 4px rgba(255,255,255,0.1);
+      border: 8px solid #1c1c1c;
+      padding: 24px;
+    }
+
+    .font-sf-bold {
+      font-weight: 700;
+    }
+
+    .curved-text {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+<!-- BEGIN: Apple Watch Face -->
+<div class="watch-screen flex flex-col justify-between" data-purpose="infograph-modular-layout">
+<!-- BEGIN: Top Row Complications -->
+<header class="flex justify-between items-start w-full" data-purpose="top-header">
+<!-- Top Left: Circular Progress Complication -->
+<div class="relative w-16 h-16 flex flex-col items-center justify-center" data-purpose="circular-complication">
+<svg class="w-full h-full transform -rotate-90">
+<!-- Background Track -->
+<circle cx="32" cy="32" fill="transparent" r="28" stroke="#1f2937" stroke-width="4"></circle>
+<!-- Progress Ring (78%) -->
+<circle cx="32" cy="32" fill="transparent" r="28" stroke="#2DD4A8" stroke-dasharray="175.9" stroke-dashoffset="38.7" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-xl font-sf-bold">78</span>
+<div class="absolute -bottom-4 curved-text text-brand">VitalAI</div>
+</div>
+<!-- Top Center: Date -->
+<div class="text-brand font-medium tracking-widest text-sm pt-2" data-purpose="date-display">
+        THU 13
+      </div>
+<!-- Top Right: Time -->
+<div class="text-5xl font-medium tracking-tight" data-purpose="time-display">
+        10:09
+      </div>
+</header>
+<!-- END: Top Row Complications -->
+<!-- BEGIN: Large Rectangular Center Complication -->
+<section class="bg-zinc-900/40 rounded-3xl p-4 flex flex-col justify-between h-32 border border-white/5" data-purpose="center-modular-complication">
+<div class="flex justify-between items-center">
+<span class="text-brand text-xs font-bold uppercase tracking-wider">VitalAI</span>
+<!-- Sparkline Trend Visualization -->
+<div class="w-20 h-6" data-purpose="trend-sparkline">
+<svg class="w-full h-full" viewbox="0 0 100 30">
+<polyline fill="none" points="0,25 15,20 30,28 45,15 60,10 75,18 90,5 100,8" stroke="#2DD4A8" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></polyline>
+</svg>
+</div>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<h1 class="text-7xl font-semibold leading-none">78</h1>
+<!-- Up Arrow Icon -->
+<svg class="w-8 h-8" fill="#2DD4A8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 4l-8 8h6v8h4v-8h6z"></path>
+</svg>
+</div>
+<div class="text-[10px] text-zinc-400 uppercase tracking-[0.2em] font-medium">
+        Health Score • Optimized
+      </div>
+</section>
+<!-- END: Large Rectangular Center Complication -->
+<!-- BEGIN: Bottom Row Slots -->
+<footer class="flex justify-around items-center w-full mb-2" data-purpose="bottom-complications">
+<!-- Dummy Slot 1: Activity Rings (Visual Representation) -->
+<div class="w-10 h-10 relative">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="none" r="14" stroke="#fa114f" stroke-dasharray="80, 100" stroke-linecap="round" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="none" r="10" stroke="#a2ff00" stroke-dasharray="60, 100" stroke-linecap="round" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="none" r="6" stroke="#00fff9" stroke-dasharray="40, 100" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+</div>
+<!-- Dummy Slot 2: Heart Rate -->
+<div class="flex flex-col items-center">
+<span class="text-red-500 text-[10px] font-bold">HR</span>
+<span class="text-lg font-medium">72</span>
+</div>
+<!-- Dummy Slot 3: Weather/Temp -->
+<div class="flex flex-col items-center">
+<span class="text-brand text-xs">●</span>
+<span class="text-lg font-medium">21°</span>
+</div>
+</footer>
+<!-- END: Bottom Row Slots -->
+</div>
+<!-- END: Apple Watch Face -->
+</body></html>

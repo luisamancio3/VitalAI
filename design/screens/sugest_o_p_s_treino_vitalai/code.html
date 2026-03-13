@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "deep-blue": "#1A1A2E",
+                        "slate-custom": "#6B7280",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<!-- iPhone 15 Pro Mockup Container -->
+<div class="relative w-full max-w-[393px] min-h-screen bg-white dark:bg-slate-900 flex flex-col shadow-2xl overflow-hidden">
+<!-- Top App Bar -->
+<header class="flex items-center px-4 py-4 bg-white dark:bg-slate-900 sticky top-0 z-10">
+<div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined text-deep-blue dark:text-slate-100">arrow_back</span>
+</div>
+<h1 class="flex-1 text-center text-[17px] font-semibold text-deep-blue dark:text-slate-100 pr-10">
+                Sugestão pós-treino
+            </h1>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex-1 overflow-y-auto px-4 pb-32">
+<!-- Main Meal Card -->
+<div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden mt-2">
+<!-- Hero Image Section -->
+<div class="relative w-full aspect-[4/3] bg-slate-200 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Appetizing chicken wrap with fresh vegetables and rice" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4RV9GFxVTMtzDom-pr7sfroUkivPuxefLj3ePO6uPIBd2_dpnDsBHeFxwazyPj69FR-WLOQ9RM3Y4tYaeDe6PvQPBDWAegUD-WXbbZDx632fNp20nCZ8gJpLTbFKfdTnuivrZnpBLuQ-zYsOttIPkYMCMGeUHrTgmVClRDFl6xnBkBC-X5Rn82eTiVlt3xfsYMAZJzu63YSyf20mLEJW88ABIH6OaL-Oh2wE7GEJx6B8GIPkRtFEnU94fsA5K9z-u8Lmnkj3aeZ3K');">
+</div>
+<!-- Overlays -->
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<span class="bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center shadow-sm">
+                            Ideal pós-treino
+                        </span>
+<div class="flex items-center gap-1 bg-black/30 backdrop-blur-md text-white text-xs font-medium px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                            15 min
+                        </div>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-5 flex flex-col gap-4">
+<h2 class="text-[22px] font-bold text-deep-blue dark:text-slate-100 leading-tight">
+                        Wrap de frango com arroz
+                    </h2>
+<!-- Macro Pills Row -->
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 bg-rose-50 dark:bg-rose-900/20 px-3 py-1.5 rounded-lg">
+<div class="w-1.5 h-1.5 rounded-full bg-rose-500"></div>
+<span class="text-rose-700 dark:text-rose-400 text-xs font-semibold">45g Prot</span>
+</div>
+<div class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-900/20 px-3 py-1.5 rounded-lg">
+<div class="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+<span class="text-amber-700 dark:text-amber-400 text-xs font-semibold">62g Carb</span>
+</div>
+<div class="flex items-center gap-1.5 bg-sky-50 dark:bg-sky-900/20 px-3 py-1.5 rounded-lg">
+<div class="w-1.5 h-1.5 rounded-full bg-sky-500"></div>
+<span class="text-sky-700 dark:text-sky-400 text-xs font-semibold">12g Fat</span>
+</div>
+<div class="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1.5 rounded-lg">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+<span class="text-emerald-700 dark:text-emerald-400 text-xs font-semibold">530kcal</span>
+</div>
+</div>
+<!-- AI Insight Section -->
+<div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">auto_awesome</span>
+<p class="text-[14px] leading-relaxed text-slate-custom dark:text-slate-300">
+                            Proteína e carb na medida certa para recuperação muscular após sua corrida de hoje.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Full Recipe Link -->
+<div class="flex justify-center mt-6">
+<button class="text-[#4A90D9] text-sm font-semibold flex items-center gap-1 hover:underline">
+                    Ver receita completa
+                </button>
+</div>
+</main>
+<!-- Bottom Sticky Area -->
+<footer class="absolute bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 flex flex-col gap-3">
+<button class="w-full h-12 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-colors shadow-lg shadow-primary/20">
+                Vou fazer essa
+            </button>
+<button class="w-full h-12 bg-transparent border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-bold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                Ver outra opção
+            </button>
+<!-- Home Indicator -->
+<div class="w-32 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full mx-auto mt-2 mb-1"></div>
+</footer>
+</div>
+</body></html>

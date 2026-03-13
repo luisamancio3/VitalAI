@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI iPhone Lock Screen</title>
+<!-- Load Tailwind CSS v3 with forms and container-queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter as a proxy for San Francisco -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-ios-weight { font-weight: 500; }
+  </style>
+<style data-purpose="layout-effects">
+    /* Soft morning wallpaper gradient */
+    .bg-morning {
+      background: linear-gradient(180deg, #a5b4fc 0%, #f9a8d4 40%, #fdba74 100%);
+    }
+    /* iOS Glassmorphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .glass-dark {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+    }
+    /* Dynamic Island */
+    .dynamic-island {
+      width: 120px;
+      height: 35px;
+      background: black;
+      border-radius: 20px;
+      margin: 10px auto 0;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen p-4">
+<!-- BEGIN: PhoneFrame -->
+<div class="relative w-[393px] h-[852px] bg-morning rounded-[55px] overflow-hidden shadow-2xl border-[8px] border-gray-800" data-purpose="iphone-15-pro-frame">
+<!-- BEGIN: DynamicIsland -->
+<div class="absolute top-0 w-full flex justify-center z-50">
+<div class="dynamic-island"></div>
+</div>
+<!-- END: DynamicIsland -->
+<!-- BEGIN: StatusBar -->
+<div class="absolute top-4 w-full px-8 flex justify-between items-center text-white text-xs font-semibold z-40">
+<div data-purpose="status-left">07:05</div>
+<div class="flex gap-1.5 items-center" data-purpose="status-right">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
+<div class="w-6 h-3 border border-white/50 rounded-sm relative">
+<div class="absolute inset-0.5 bg-white w-4/5 rounded-px"></div>
+</div>
+</div>
+</div>
+<!-- END: StatusBar -->
+<!-- BEGIN: LockScreenClock -->
+<div class="mt-28 flex flex-col items-center text-white/90">
+<span class="text-[80px] font-bold tracking-tight leading-none">07:05</span>
+<span class="text-xl font-medium mt-1">quinta-feira, 24 de outubro</span>
+</div>
+<!-- END: LockScreenClock -->
+<!-- BEGIN: NotificationStack -->
+<div class="mt-8 px-4 space-y-2">
+<!-- Main VitalAI Notification -->
+<div class="glass rounded-[28px] p-4 shadow-sm animate-fade-in" data-purpose="notification-card">
+<!-- Notification Header -->
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 bg-white rounded-md flex items-center justify-center shadow-sm">
+<!-- Green Heart Icon for VitalAI -->
+<svg class="w-3.5 h-3.5 text-green-500" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</div>
+<span class="text-[13px] font-semibold text-gray-800 uppercase tracking-wide">VitalAI</span>
+</div>
+<span class="text-[12px] text-gray-600">agora</span>
+</div>
+<!-- Notification Content -->
+<div class="space-y-0.5">
+<h4 class="text-[15px] font-bold text-black leading-tight">Noite curta — 5h12min com HRV baixo.</h4>
+<p class="text-[14px] text-gray-800 leading-snug">Hoje o corpo pede calma: treino leve, comida nutritiva e dormir mais cedo. Café sugerido: aveia com banana e mel.</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-2 mt-2">
+<button class="glass h-[50px] rounded-[18px] text-[15px] font-semibold text-gray-900 flex items-center justify-center active:scale-95 transition-transform">
+          Ver sugestões do dia
+        </button>
+<button class="glass h-[50px] rounded-[18px] text-[15px] font-semibold text-gray-900 flex items-center justify-center active:scale-95 transition-transform">
+          Entendi
+        </button>
+</div>
+</div>
+<!-- END: NotificationStack -->
+<!-- BEGIN: BottomControls -->
+<div class="absolute bottom-12 w-full px-12 flex justify-between items-center">
+<!-- Flashlight -->
+<div class="glass-dark w-12 h-12 rounded-full flex items-center justify-center text-white">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Camera -->
+<div class="glass-dark w-12 h-12 rounded-full flex items-center justify-center text-white">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="3.2"></circle><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"></path>
+</svg>
+</div>
+</div>
+<!-- END: BottomControls -->
+<!-- BEGIN: HomeIndicator -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-white rounded-full opacity-80"></div>
+<!-- END: HomeIndicator -->
+</div>
+<!-- END: PhoneFrame -->
+</body></html>

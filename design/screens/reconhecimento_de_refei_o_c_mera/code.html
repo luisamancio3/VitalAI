@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2bd4a7",
+              "background-light": "#f6f8f7",
+              "background-dark": "#12201c",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .camera-vignette {
+            background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.4) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black font-display">
+<!-- Main Mobile Container (iPhone 15 Pro Ratio aspect) -->
+<div class="relative h-screen w-full max-w-md mx-auto overflow-hidden bg-black flex flex-col">
+<!-- Camera Viewfinder Background -->
+<div class="absolute inset-0 z-0">
+<img alt="Healthy salmon salad bowl top view" class="h-full w-full object-cover" data-alt="Top down view of a healthy salmon salad on a white plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBceKOXleC6P3G8yPb7dMpry0pV19dcF2MLw5j_U7USyEBY1_Dj5foAm5whCsFrg_KKSggRXEWYWuGzLneWjEvOdS85_1FdzBk_BLYJ9O9vObL6ltG3zxn13Pu9ywKZaQcC7dcwRXdzkIQ3siCFf6tn0bQ2f5k9z0KFMPsRa9Wug1RfNI-Ro4FztWqNC9UrPqvjdSn7M2_97s-kNPfgwF0mQx6R3hVEk838IBxAXFR_leLJP_cO7SMqXOHk1mX6IEYNuZdYaweQH_YN"/>
+<!-- Vignette Overlay -->
+<div class="absolute inset-0 camera-vignette"></div>
+</div>
+<!-- Top Navigation Overlay -->
+<div class="relative z-10 flex items-center justify-between px-6 pt-12 pb-4">
+<button class="text-white text-base font-medium drop-shadow-md">
+                Cancelar
+            </button>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center text-white drop-shadow-md">
+<span class="material-symbols-outlined text-[28px]">flash_on</span>
+</button>
+</div>
+</div>
+<!-- Center Guide UI -->
+<div class="relative z-10 flex-1 flex flex-col items-center justify-center">
+<p class="text-white text-sm font-medium mb-6 drop-shadow-md tracking-wide">
+                Posicione o prato no centro
+            </p>
+<!-- Circular Guide -->
+<div class="w-72 h-72 border-2 border-dashed border-white/60 rounded-full flex items-center justify-center">
+<!-- Inner small indicator -->
+<div class="w-2 h-2 bg-white/40 rounded-full"></div>
+</div>
+</div>
+<!-- Bottom Controls Overlay -->
+<div class="relative z-10 w-full px-8 pb-12 flex flex-col items-center gap-8">
+<!-- Food Category Pills (Subtle Scrollable/Interactive) -->
+<div class="flex gap-4 overflow-x-auto no-scrollbar py-2">
+<span class="px-4 py-1.5 bg-black/40 backdrop-blur-md text-white text-xs font-semibold rounded-full border border-white/20">SALADA</span>
+<span class="px-4 py-1.5 bg-primary/80 backdrop-blur-md text-white text-xs font-semibold rounded-full border border-primary/20">REFEIÇÃO</span>
+<span class="px-4 py-1.5 bg-black/40 backdrop-blur-md text-white text-xs font-semibold rounded-full border border-white/20">LANCHE</span>
+</div>
+<!-- Main Shutter Bar -->
+<div class="flex items-center justify-between w-full max-w-[320px]">
+<!-- Gallery Preview -->
+<button class="size-12 rounded-xl border-2 border-white/30 overflow-hidden bg-white/10 backdrop-blur-sm">
+<img alt="Previous meal photo" class="w-full h-full object-cover" data-alt="Small preview of a previously taken food photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7MtGP16OMH-ufztt_d7VLW1KY6L3ZIW29GDpJ1iWFVGeGNcnCMj41CqJ9bEHEGoqggp7W1ndJp-nZZqQ6N5RPIajYlxx1m411iNvLPpa9oiMCwkdaEHMyFYDMG46012maW7I2g4HLNog79jwr72qYKf49juRomIVehMAbJI2y1W1m4PGaa9pOwALrXojELeq0rV8jmgtRLo_VzP0E5zh3TqJ2yJTFRM-p7j825lp4rhwPFyueSxcp6tWEYfz_Nz2zfXsRxktnWwh1"/>
+</button>
+<!-- Shutter Button -->
+<button class="group flex items-center justify-center p-1.5 bg-white/20 rounded-full border-2 border-white">
+<div class="size-16 bg-white rounded-full group-active:scale-95 transition-transform"></div>
+</button>
+<!-- AI Info Button -->
+<button class="size-12 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
+<span class="material-symbols-outlined text-[24px]">auto_awesome</span>
+</button>
+</div>
+<!-- Zoom Controls -->
+<div class="flex gap-4 items-center bg-black/30 backdrop-blur-lg px-4 py-1.5 rounded-full border border-white/10">
+<button class="text-[10px] font-bold text-white/60">0.5x</button>
+<button class="text-[10px] font-bold text-primary">1x</button>
+<button class="text-[10px] font-bold text-white/60">2x</button>
+</div>
+</div>
+<!-- iOS Home Indicator -->
+<div class="relative z-10 flex justify-center pb-2">
+<div class="w-32 h-1.5 bg-white/30 rounded-full"></div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VitalAI - Resumo do Sono</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bd4a7",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#12201c",
+                        "dark-blue": "#1e3a8a",
+                        "light-blue": "#60a5fa",
+                        "rem-purple": "#a855f7",
+                        "awake-red": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .bottom-sheet-shadow { box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.1), 0 -8px 10px -6px rgba(0, 0, 0, 0.1); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-200 flex justify-center items-center min-h-screen">
+<!-- Mobile Container (iPhone 15 Pro Ratio approx) -->
+<div class="relative w-[393px] h-[852px] bg-white rounded-[55px] overflow-hidden border-[8px] border-slate-900 shadow-2xl">
+<!-- Background: Dimmed/Blurred Timeline (Mockup) -->
+<div class="absolute inset-0 z-0 bg-background-light dark:bg-background-dark filter blur-sm brightness-50">
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-center mb-8">
+<div class="w-10 h-10 rounded-full bg-slate-300"></div>
+<div class="w-24 h-6 bg-slate-300 rounded-full"></div>
+<div class="w-10 h-10 rounded-full bg-slate-300"></div>
+</div>
+<div class="h-32 bg-white/20 rounded-xl"></div>
+<div class="h-48 bg-white/20 rounded-xl"></div>
+<div class="h-32 bg-white/20 rounded-xl"></div>
+</div>
+</div>
+<!-- Overlay / Dimmer -->
+<div class="absolute inset-0 bg-black/40 z-10"></div>
+<!-- Bottom Sheet -->
+<div class="absolute bottom-0 left-0 right-0 z-20 bg-white rounded-t-[20px] h-[72%] flex flex-col bottom-sheet-shadow overflow-hidden">
+<!-- Handle Bar -->
+<div class="flex h-6 w-full items-center justify-center shrink-0">
+<div class="h-1.5 w-12 rounded-full bg-slate-200"></div>
+</div>
+<!-- Header -->
+<div class="px-6 pt-2 pb-4 flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600 !text-[24px]">bedtime</span>
+<h2 class="text-[18px] font-semibold text-slate-900">Resumo do sono</h2>
+</div>
+<span class="text-[12px] text-slate-500 font-normal">Hoje, 07:12</span>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined !text-[20px]">close</span>
+</button>
+</div>
+<!-- Content Area Scrollable -->
+<div class="flex-1 overflow-y-auto px-6 space-y-6 pb-8">
+<!-- AI Insight -->
+<div class="bg-primary/5 border border-primary/10 rounded-xl p-4">
+<p class="text-[16px] leading-[1.5] text-slate-900">
+                        Bom dia, Luis! Você dormiu <span class="font-semibold">6h48min</span> com qualidade <span class="font-semibold">72</span>. Seu HRV está um pouco abaixo do normal — o dia de hoje pede energia moderada.
+                    </p>
+</div>
+<!-- Sleep Phases Chart -->
+<div class="space-y-3">
+<h3 class="text-[14px] font-semibold text-slate-900">Fases do sono</h3>
+<!-- Chart Bar -->
+<div class="h-8 w-full flex rounded-lg overflow-hidden border border-slate-100">
+<div class="bg-awake-red w-[2%]" title="Acordado"></div>
+<div class="bg-light-blue w-[45%]" title="Leve"></div>
+<div class="bg-dark-blue w-[28%]" title="Profundo"></div>
+<div class="bg-rem-purple w-[25%]" title="REM"></div>
+</div>
+<!-- Legend -->
+<div class="flex flex-wrap gap-x-4 gap-y-2 pt-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-awake-red"></span>
+<span class="text-[12px] text-slate-600">Acordado</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-light-blue"></span>
+<span class="text-[12px] text-slate-600">Leve</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-dark-blue"></span>
+<span class="text-[12px] text-slate-600">Profundo</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-rem-purple"></span>
+<span class="text-[12px] text-slate-600">REM</span>
+</div>
+</div>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+<span class="text-[12px] text-slate-500 block mb-1">Duração</span>
+<span class="text-[18px] font-bold text-slate-900">6h48m</span>
+</div>
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+<span class="text-[12px] text-slate-500 block mb-1">Qualidade</span>
+<span class="text-[18px] font-bold text-slate-900">72/100</span>
+</div>
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+<span class="text-[12px] text-slate-500 block mb-1">HRV</span>
+<span class="text-[18px] font-bold text-slate-900">38ms</span>
+</div>
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+<span class="text-[12px] text-slate-500 block mb-1">Ciclos</span>
+<span class="text-[18px] font-bold text-slate-900">4</span>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="flex gap-3 pt-4">
+<button class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined !text-[20px] font-bold">thumb_up</span>
+                        Útil
+                    </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-slate-300 text-slate-500 font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined !text-[20px] font-bold">thumb_down</span>
+                        Não relevante
+                    </button>
+</div>
+</div>
+<!-- Bottom Safe Area (iPhone) -->
+<div class="h-8 shrink-0"></div>
+</div>
+<!-- Dynamic Island (Simplified) -->
+<div class="absolute top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-black rounded-full z-50"></div>
+</div>
+</body></html>
