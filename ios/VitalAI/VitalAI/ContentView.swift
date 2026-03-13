@@ -8,14 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var hasCompletedOnboarding = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if hasCompletedOnboarding {
+            MainTabView()
+        } else {
+            OnboardingFlow(onComplete: {
+                hasCompletedOnboarding = true
+            })
         }
-        .padding()
+    }
+}
+
+// Main tab navigation — matches bottom nav from component library:
+// Home, Nutrição, Relatórios, Perfil
+struct MainTabView: View {
+    var body: some View {
+        TabView {
+            DashboardView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+            NutritionView()
+                .tabItem {
+                    Label("Nutrição", systemImage: "fork.knife")
+                }
+            ReportsHubView()
+                .tabItem {
+                    Label("Relatórios", systemImage: "chart.line.uptrend.xyaxis")
+                }
+            ProfileView()
+                .tabItem {
+                    Label("Perfil", systemImage: "person")
+                }
+        }
+        .tint(.vitalPrimary)
     }
 }
 

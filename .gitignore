@@ -26,9 +26,9 @@ Thumbs.db
 # iOS / Xcode
 ios/build/
 ios/DerivedData/
-ios/*.xcworkspace/xcuserdata/
-ios/*.xcodeproj/xcuserdata/
-ios/*.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+**/xcuserdata/
+*.xcuserstate
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 *.pbxuser
 *.mode1v3
 *.mode2v3
