@@ -34,6 +34,29 @@ extension Color {
     static let vitalStar = Color(hex: "fbbf24")           // amber-400
 }
 
+// MARK: - ShapeStyle conformance for use with .foregroundStyle()
+extension ShapeStyle where Self == Color {
+    static var vitalPrimary: Color { .vitalPrimary }
+    static var vitalBackground: Color { .vitalBackground }
+    static var vitalBackgroundDark: Color { .vitalBackgroundDark }
+    static var vitalError: Color { .vitalError }
+    static var vitalWarning: Color { .vitalWarning }
+    static var vitalSuccess: Color { .vitalSuccess }
+    static var vitalSlate100: Color { .vitalSlate100 }
+    static var vitalSlate200: Color { .vitalSlate200 }
+    static var vitalSlate300: Color { .vitalSlate300 }
+    static var vitalSlate400: Color { .vitalSlate400 }
+    static var vitalSlate500: Color { .vitalSlate500 }
+    static var vitalSlate600: Color { .vitalSlate600 }
+    static var vitalSlate800: Color { .vitalSlate800 }
+    static var vitalSlate900: Color { .vitalSlate900 }
+    static var vitalStar: Color { .vitalStar }
+    static var macroProtein: Color { .macroProtein }
+    static var macroCarbs: Color { .macroCarbs }
+    static var macroFat: Color { .macroFat }
+    static var macroCalories: Color { .macroCalories }
+}
+
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
