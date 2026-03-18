@@ -30,7 +30,9 @@ struct OnboardingFlow: View {
                     )
 
                     VitalButton(
-                        title: onboardingSlides[currentSlide].buttonTitle,
+                        title: currentSlide < onboardingSlides.count
+                            ? onboardingSlides[currentSlide].buttonTitle
+                            : "Começar",
                         variant: .primary
                     ) {
                         if currentSlide < onboardingSlides.count - 1 {

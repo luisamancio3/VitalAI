@@ -61,6 +61,7 @@ describe("TriggerProcessor", () => {
 
     expect(result.processed).toBe(true);
     expect(result.message).toBe("Ótimo treino! Descanse e se hidrate.");
+    expect(result.reason).toBeUndefined();
   });
 
   it("should reject event when on cooldown", async () => {
@@ -75,6 +76,7 @@ describe("TriggerProcessor", () => {
 
     expect(result.processed).toBe(false);
     expect(result.message).toBeUndefined();
+    expect(result.reason).toBe("cooldown");
   });
 
   it("should set cooldown key with correct TTL", async () => {
@@ -136,5 +138,21 @@ describe("TriggerProcessor", () => {
       1800, // 30 minutes
       "NX",
     );
+  });
+
+  it("should return error reason when processing fails", async () => {
+    const { generateMessage } = await import("../src/config/claude.js");
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
+    (generateMessage as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("API timeout"));
+
+    const result = await processEvent({
+      userId: "user-error",
+      triggerType: "inactivity",
+      payload: {},
+      timestamp: new Date().toISOString(),
+    });
+
+    expect(result.processed).toBe(false);
+    expect(result.reason).toBe("error");
   });
 });

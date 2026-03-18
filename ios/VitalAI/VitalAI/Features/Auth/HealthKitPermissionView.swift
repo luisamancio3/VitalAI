@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 
 struct HealthKitPermissionView: View {
     let onComplete: () -> Void
@@ -37,7 +36,7 @@ struct HealthKitPermissionView: View {
                 HealthDataRow(icon: "figure.walk", title: "Atividade Física", subtitle: "Passos e movimento")
             }
             .padding(VitalSpacing.lg)
-            .background(Color.white)
+            .background(Color(.systemBackground))
             .clipShape(RoundedRectangle(cornerRadius: VitalRadius.lg))
             .padding(.horizontal, VitalSpacing.lg)
 
@@ -56,7 +55,11 @@ struct HealthKitPermissionView: View {
             VStack(spacing: VitalSpacing.md) {
                 VitalButton(title: "Conectar Apple Health", variant: .primary) {
                     Task {
-                        try? await healthKitService.requestAuthorization()
+                        do {
+                            try await healthKitService.requestAuthorization()
+                        } catch {
+                            print("[HealthKit] Authorization failed: \(error)")
+                        }
                         onComplete()
                     }
                 }
