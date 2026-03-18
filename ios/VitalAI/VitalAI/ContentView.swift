@@ -1,22 +1,44 @@
-//
-//  ContentView.swift
-//  VitalAI
-//
-//  Created by Luis Amancio on 13/03/26.
-//
-
 import SwiftUI
+import Combine
 
 struct ContentView: View {
-    @State private var hasCompletedOnboarding = false
+    @EnvironmentObject private var authService: AuthService
+    @EnvironmentObject private var healthKitService: HealthKitService
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @AppStorage("hasCompletedHealthKit") private var hasCompletedHealthKit = false
+    @State private var showLogin = false
 
     var body: some View {
-        if hasCompletedOnboarding {
-            MainTabView()
-        } else {
-            OnboardingFlow(onComplete: {
-                hasCompletedOnboarding = true
-            })
+        Group {
+            switch authService.state {
+            case .unknown:
+                SplashView()
+
+            case .unauthenticated:
+                if showLogin {
+                    LoginView(onShowSignUp: { showLogin = false })
+                } else {
+                    OnboardingFlow(
+                        onComplete: {
+                            hasCompletedOnboarding = true
+                        },
+                        onShowLogin: { showLogin = true }
+                    )
+                }
+
+            case .authenticated:
+                if !hasCompletedHealthKit {
+                    HealthKitPermissionView {
+                        hasCompletedHealthKit = true
+                    }
+                } else {
+                    MainTabView()
+                }
+            }
+        }
+        .animation(.easeInOut(duration: 0.3), value: authService.state)
+        .task {
+            await authService.checkSession()
         }
     }
 }
@@ -45,8 +67,4 @@ struct MainTabView: View {
         }
         .tint(.vitalPrimary)
     }
-}
-
-#Preview {
-    ContentView()
 }

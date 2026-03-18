@@ -5,8 +5,11 @@ struct VitalTextField: View {
     @Binding var text: String
     var placeholder: String = ""
     var icon: String? = nil
+    var isSecure: Bool = false
     var errorMessage: String? = nil
     var isDisabled: Bool = false
+
+    @State private var isPasswordVisible = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -18,8 +21,24 @@ struct VitalTextField: View {
                     Image(systemName: icon)
                         .foregroundStyle(.vitalSlate400)
                 }
-                TextField(placeholder, text: $text)
-                    .disabled(isDisabled)
+
+                if isSecure && !isPasswordVisible {
+                    SecureField(placeholder, text: $text)
+                        .disabled(isDisabled)
+                } else {
+                    TextField(placeholder, text: $text)
+                        .disabled(isDisabled)
+                }
+
+                if isSecure {
+                    Button {
+                        isPasswordVisible.toggle()
+                    } label: {
+                        Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                            .foregroundStyle(.vitalSlate400)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
             .padding(.horizontal, VitalSpacing.lg)
             .padding(.vertical, 12)

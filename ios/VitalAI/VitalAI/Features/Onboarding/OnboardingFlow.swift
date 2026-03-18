@@ -2,12 +2,17 @@ import SwiftUI
 
 struct OnboardingFlow: View {
     let onComplete: () -> Void
+    var onShowLogin: (() -> Void)? = nil
+
     @State private var currentSlide = 0
     @State private var showSignUp = false
 
     var body: some View {
         if showSignUp {
-            SignUpView(onComplete: onComplete)
+            SignUpView(
+                onComplete: onComplete,
+                onShowLogin: { onShowLogin?() }
+            )
         } else {
             VStack(spacing: 0) {
                 TabView(selection: $currentSlide) {
@@ -16,11 +21,16 @@ struct OnboardingFlow: View {
                             .tag(slide.id)
                     }
                 }
-                .tabViewStyle(.page(indexDisplayMode: .always))
+                .tabViewStyle(.page(indexDisplayMode: .never))
 
-                VStack(spacing: VitalSpacing.md) {
+                VStack(spacing: VitalSpacing.lg) {
+                    PageIndicator(
+                        totalPages: onboardingSlides.count,
+                        currentPage: currentSlide
+                    )
+
                     VitalButton(
-                        title: currentSlide < onboardingSlides.count - 1 ? "Próximo" : "Começar",
+                        title: onboardingSlides[currentSlide].buttonTitle,
                         variant: .primary
                     ) {
                         if currentSlide < onboardingSlides.count - 1 {
@@ -32,10 +42,12 @@ struct OnboardingFlow: View {
                         }
                     }
 
-                    if currentSlide < onboardingSlides.count - 1 {
-                        VitalButton(title: "Pular", variant: .ghost) {
-                            showSignUp = true
-                        }
+                    Button {
+                        onShowLogin?()
+                    } label: {
+                        Text("Já tenho conta")
+                            .font(.vitalCaptionMedium)
+                            .foregroundStyle(.vitalAccentBlue)
                     }
                 }
                 .padding(.horizontal, VitalSpacing.lg)

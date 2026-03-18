@@ -1,9 +1,8 @@
 import SwiftUI
 import Combine
 
-struct SignUpView: View {
-    let onComplete: () -> Void
-    var onShowLogin: (() -> Void)? = nil
+struct LoginView: View {
+    var onShowSignUp: (() -> Void)? = nil
 
     @EnvironmentObject private var authService: AuthService
     @State private var email = ""
@@ -22,10 +21,10 @@ struct SignUpView: View {
                         .frame(width: 56, height: 56)
                         .foregroundStyle(.vitalPrimary)
 
-                    Text("Crie sua conta")
+                    Text("Bem-vindo de volta")
                         .font(.vitalTitle)
 
-                    Text("Comece sua jornada de saúde")
+                    Text("Entre na sua conta VitalAI")
                         .font(.vitalCaption)
                         .foregroundStyle(.secondary)
                 }
@@ -65,11 +64,11 @@ struct SignUpView: View {
                     VitalTextField(
                         label: "Senha",
                         text: $password,
-                        placeholder: "Mínimo 8 caracteres",
+                        placeholder: "Sua senha",
                         icon: "lock",
                         isSecure: true
                     )
-                    .textContentType(.newPassword)
+                    .textContentType(.password)
                 }
                 .padding(.horizontal, VitalSpacing.lg)
 
@@ -81,31 +80,24 @@ struct SignUpView: View {
                         .padding(.horizontal, VitalSpacing.lg)
                 }
 
-                // Create account button
+                // Login button
                 VitalButton(
-                    title: authService.isLoading ? "Criando conta..." : "Criar conta",
+                    title: authService.isLoading ? "Entrando..." : "Entrar",
                     variant: .primary,
                     isDisabled: authService.isLoading || email.isEmpty || password.isEmpty
                 ) {
-                    Task { await authService.signup(email: email, password: password) }
+                    Task { await authService.login(email: email, password: password) }
                 }
                 .padding(.horizontal, VitalSpacing.lg)
 
-                // Terms
-                Text("Ao criar conta, você concorda com os **Termos de Uso** e **Política de Privacidade**")
-                    .font(.vitalMicro)
-                    .foregroundStyle(.vitalSlate400)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, VitalSpacing.xl)
-
-                // Login link
+                // Sign up link
                 Button {
-                    onShowLogin?()
+                    onShowSignUp?()
                 } label: {
                     HStack(spacing: 4) {
-                        Text("Já tenho conta?")
+                        Text("Não tem conta?")
                             .foregroundStyle(.vitalSlate400)
-                        Text("Entrar")
+                        Text("Criar conta")
                             .foregroundStyle(.vitalAccentBlue)
                     }
                     .font(.vitalCaptionMedium)

@@ -30,6 +30,10 @@ extension Color {
     static let vitalSlate800 = Color(hex: "1e293b")
     static let vitalSlate900 = Color(hex: "0f172a")
 
+    // MARK: - Accent
+    static let vitalAccentBlue = Color(hex: "4A90D9")     // secondary links, "Já tenho conta"
+    static let vitalOnboardingGradientTop = Color(hex: "f0faf8") // onboarding slide gradient
+
     // MARK: - Star Rating
     static let vitalStar = Color(hex: "fbbf24")           // amber-400
 }
@@ -55,6 +59,8 @@ extension ShapeStyle where Self == Color {
     static var macroCarbs: Color { .macroCarbs }
     static var macroFat: Color { .macroFat }
     static var macroCalories: Color { .macroCalories }
+    static var vitalAccentBlue: Color { .vitalAccentBlue }
+    static var vitalOnboardingGradientTop: Color { .vitalOnboardingGradientTop }
 }
 
 extension Color {
