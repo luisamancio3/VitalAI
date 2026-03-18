@@ -6,7 +6,7 @@ const AUTH_AUDIENCE = process.env.AUTH0_AUDIENCE || "https://api.vitalai.com";
 
 // jose caches the JWKS internally
 const jwks = createRemoteJWKSet(
-  new URL(`${AUTH_ISSUER_URL}.well-known/jwks.json`),
+  new URL(".well-known/jwks.json", AUTH_ISSUER_URL),
 );
 
 declare module "fastify" {

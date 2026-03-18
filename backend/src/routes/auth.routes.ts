@@ -1,17 +1,26 @@
 import type { FastifyInstance } from "fastify";
+import { z } from "zod";
 import { eq } from "drizzle-orm";
 import { db } from "../config/database.js";
 import { users } from "../db/schema.js";
 import { authMiddleware } from "../middleware/auth.js";
 
+const registerSchema = z.object({
+  email: z.string().email().optional(),
+  name: z.string().max(200).optional(),
+});
+
 export default async function authRoutes(app: FastifyInstance) {
   // POST /api/v1/auth/register — Sync Auth0 user to local DB
   app.post("/register", { preHandler: [authMiddleware] }, async (request, reply) => {
     const auth0Id = request.userId;
-    const body = request.body as { email?: string; name?: string };
+    const parsed = registerSchema.safeParse(request.body);
+    if (!parsed.success) {
+      return reply.status(400).send({ error: parsed.error.flatten() });
+    }
 
-    const email = body.email ?? "unknown@vitalai.app";
-    const name = body.name ?? null;
+    const email = parsed.data.email ?? "unknown@vitalai.app";
+    const name = parsed.data.name ?? null;
 
     const [user] = await db
       .insert(users)

@@ -2,6 +2,7 @@ import SwiftUI
 import Combine
 import HealthKit
 
+@MainActor
 final class HealthKitService: ObservableObject {
     @Published var authorizationStatus: HKAuthorizationRequestStatus = .unknown
     @Published var latestHeartRate: Double?

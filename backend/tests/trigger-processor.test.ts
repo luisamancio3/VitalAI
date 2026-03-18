@@ -93,6 +93,28 @@ describe("TriggerProcessor", () => {
     );
   });
 
+  it("should send notification when user has FCM token", async () => {
+    const { getUserFcmToken, deliverNotification } = await import("../src/services/notification.service.js");
+    (redis.exists as ReturnType<typeof vi.fn>).mockResolvedValue(0);
+    (getUserFcmToken as ReturnType<typeof vi.fn>).mockResolvedValue("fcm-token-abc");
+    (deliverNotification as ReturnType<typeof vi.fn>).mockResolvedValue({ success: true, messageId: "msg-456" });
+
+    const result = await processEvent({
+      userId: "user-with-token",
+      triggerType: "low_hrv",
+      payload: { hrv: 20 },
+      timestamp: new Date().toISOString(),
+    });
+
+    expect(result.processed).toBe(true);
+    expect(deliverNotification).toHaveBeenCalledWith(
+      expect.objectContaining({
+        userId: "user-with-token",
+        fcmToken: "fcm-token-abc",
+      }),
+    );
+  });
+
   it("should set correct cooldown for high_heart_rate", async () => {
     (redis.exists as ReturnType<typeof vi.fn>).mockResolvedValue(0);
 
