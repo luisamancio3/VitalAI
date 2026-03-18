@@ -62,6 +62,9 @@ final class AuthService: ObservableObject {
             _ = credentialsManager.store(credentials: credentials)
             let profile = extractProfile(from: credentials)
             state = .authenticated(profile)
+            // Sync user to backend (fire-and-forget)
+            let token = credentials.accessToken
+            Task { try? await APIService.shared.registerUser(accessToken: token, email: profile.email, name: profile.name) }
         } catch WebAuthError.userCancelled {
             print("[AuthService] Universal Login cancelled by user")
         } catch let error as WebAuthError {
@@ -118,6 +121,9 @@ final class AuthService: ObservableObject {
             _ = credentialsManager.store(credentials: credentials)
             let profile = extractProfile(from: credentials)
             state = .authenticated(profile)
+            // Sync user to backend (fire-and-forget)
+            let token = credentials.accessToken
+            Task { try? await APIService.shared.registerUser(accessToken: token, email: profile.email, name: profile.name) }
         } catch {
             print("[AuthService] Login failed: \(error)")
             errorMessage = parseAuthError(error)

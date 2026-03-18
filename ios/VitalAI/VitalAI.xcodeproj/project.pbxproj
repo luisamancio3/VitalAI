@@ -15,7 +15,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		AA0000022F647B000000001A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		AA0000022F647B000000001A /* Exceptions for "VitalAI" folder in "VitalAI" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -28,7 +28,7 @@
 		EB6706DF2F6471D60085798C /* VitalAI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				AA0000022F647B000000001A /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+				AA0000022F647B000000001A /* Exceptions for "VitalAI" folder in "VitalAI" target */,
 			);
 			path = VitalAI;
 			sourceTree = "<group>";
