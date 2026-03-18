@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, boolean, jsonb, timestamp, index } from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, boolean, jsonb, timestamp, index, integer } from "drizzle-orm/pg-core";
 
 // users table
 export const users = pgTable("users", {
@@ -44,4 +44,42 @@ export const notificationLog = pgTable("notification_log", {
 }, (table) => [
   index("idx_notification_log_user_id").on(table.userId),
   index("idx_notification_log_event_id").on(table.eventId),
+]);
+
+// nutrition_profiles table
+export const nutritionProfiles = pgTable("nutrition_profiles", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id).unique().notNull(),
+  goal: text("goal").notNull(), // "lose" | "maintain" | "gain"
+  restrictions: jsonb("restrictions").default('[]'), // ["vegan", "gluten_free", ...]
+  cookingSkill: text("cooking_skill").notNull(), // "beginner" | "intermediate" | "advanced"
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// meal_feedback table
+export const mealFeedback = pgTable("meal_feedback", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id).notNull(),
+  recipeId: text("recipe_id").notNull(), // MongoDB ObjectId as string
+  rating: integer("rating").notNull(), // 1-5
+  comment: text("comment"),
+  context: text("context"), // "post_workout", "breakfast", etc.
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_meal_feedback_user_id").on(table.userId),
+  index("idx_meal_feedback_recipe_id").on(table.recipeId),
+]);
+
+// weekly_reports table
+export const weeklyReports = pgTable("weekly_reports", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id).notNull(),
+  weekStart: timestamp("week_start").notNull(),
+  weekEnd: timestamp("week_end").notNull(),
+  metrics: jsonb("metrics").notNull(), // aggregated data
+  reportText: text("report_text").notNull(), // Claude-generated
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_weekly_reports_user_id").on(table.userId),
 ]);

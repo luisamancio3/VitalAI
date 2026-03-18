@@ -6,6 +6,7 @@ import "dotenv/config";
 
 import authRoutes from "./routes/auth.routes.js";
 import eventsRoutes from "./routes/events.routes.js";
+import nutritionRoutes from "./routes/nutrition.routes.js";
 
 const app = Fastify({ logger: true });
 
@@ -33,7 +34,7 @@ app.get("/health", async () => ({
 // Routes
 await app.register(authRoutes, { prefix: "/api/v1/auth" });
 await app.register(eventsRoutes, { prefix: "/api/v1/events" });
-// await app.register(nutritionRoutes, { prefix: "/api/v1/nutrition" });
+await app.register(nutritionRoutes, { prefix: "/api/v1/nutrition" });
 // await app.register(reportsRoutes, { prefix: "/api/v1/reports" });
 // await app.register(usersRoutes, { prefix: "/api/v1/users" });
 

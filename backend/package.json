@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed-recipes": "tsx src/scripts/seed-recipes.ts"
   },
   "engines": {
     "node": ">=22.0.0"
