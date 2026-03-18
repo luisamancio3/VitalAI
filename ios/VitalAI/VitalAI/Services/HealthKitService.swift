@@ -200,18 +200,19 @@ final class HealthKitService: ObservableObject {
     func setupBackgroundDelivery() {
         guard isAvailable else { return }
 
-        if let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate) {
-            healthStore.enableBackgroundDelivery(for: heartRateType, frequency: .immediate) { _, error in
-                if let error {
-                    print("[HealthKit] Background delivery error (heartRate): \(error)")
-                }
-            }
-        }
+        let typesAndNames: [(HKObjectType, String)] = [
+            (HKQuantityType(.heartRate), "heartRate"),
+            (HKQuantityType(.heartRateVariabilitySDNN), "hrv"),
+            (HKQuantityType(.stepCount), "steps"),
+            (HKCategoryType(.sleepAnalysis), "sleep"),
+            (HKObjectType.workoutType(), "workout"),
+        ]
 
-        let workoutType = HKObjectType.workoutType()
-        healthStore.enableBackgroundDelivery(for: workoutType, frequency: .immediate) { _, error in
-            if let error {
-                print("[HealthKit] Background delivery error (workout): \(error)")
+        for (type, name) in typesAndNames {
+            healthStore.enableBackgroundDelivery(for: type, frequency: .immediate) { _, error in
+                if let error {
+                    print("[HealthKit] Background delivery error (\(name)): \(error)")
+                }
             }
         }
     }

@@ -27,11 +27,18 @@ struct UserProfile: Sendable {
 
 @MainActor
 final class AuthService: ObservableObject {
+    /// Weak shared reference for services that need access token (e.g. TriggerEngine)
+    static weak var shared: AuthService?
+
     @Published var state: AuthState = .unknown
     @Published var isLoading = false
     @Published var errorMessage: String?
 
     private let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
+
+    init() {
+        AuthService.shared = self
+    }
 
     func checkSession() async {
         guard credentialsManager.canRenew() else {
