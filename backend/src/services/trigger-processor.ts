@@ -1,7 +1,7 @@
-import { eq } from "drizzle-orm";
+import { eq, and, gte, sql } from "drizzle-orm";
 import { generateMessage } from "../config/claude.js";
 import { redis, db } from "../config/database.js";
-import { healthEvents, notificationLog } from "../db/schema.js";
+import { healthEvents, notificationLog, users } from "../db/schema.js";
 import { getUserFcmToken, deliverNotification } from "./notification.service.js";
 
 // Trigger types from the watch/phone classified events
@@ -24,7 +24,13 @@ interface ClassifiedEvent {
 interface ProcessResult {
   processed: boolean;
   message?: string;
-  reason?: "cooldown" | "error";
+  reason?: "cooldown" | "quiet_hours" | "daily_budget" | "error";
+}
+
+interface NotificationPreferences {
+  quietHoursStart?: number;
+  quietHoursEnd?: number;
+  dailyBudget?: number;
 }
 
 // Cooldown periods per trigger type (in seconds)
@@ -40,9 +46,25 @@ const COOLDOWN_MAP: Record<TriggerType, number> = {
 
 export async function processEvent(event: ClassifiedEvent): Promise<ProcessResult> {
   const { userId, triggerType } = event;
-  const cooldownKey = `cooldown:${userId}:${triggerType}`;
 
-  // Atomically check-and-set cooldown via Redis SET NX EX
+  // 1. Check quiet hours
+  const userPrefs = await getUserNotificationPreferences(userId);
+  const currentHour = new Date().getHours();
+  const quietStart = userPrefs.quietHoursStart ?? 22;
+  const quietEnd = userPrefs.quietHoursEnd ?? 7;
+  if (isInQuietHours(currentHour, quietStart, quietEnd)) {
+    return { processed: false, reason: "quiet_hours" };
+  }
+
+  // 2. Check daily notification budget
+  const todayCount = await getTodayNotificationCount(userId);
+  const dailyBudget = userPrefs.dailyBudget ?? 6;
+  if (todayCount >= dailyBudget) {
+    return { processed: false, reason: "daily_budget" };
+  }
+
+  // 3. Atomically check-and-set cooldown via Redis SET NX EX
+  const cooldownKey = `cooldown:${userId}:${triggerType}`;
   const cooldownSeconds = COOLDOWN_MAP[triggerType];
   const acquired = await redis.set(cooldownKey, "1", "EX", cooldownSeconds, "NX");
   if (!acquired) return { processed: false, reason: "cooldown" };
@@ -112,6 +134,49 @@ function buildNotificationTitle(triggerType: TriggerType): string {
     hydration_reminder: "Hidratação",
   };
   return titles[triggerType];
+}
+
+// --- Fatigue Protection Helpers ---
+
+async function getUserNotificationPreferences(userId: string): Promise<NotificationPreferences> {
+  try {
+    const [user] = await db
+      .select({ notificationPreferences: users.notificationPreferences })
+      .from(users)
+      .where(eq(users.id, userId))
+      .limit(1);
+    return (user?.notificationPreferences as NotificationPreferences) ?? {};
+  } catch {
+    return {};
+  }
+}
+
+async function getTodayNotificationCount(userId: string): Promise<number> {
+  try {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+    const result = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(notificationLog)
+      .where(
+        and(
+          eq(notificationLog.userId, userId),
+          eq(notificationLog.delivered, true),
+          gte(notificationLog.createdAt, startOfDay),
+        ),
+      );
+    return result[0]?.count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
+export function isInQuietHours(hour: number, start: number, end: number): boolean {
+  if (start > end) {
+    // Wraps midnight: e.g. 22-7 means 22,23,0,1,2,3,4,5,6
+    return hour >= start || hour < end;
+  }
+  return hour >= start && hour < end;
 }
 
 function buildSystemPrompt(triggerType: TriggerType): string {

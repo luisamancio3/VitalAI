@@ -41,8 +41,8 @@ vi.mock("../src/services/notification.service.js", () => ({
   deliverNotification: vi.fn().mockResolvedValue({ success: true, messageId: "msg-123" }),
 }));
 
-import { processEvent } from "../src/services/trigger-processor.js";
-import { redis } from "../src/config/database.js";
+import { processEvent, isInQuietHours } from "../src/services/trigger-processor.js";
+import { redis, db } from "../src/config/database.js";
 
 describe("TriggerProcessor", () => {
   beforeEach(() => {
@@ -154,5 +154,26 @@ describe("TriggerProcessor", () => {
 
     expect(result.processed).toBe(false);
     expect(result.reason).toBe("error");
+  });
+});
+
+describe("isInQuietHours", () => {
+  it("should detect quiet hours wrapping midnight (22-7)", () => {
+    expect(isInQuietHours(23, 22, 7)).toBe(true);
+    expect(isInQuietHours(0, 22, 7)).toBe(true);
+    expect(isInQuietHours(3, 22, 7)).toBe(true);
+    expect(isInQuietHours(6, 22, 7)).toBe(true);
+    expect(isInQuietHours(7, 22, 7)).toBe(false);
+    expect(isInQuietHours(12, 22, 7)).toBe(false);
+    expect(isInQuietHours(21, 22, 7)).toBe(false);
+    expect(isInQuietHours(22, 22, 7)).toBe(true);
+  });
+
+  it("should detect quiet hours within same day (1-6)", () => {
+    expect(isInQuietHours(2, 1, 6)).toBe(true);
+    expect(isInQuietHours(5, 1, 6)).toBe(true);
+    expect(isInQuietHours(6, 1, 6)).toBe(false);
+    expect(isInQuietHours(0, 1, 6)).toBe(false);
+    expect(isInQuietHours(12, 1, 6)).toBe(false);
   });
 });
