@@ -1,5 +1,16 @@
 import Foundation
 
+enum APIError: LocalizedError {
+    case httpError(statusCode: Int)
+
+    var errorDescription: String? {
+        switch self {
+        case .httpError(let code):
+            return "HTTP error \(code)"
+        }
+    }
+}
+
 final class APIService {
     static let shared = APIService()
 
@@ -42,8 +53,9 @@ final class APIService {
         let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
-            print("[APIService] registerUser failed with status: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
-            return
+            let code = (response as? HTTPURLResponse)?.statusCode ?? -1
+            print("[APIService] registerUser failed with status: \(code)")
+            throw APIError.httpError(statusCode: code)
         }
         print("[APIService] User registered successfully")
     }
@@ -62,8 +74,9 @@ final class APIService {
         let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
-            print("[APIService] sendFCMToken failed")
-            return
+            let code = (response as? HTTPURLResponse)?.statusCode ?? -1
+            print("[APIService] sendFCMToken failed with status: \(code)")
+            throw APIError.httpError(statusCode: code)
         }
         print("[APIService] FCM token registered")
     }
@@ -86,8 +99,9 @@ final class APIService {
         let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
-            print("[APIService] sendHealthEvent failed")
-            return
+            let code = (response as? HTTPURLResponse)?.statusCode ?? -1
+            print("[APIService] sendHealthEvent failed with status: \(code)")
+            throw APIError.httpError(statusCode: code)
         }
         print("[APIService] Health event sent: \(triggerType)")
     }
