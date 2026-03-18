@@ -3,6 +3,9 @@ import SwiftUI
 // Reference: design/screens/generated_screen_7/screen.png ("Comendo agora?")
 
 struct MealPromptView: View {
+    @EnvironmentObject private var sessionManager: WatchSessionManager
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         VStack(spacing: 12) {
             Image(systemName: "fork.knife")
@@ -14,12 +17,16 @@ struct MealPromptView: View {
 
             HStack(spacing: 8) {
                 Button("Sim") {
-                    // TODO: Confirm meal detection
+                    sessionManager.sendTriggerEvent(
+                        type: "meal_detected",
+                        payload: ["confirmed": true, "source": "watch_prompt"]
+                    )
+                    dismiss()
                 }
                 .tint(Color(hex: "2bd4a7"))
 
                 Button("Não") {
-                    // TODO: Dismiss meal detection
+                    dismiss()
                 }
                 .tint(.gray)
             }

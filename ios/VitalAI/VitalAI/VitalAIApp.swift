@@ -7,6 +7,7 @@ struct VitalAIApp: App {
     @StateObject private var healthKitService = HealthKitService()
     @StateObject private var notificationService = NotificationService()
     @StateObject private var triggerEngine = TriggerEngine()
+    @StateObject private var connectivityService = PhoneConnectivityService()
 
     var body: some Scene {
         WindowGroup {
@@ -15,6 +16,7 @@ struct VitalAIApp: App {
                 .environmentObject(healthKitService)
                 .environmentObject(notificationService)
                 .environmentObject(triggerEngine)
+                .environmentObject(connectivityService)
                 .onReceive(NotificationCenter.default.publisher(for: .vitalAPNsToken)) { notification in
                     if let tokenData = notification.object as? Data {
                         notificationService.handleDeviceToken(tokenData)
@@ -37,6 +39,7 @@ struct VitalAIApp: App {
                         Task {
                             await notificationService.requestPermission()
                             triggerEngine.startMonitoring()
+                            connectivityService.activate()
                         }
                     } else {
                         triggerEngine.stopMonitoring()

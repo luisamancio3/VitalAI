@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DashboardView: View {
     @EnvironmentObject private var healthKitService: HealthKitService
+    @EnvironmentObject private var connectivityService: PhoneConnectivityService
 
     private var healthScore: Int {
         let sleepWeight = 0.4
@@ -131,11 +132,21 @@ struct DashboardView: View {
             .navigationTitle("VitalAI")
             .refreshable {
                 await healthKitService.refreshAll()
+                syncToWatch()
             }
             .task {
                 await healthKitService.refreshAll()
+                syncToWatch()
             }
         }
+    }
+
+    private func syncToWatch() {
+        connectivityService.syncHealthDataToWatch(
+            healthScore: healthScore,
+            heartRate: Int(healthKitService.latestHeartRate ?? 0),
+            sleepHours: healthKitService.lastSleepHours ?? 0
+        )
     }
 
     private func formatSteps(_ steps: Int) -> String {
