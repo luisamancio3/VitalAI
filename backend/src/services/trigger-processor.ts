@@ -24,6 +24,7 @@ interface ClassifiedEvent {
 interface ProcessResult {
   processed: boolean;
   message?: string;
+  reason?: "cooldown" | "error";
 }
 
 // Cooldown periods per trigger type (in seconds)
@@ -44,7 +45,7 @@ export async function processEvent(event: ClassifiedEvent): Promise<ProcessResul
   // Atomically check-and-set cooldown via Redis SET NX EX
   const cooldownSeconds = COOLDOWN_MAP[triggerType];
   const acquired = await redis.set(cooldownKey, "1", "EX", cooldownSeconds, "NX");
-  if (!acquired) return { processed: false };
+  if (!acquired) return { processed: false, reason: "cooldown" };
 
   try {
     // Generate personalized message via Claude
@@ -80,7 +81,7 @@ export async function processEvent(event: ClassifiedEvent): Promise<ProcessResul
         eventId: insertedEvent.id,
         title,
         body: message,
-        fcmMessageId: result.success ? (result.messageId as string) : null,
+        fcmMessageId: result.success ? result.messageId : null,
         delivered: result.success,
       });
 
@@ -96,7 +97,7 @@ export async function processEvent(event: ClassifiedEvent): Promise<ProcessResul
     return { processed: true, message };
   } catch (error) {
     console.error(`[TriggerProcessor] Failed to process ${triggerType} for ${userId}:`, error);
-    return { processed: false };
+    return { processed: false, reason: "error" };
   }
 }
 

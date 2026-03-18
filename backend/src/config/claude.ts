@@ -1,13 +1,17 @@
 import Anthropic from "@anthropic-ai/sdk";
 
-export const anthropic = new Anthropic();
+if (!process.env.ANTHROPIC_API_KEY) {
+  throw new Error("ANTHROPIC_API_KEY environment variable is required");
+}
+
+const anthropic = new Anthropic();
 
 export async function generateMessage(
   systemPrompt: string,
   userContent: string,
 ): Promise<string> {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000); // 10s timeout
+  const timeout = setTimeout(() => controller.abort(), 10_000);
 
   try {
     const response = await anthropic.messages.create(

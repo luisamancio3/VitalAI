@@ -60,7 +60,7 @@ describe("TriggerProcessor", () => {
     });
 
     expect(result.processed).toBe(true);
-    expect(result.message).toBeDefined();
+    expect(result.message).toBe("Ótimo treino! Descanse e se hidrate.");
   });
 
   it("should reject event when on cooldown", async () => {
@@ -110,6 +110,7 @@ describe("TriggerProcessor", () => {
     });
 
     expect(result.processed).toBe(true);
+    expect(result.message).toBe("Ótimo treino! Descanse e se hidrate.");
     expect(deliverNotification).toHaveBeenCalledWith(
       expect.objectContaining({
         userId: "user-with-token",

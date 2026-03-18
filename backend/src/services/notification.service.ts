@@ -11,7 +11,11 @@ interface NotificationPayload {
   data?: Record<string, string>;
 }
 
-export async function deliverNotification(payload: NotificationPayload) {
+type DeliveryResult =
+  | { success: true; messageId: string }
+  | { success: false; error: unknown };
+
+export async function deliverNotification(payload: NotificationPayload): Promise<DeliveryResult> {
   const { fcmToken, title, body, data } = payload;
 
   try {
@@ -24,9 +28,13 @@ export async function deliverNotification(payload: NotificationPayload) {
 }
 
 export async function getUserFcmToken(userId: string): Promise<string | null> {
-  // Check Redis cache first
-  const cached = await redis.get(`fcm:${userId}`);
-  if (cached) return cached;
+  // Check Redis cache first (best-effort)
+  try {
+    const cached = await redis.get(`fcm:${userId}`);
+    if (cached) return cached;
+  } catch {
+    // Redis unavailable — fall through to database
+  }
 
   // Query database for FCM token
   const [user] = await db
@@ -37,9 +45,13 @@ export async function getUserFcmToken(userId: string): Promise<string | null> {
 
   const token = user?.fcmToken ?? null;
 
-  // Cache in Redis with 5-minute TTL
+  // Cache in Redis with 5-minute TTL (best-effort)
   if (token) {
-    await redis.setex(`fcm:${userId}`, 300, token);
+    try {
+      await redis.setex(`fcm:${userId}`, 300, token);
+    } catch {
+      // Redis unavailable — skip caching
+    }
   }
 
   return token;

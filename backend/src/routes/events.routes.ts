@@ -48,7 +48,7 @@ export default async function eventsRoutes(app: FastifyInstance) {
         timestamp: parsed.data.timestamp,
       });
 
-      return { processed: result.processed, message: result.message, triggerType: parsed.data.triggerType };
+      return { processed: result.processed, message: result.message, triggerType: parsed.data.triggerType, reason: result.reason };
     } catch (error) {
       request.log.error(error, "Failed to process event");
       return reply.status(500).send({ error: "Internal server error" });

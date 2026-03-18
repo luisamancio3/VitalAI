@@ -39,6 +39,7 @@ struct SignUpView: View {
                         Task { await authService.loginWithUniversalLogin() }
                     }
                 }
+                .disabled(authService.isLoading)
                 .padding(.horizontal, VitalSpacing.lg)
 
                 // Divider
