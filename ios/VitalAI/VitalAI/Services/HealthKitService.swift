@@ -125,7 +125,8 @@ final class HealthKitService: ObservableObject {
 
         let calendar = Calendar.current
         let now = Date()
-        guard let yesterday8PM = calendar.date(bySettingHour: 20, minute: 0, second: 0, of: calendar.date(byAdding: .day, value: -1, to: now)!),
+        guard let yesterday = calendar.date(byAdding: .day, value: -1, to: now),
+              let yesterday8PM = calendar.date(bySettingHour: 20, minute: 0, second: 0, of: yesterday),
               let today12PM = calendar.date(bySettingHour: 12, minute: 0, second: 0, of: now)
         else { return }
 
