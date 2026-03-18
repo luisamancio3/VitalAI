@@ -28,25 +28,30 @@ export default async function eventsRoutes(app: FastifyInstance) {
       return reply.status(400).send({ error: parsed.error.flatten() });
     }
 
-    // Look up internal user ID from Auth0 sub
-    const auth0Id = request.userId;
-    const [user] = await db
-      .select({ id: users.id })
-      .from(users)
-      .where(eq(users.auth0Id, auth0Id))
-      .limit(1);
+    try {
+      // Look up internal user ID from Auth0 sub
+      const auth0Id = request.userId;
+      const [user] = await db
+        .select({ id: users.id })
+        .from(users)
+        .where(eq(users.auth0Id, auth0Id))
+        .limit(1);
 
-    if (!user) {
-      return reply.status(404).send({ error: "User not found. Call /auth/register first." });
+      if (!user) {
+        return reply.status(404).send({ error: "User not found. Call /auth/register first." });
+      }
+
+      const result = await processEvent({
+        userId: user.id,
+        triggerType: parsed.data.triggerType,
+        payload: parsed.data.payload,
+        timestamp: parsed.data.timestamp,
+      });
+
+      return { processed: result.processed, message: result.message, triggerType: parsed.data.triggerType };
+    } catch (error) {
+      request.log.error(error, "Failed to process event");
+      return reply.status(500).send({ error: "Internal server error" });
     }
-
-    const result = await processEvent({
-      userId: user.id,
-      triggerType: parsed.data.triggerType,
-      payload: parsed.data.payload,
-      timestamp: parsed.data.timestamp,
-    });
-
-    return { processed: result.processed, message: result.message, triggerType: parsed.data.triggerType };
   });
 }

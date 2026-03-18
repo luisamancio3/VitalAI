@@ -26,6 +26,7 @@ struct UserProfile: Sendable {
     let picture: String?
 }
 
+@MainActor
 final class AuthService: ObservableObject {
     @Published var state: AuthState = .unknown
     @Published var isLoading = false

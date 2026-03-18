@@ -12,6 +12,7 @@ vi.mock("../src/config/firebase.js", () => ({
 vi.mock("../src/config/database.js", () => {
   const mockRedis = {
     exists: vi.fn().mockResolvedValue(0),
+    set: vi.fn().mockResolvedValue("OK"),
     setex: vi.fn().mockResolvedValue("OK"),
     get: vi.fn().mockResolvedValue(null),
   };
@@ -49,7 +50,7 @@ describe("TriggerProcessor", () => {
   });
 
   it("should process event when not on cooldown", async () => {
-    (redis.exists as ReturnType<typeof vi.fn>).mockResolvedValue(0);
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
 
     const result = await processEvent({
       userId: "user-123",
@@ -63,7 +64,7 @@ describe("TriggerProcessor", () => {
   });
 
   it("should reject event when on cooldown", async () => {
-    (redis.exists as ReturnType<typeof vi.fn>).mockResolvedValue(1);
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue(null);
 
     const result = await processEvent({
       userId: "user-123",
@@ -77,7 +78,7 @@ describe("TriggerProcessor", () => {
   });
 
   it("should set cooldown key with correct TTL", async () => {
-    (redis.exists as ReturnType<typeof vi.fn>).mockResolvedValue(0);
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
 
     await processEvent({
       userId: "user-456",
@@ -86,16 +87,18 @@ describe("TriggerProcessor", () => {
       timestamp: new Date().toISOString(),
     });
 
-    expect(redis.setex).toHaveBeenCalledWith(
+    expect(redis.set).toHaveBeenCalledWith(
       "cooldown:user-456:morning_sleep",
-      86400, // 24 hours
       "1",
+      "EX",
+      86400, // 24 hours
+      "NX",
     );
   });
 
   it("should send notification when user has FCM token", async () => {
     const { getUserFcmToken, deliverNotification } = await import("../src/services/notification.service.js");
-    (redis.exists as ReturnType<typeof vi.fn>).mockResolvedValue(0);
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
     (getUserFcmToken as ReturnType<typeof vi.fn>).mockResolvedValue("fcm-token-abc");
     (deliverNotification as ReturnType<typeof vi.fn>).mockResolvedValue({ success: true, messageId: "msg-456" });
 
@@ -116,7 +119,7 @@ describe("TriggerProcessor", () => {
   });
 
   it("should set correct cooldown for high_heart_rate", async () => {
-    (redis.exists as ReturnType<typeof vi.fn>).mockResolvedValue(0);
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
 
     await processEvent({
       userId: "user-789",
@@ -125,10 +128,12 @@ describe("TriggerProcessor", () => {
       timestamp: new Date().toISOString(),
     });
 
-    expect(redis.setex).toHaveBeenCalledWith(
+    expect(redis.set).toHaveBeenCalledWith(
       "cooldown:user-789:high_heart_rate",
-      1800, // 30 minutes
       "1",
+      "EX",
+      1800, // 30 minutes
+      "NX",
     );
   });
 });

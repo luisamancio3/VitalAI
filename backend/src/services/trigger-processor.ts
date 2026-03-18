@@ -41,61 +41,63 @@ export async function processEvent(event: ClassifiedEvent): Promise<ProcessResul
   const { userId, triggerType } = event;
   const cooldownKey = `cooldown:${userId}:${triggerType}`;
 
-  // Check cooldown via Redis
-  const isOnCooldown = await redis.exists(cooldownKey);
-  if (isOnCooldown) return { processed: false };
-
-  // Set cooldown
+  // Atomically check-and-set cooldown via Redis SET NX EX
   const cooldownSeconds = COOLDOWN_MAP[triggerType];
-  await redis.setex(cooldownKey, cooldownSeconds, "1");
+  const acquired = await redis.set(cooldownKey, "1", "EX", cooldownSeconds, "NX");
+  if (!acquired) return { processed: false };
 
-  // Generate personalized message via Claude
-  const systemPrompt = buildSystemPrompt(triggerType);
-  const userContext = JSON.stringify(event.payload);
-  const message = await generateMessage(systemPrompt, userContext);
+  try {
+    // Generate personalized message via Claude
+    const systemPrompt = buildSystemPrompt(triggerType);
+    const userContext = JSON.stringify(event.payload);
+    const message = await generateMessage(systemPrompt, userContext);
 
-  // Insert health event into DB
-  const [insertedEvent] = await db
-    .insert(healthEvents)
-    .values({
-      userId,
-      triggerType,
-      payload: event.payload,
-      messageGenerated: message,
-    })
-    .returning();
+    // Insert health event into DB
+    const [insertedEvent] = await db
+      .insert(healthEvents)
+      .values({
+        userId,
+        triggerType,
+        payload: event.payload,
+        messageGenerated: message,
+      })
+      .returning();
 
-  // Send push notification
-  const fcmToken = await getUserFcmToken(userId);
-  if (fcmToken) {
-    const title = buildNotificationTitle(triggerType);
-    const result = await deliverNotification({
-      userId,
-      fcmToken,
-      title,
-      body: message,
-    });
+    // Send push notification
+    const fcmToken = await getUserFcmToken(userId);
+    if (fcmToken) {
+      const title = buildNotificationTitle(triggerType);
+      const result = await deliverNotification({
+        userId,
+        fcmToken,
+        title,
+        body: message,
+      });
 
-    // Log notification
-    await db.insert(notificationLog).values({
-      userId,
-      eventId: insertedEvent.id,
-      title,
-      body: message,
-      fcmMessageId: result.success ? (result.messageId as string) : null,
-      delivered: result.success,
-    });
+      // Log notification
+      await db.insert(notificationLog).values({
+        userId,
+        eventId: insertedEvent.id,
+        title,
+        body: message,
+        fcmMessageId: result.success ? (result.messageId as string) : null,
+        delivered: result.success,
+      });
 
-    // Update health event
-    if (result.success) {
-      await db
-        .update(healthEvents)
-        .set({ notificationSent: true })
-        .where(eq(healthEvents.id, insertedEvent.id));
+      // Update health event
+      if (result.success) {
+        await db
+          .update(healthEvents)
+          .set({ notificationSent: true })
+          .where(eq(healthEvents.id, insertedEvent.id));
+      }
     }
-  }
 
-  return { processed: true, message };
+    return { processed: true, message };
+  } catch (error) {
+    console.error(`[TriggerProcessor] Failed to process ${triggerType} for ${userId}:`, error);
+    return { processed: false };
+  }
 }
 
 function buildNotificationTitle(triggerType: TriggerType): string {

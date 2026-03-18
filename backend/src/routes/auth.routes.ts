@@ -10,6 +10,10 @@ const registerSchema = z.object({
   name: z.string().max(200).optional(),
 });
 
+const fcmTokenSchema = z.object({
+  fcmToken: z.string().min(32).max(4096),
+});
+
 export default async function authRoutes(app: FastifyInstance) {
   // POST /api/v1/auth/register — Sync Auth0 user to local DB
   app.post("/register", { preHandler: [authMiddleware] }, async (request, reply) => {
@@ -22,37 +26,46 @@ export default async function authRoutes(app: FastifyInstance) {
     const email = parsed.data.email ?? "unknown@vitalai.app";
     const name = parsed.data.name ?? null;
 
-    const [user] = await db
-      .insert(users)
-      .values({ auth0Id, email, name })
-      .onConflictDoUpdate({
-        target: users.auth0Id,
-        set: { email, name, updatedAt: new Date() },
-      })
-      .returning();
+    try {
+      const [user] = await db
+        .insert(users)
+        .values({ auth0Id, email, name })
+        .onConflictDoUpdate({
+          target: users.auth0Id,
+          set: { email, name, updatedAt: new Date() },
+        })
+        .returning();
 
-    return reply.status(200).send({ id: user.id, auth0Id: user.auth0Id });
+      return reply.status(200).send({ id: user.id, auth0Id: user.auth0Id });
+    } catch (error) {
+      request.log.error(error, "Failed to register user");
+      return reply.status(500).send({ error: "Internal server error" });
+    }
   });
 
   // POST /api/v1/auth/fcm-token — Register FCM token for push notifications
   app.post("/fcm-token", { preHandler: [authMiddleware] }, async (request, reply) => {
     const auth0Id = request.userId;
-    const body = request.body as { fcmToken: string };
-
-    if (!body.fcmToken) {
-      return reply.status(400).send({ error: "fcmToken is required" });
+    const parsed = fcmTokenSchema.safeParse(request.body);
+    if (!parsed.success) {
+      return reply.status(400).send({ error: "Invalid or missing fcmToken" });
     }
 
-    const result = await db
-      .update(users)
-      .set({ fcmToken: body.fcmToken, updatedAt: new Date() })
-      .where(eq(users.auth0Id, auth0Id))
-      .returning({ id: users.id });
+    try {
+      const result = await db
+        .update(users)
+        .set({ fcmToken: parsed.data.fcmToken, updatedAt: new Date() })
+        .where(eq(users.auth0Id, auth0Id))
+        .returning({ id: users.id });
 
-    if (result.length === 0) {
-      return reply.status(404).send({ error: "User not found" });
+      if (result.length === 0) {
+        return reply.status(404).send({ error: "User not found" });
+      }
+
+      return reply.status(200).send({ success: true });
+    } catch (error) {
+      request.log.error(error, "Failed to update FCM token");
+      return reply.status(500).send({ error: "Internal server error" });
     }
-
-    return reply.status(200).send({ success: true });
   });
 }
