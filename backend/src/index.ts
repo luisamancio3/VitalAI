@@ -18,6 +18,9 @@ await app.register(helmet);
 await app.register(rateLimit, {
   max: 100,
   timeWindow: "1 minute",
+  keyGenerator: (request) => {
+    return request.userId ?? request.ip;
+  },
 });
 
 // Health check

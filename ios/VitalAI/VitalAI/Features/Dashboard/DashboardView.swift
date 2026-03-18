@@ -36,7 +36,7 @@ struct DashboardView: View {
         }()
 
         let raw = (sleepScore * sleepWeight) + (hrvScore * hrvWeight) + (stepsScore * stepsWeight) + (hrScore * hrWeight)
-        return Int(raw * 100)
+        return min(Int(raw * 100), 100)
     }
 
     private var scoreLabel: String {

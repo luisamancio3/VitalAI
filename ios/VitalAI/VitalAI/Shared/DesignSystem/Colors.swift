@@ -6,8 +6,12 @@ import SwiftUI
 extension Color {
     // MARK: - Brand Colors
     static let vitalPrimary = Color(hex: "2bd4a7")       // Teal — primary CTA, active states
-    static let vitalBackground = Color(hex: "f6f8f7")    // Light background
-    static let vitalBackgroundDark = Color(hex: "12201c") // Dark mode background
+    static let vitalBackground = Color(UIColor { traits in
+        traits.userInterfaceStyle == .dark
+            ? UIColor(Color(hex: "12201c"))
+            : UIColor(Color(hex: "f6f8f7"))
+    })
+    static let vitalBackgroundDark = Color(hex: "12201c") // Keep for explicit use
 
     // MARK: - Semantic Colors
     static let vitalError = Color(hex: "ef4444")          // red-500

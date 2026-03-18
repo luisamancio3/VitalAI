@@ -53,15 +53,15 @@ struct SocialLoginButton: View {
 
     private var foregroundColor: Color {
         switch provider {
-        case .apple: return .white
+        case .apple: return Color(.systemBackground)
         case .google: return .vitalSlate800
         }
     }
 
     private var backgroundColor: Color {
         switch provider {
-        case .apple: return .black
-        case .google: return .white
+        case .apple: return Color(.label)
+        case .google: return Color(.systemBackground)
         }
     }
 

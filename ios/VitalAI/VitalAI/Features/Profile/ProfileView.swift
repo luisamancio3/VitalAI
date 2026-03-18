@@ -7,6 +7,9 @@ struct ProfileView: View {
     @EnvironmentObject private var healthKitService: HealthKitService
     @AppStorage("notificationsEnabled") private var notificationsEnabled = true
 
+    // TODO: Sync notificationsEnabled to backend via PATCH /api/v1/users/preferences
+    // Currently this only affects local UI; the backend still sends notifications
+
     var body: some View {
         NavigationStack {
             List {
