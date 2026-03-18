@@ -2,11 +2,12 @@ import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import mongoose from "mongoose";
 import Redis from "ioredis";
+import * as schema from "../db/schema.js";
 
 // PostgreSQL + TimescaleDB (via Drizzle ORM)
 const connectionString = process.env.DATABASE_URL!;
 const queryClient = postgres(connectionString);
-export const db = drizzle(queryClient);
+export const db = drizzle(queryClient, { schema });
 
 // MongoDB (recipe catalog, food database)
 export async function connectMongo() {
