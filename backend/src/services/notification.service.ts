@@ -1,5 +1,7 @@
+import { eq } from "drizzle-orm";
 import { sendPushNotification } from "../config/firebase.js";
-import { redis } from "../config/database.js";
+import { redis, db } from "../config/database.js";
+import { users } from "../db/schema.js";
 
 interface NotificationPayload {
   userId: string;
@@ -26,6 +28,19 @@ export async function getUserFcmToken(userId: string): Promise<string | null> {
   const cached = await redis.get(`fcm:${userId}`);
   if (cached) return cached;
 
-  // TODO: Query database for FCM token
-  return null;
+  // Query database for FCM token
+  const [user] = await db
+    .select({ fcmToken: users.fcmToken })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  const token = user?.fcmToken ?? null;
+
+  // Cache in Redis with 5-minute TTL
+  if (token) {
+    await redis.setex(`fcm:${userId}`, 300, token);
+  }
+
+  return token;
 }

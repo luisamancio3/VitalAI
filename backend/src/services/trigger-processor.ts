@@ -1,6 +1,8 @@
+import { eq } from "drizzle-orm";
 import { generateMessage } from "../config/claude.js";
-import { sendPushNotification } from "../config/firebase.js";
-import { redis } from "../config/database.js";
+import { redis, db } from "../config/database.js";
+import { healthEvents, notificationLog } from "../db/schema.js";
+import { getUserFcmToken, deliverNotification } from "./notification.service.js";
 
 // Trigger types from the watch/phone classified events
 export type TriggerType =
@@ -19,6 +21,11 @@ interface ClassifiedEvent {
   timestamp: string;
 }
 
+interface ProcessResult {
+  processed: boolean;
+  message?: string;
+}
+
 // Cooldown periods per trigger type (in seconds)
 const COOLDOWN_MAP: Record<TriggerType, number> = {
   post_workout: 3600, // 1 hour
@@ -30,13 +37,13 @@ const COOLDOWN_MAP: Record<TriggerType, number> = {
   hydration_reminder: 5400, // 90 minutes
 };
 
-export async function processEvent(event: ClassifiedEvent): Promise<boolean> {
+export async function processEvent(event: ClassifiedEvent): Promise<ProcessResult> {
   const { userId, triggerType } = event;
   const cooldownKey = `cooldown:${userId}:${triggerType}`;
 
   // Check cooldown via Redis
   const isOnCooldown = await redis.exists(cooldownKey);
-  if (isOnCooldown) return false;
+  if (isOnCooldown) return { processed: false };
 
   // Set cooldown
   const cooldownSeconds = COOLDOWN_MAP[triggerType];
@@ -47,10 +54,61 @@ export async function processEvent(event: ClassifiedEvent): Promise<boolean> {
   const userContext = JSON.stringify(event.payload);
   const message = await generateMessage(systemPrompt, userContext);
 
-  // Send notification (FCM token lookup would happen here)
-  // await sendPushNotification(fcmToken, title, message);
+  // Insert health event into DB
+  const [insertedEvent] = await db
+    .insert(healthEvents)
+    .values({
+      userId,
+      triggerType,
+      payload: event.payload,
+      messageGenerated: message,
+    })
+    .returning();
 
-  return true;
+  // Send push notification
+  const fcmToken = await getUserFcmToken(userId);
+  if (fcmToken) {
+    const title = buildNotificationTitle(triggerType);
+    const result = await deliverNotification({
+      userId,
+      fcmToken,
+      title,
+      body: message,
+    });
+
+    // Log notification
+    await db.insert(notificationLog).values({
+      userId,
+      eventId: insertedEvent.id,
+      title,
+      body: message,
+      fcmMessageId: result.success ? (result.messageId as string) : null,
+      delivered: result.success,
+    });
+
+    // Update health event
+    if (result.success) {
+      await db
+        .update(healthEvents)
+        .set({ notificationSent: true })
+        .where(eq(healthEvents.id, insertedEvent.id));
+    }
+  }
+
+  return { processed: true, message };
+}
+
+function buildNotificationTitle(triggerType: TriggerType): string {
+  const titles: Record<TriggerType, string> = {
+    morning_sleep: "Resumo do Sono",
+    post_workout: "Pós-Treino",
+    low_hrv: "Alerta de Estresse",
+    high_heart_rate: "Frequência Cardíaca",
+    meal_detected: "Refeição Detectada",
+    inactivity: "Hora de se Mover",
+    hydration_reminder: "Hidratação",
+  };
+  return titles[triggerType];
 }
 
 function buildSystemPrompt(triggerType: TriggerType): string {

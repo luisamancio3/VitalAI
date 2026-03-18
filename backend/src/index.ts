@@ -1,12 +1,20 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
+import rateLimit from "@fastify/rate-limit";
 import "dotenv/config";
+
+import authRoutes from "./routes/auth.routes.js";
+import eventsRoutes from "./routes/events.routes.js";
 
 const app = Fastify({ logger: true });
 
 await app.register(cors, { origin: true });
 await app.register(helmet);
+await app.register(rateLimit, {
+  max: 100,
+  timeWindow: "1 minute",
+});
 
 // Health check
 app.get("/health", async () => ({
@@ -15,9 +23,9 @@ app.get("/health", async () => ({
   timestamp: new Date().toISOString(),
 }));
 
-// Routes will be registered here
-// await app.register(authRoutes, { prefix: "/api/v1/auth" });
-// await app.register(eventsRoutes, { prefix: "/api/v1/events" });
+// Routes
+await app.register(authRoutes, { prefix: "/api/v1/auth" });
+await app.register(eventsRoutes, { prefix: "/api/v1/events" });
 // await app.register(nutritionRoutes, { prefix: "/api/v1/nutrition" });
 // await app.register(reportsRoutes, { prefix: "/api/v1/reports" });
 // await app.register(usersRoutes, { prefix: "/api/v1/users" });

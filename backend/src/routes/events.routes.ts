@@ -1,6 +1,10 @@
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
+import { eq } from "drizzle-orm";
 import { processEvent, type TriggerType } from "../services/trigger-processor.js";
+import { authMiddleware } from "../middleware/auth.js";
+import { db } from "../config/database.js";
+import { users } from "../db/schema.js";
 
 const eventSchema = z.object({
   triggerType: z.enum([
@@ -18,22 +22,31 @@ const eventSchema = z.object({
 
 export default async function eventsRoutes(app: FastifyInstance) {
   // POST /api/v1/events — Receive classified events from phone
-  app.post("/", async (request, reply) => {
+  app.post("/", { preHandler: [authMiddleware] }, async (request, reply) => {
     const parsed = eventSchema.safeParse(request.body);
     if (!parsed.success) {
       return reply.status(400).send({ error: parsed.error.flatten() });
     }
 
-    // TODO: Extract userId from JWT auth middleware
-    const userId = "placeholder-user-id";
+    // Look up internal user ID from Auth0 sub
+    const auth0Id = request.userId;
+    const [user] = await db
+      .select({ id: users.id })
+      .from(users)
+      .where(eq(users.auth0Id, auth0Id))
+      .limit(1);
 
-    const processed = await processEvent({
-      userId,
+    if (!user) {
+      return reply.status(404).send({ error: "User not found. Call /auth/register first." });
+    }
+
+    const result = await processEvent({
+      userId: user.id,
       triggerType: parsed.data.triggerType,
       payload: parsed.data.payload,
       timestamp: parsed.data.timestamp,
     });
 
-    return { processed, triggerType: parsed.data.triggerType };
+    return { processed: result.processed, message: result.message, triggerType: parsed.data.triggerType };
   });
 }
