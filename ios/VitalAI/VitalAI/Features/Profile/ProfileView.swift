@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import HealthKit
 
 struct ProfileView: View {

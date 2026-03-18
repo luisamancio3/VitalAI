@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import Auth0
 
 enum AuthState: Equatable {
