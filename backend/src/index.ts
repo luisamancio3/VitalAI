@@ -9,7 +9,11 @@ import eventsRoutes from "./routes/events.routes.js";
 
 const app = Fastify({ logger: true });
 
-await app.register(cors, { origin: true });
+const CORS_ORIGINS = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(",")
+  : ["http://localhost:3000", "http://localhost:5173"];
+
+await app.register(cors, { origin: CORS_ORIGINS });
 await app.register(helmet);
 await app.register(rateLimit, {
   max: 100,

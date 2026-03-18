@@ -6,7 +6,7 @@ import { authMiddleware } from "../middleware/auth.js";
 import { db } from "../config/database.js";
 import { users } from "../db/schema.js";
 
-const eventSchema = z.object({
+export const eventSchema = z.object({
   triggerType: z.enum([
     "post_workout",
     "morning_sleep",

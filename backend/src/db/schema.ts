@@ -41,4 +41,7 @@ export const notificationLog = pgTable("notification_log", {
   fcmMessageId: text("fcm_message_id"),
   delivered: boolean("delivered").default(false),
   createdAt: timestamp("created_at").defaultNow(),
-});
+}, (table) => [
+  index("idx_notification_log_user_id").on(table.userId),
+  index("idx_notification_log_event_id").on(table.eventId),
+]);

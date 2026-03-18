@@ -3,7 +3,7 @@ import Foundation
 final class APIService {
     static let shared = APIService()
 
-    private let baseURL = URL(string: "http://localhost:3000/api/v1")!
+    private let baseURL: URL
 
     private let decoder: JSONDecoder = {
         let d = JSONDecoder()
@@ -17,7 +17,14 @@ final class APIService {
         return e
     }()
 
-    private init() {}
+    private init() {
+        let urlString = Bundle.main.infoDictionary?["API_BASE_URL"] as? String
+            ?? "https://api.vitalai.com/api/v1"
+        guard let url = URL(string: urlString) else {
+            fatalError("Invalid API_BASE_URL: \(urlString)")
+        }
+        self.baseURL = url
+    }
 
     // MARK: - Auth
 

@@ -1,20 +1,31 @@
-import { describe, it, expect } from "vitest";
-import { z } from "zod";
+import { describe, it, expect, vi } from "vitest";
 
-// Replicate the event schema from events.routes.ts for validation testing
-const eventSchema = z.object({
-  triggerType: z.enum([
-    "post_workout",
-    "morning_sleep",
-    "low_hrv",
-    "high_heart_rate",
-    "meal_detected",
-    "inactivity",
-    "hydration_reminder",
-  ] as const),
-  payload: z.record(z.unknown()),
-  timestamp: z.string().datetime(),
-});
+// Mock transitive dependencies so importing events.routes.js doesn't require env vars
+vi.mock("../src/config/database.js", () => ({
+  redis: {},
+  db: {},
+}));
+
+vi.mock("../src/config/claude.js", () => ({
+  generateMessage: vi.fn(),
+}));
+
+vi.mock("../src/db/schema.js", () => ({
+  healthEvents: {},
+  notificationLog: {},
+  users: {},
+}));
+
+vi.mock("../src/services/notification.service.js", () => ({
+  getUserFcmToken: vi.fn(),
+  deliverNotification: vi.fn(),
+}));
+
+vi.mock("../src/middleware/auth.js", () => ({
+  authMiddleware: vi.fn(),
+}));
+
+import { eventSchema } from "../src/routes/events.routes.js";
 
 describe("Event Zod Validation", () => {
   it("should accept a valid event body", () => {

@@ -6,13 +6,23 @@ export async function generateMessage(
   systemPrompt: string,
   userContent: string,
 ): Promise<string> {
-  const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 1024,
-    system: systemPrompt,
-    messages: [{ role: "user", content: userContent }],
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10_000); // 10s timeout
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  return textBlock?.text ?? "";
+  try {
+    const response = await anthropic.messages.create(
+      {
+        model: "claude-sonnet-4-6",
+        max_tokens: 256,
+        system: systemPrompt,
+        messages: [{ role: "user", content: userContent }],
+      },
+      { signal: controller.signal },
+    );
+
+    const textBlock = response.content.find((block) => block.type === "text");
+    return textBlock?.text ?? "";
+  } finally {
+    clearTimeout(timeout);
+  }
 }
