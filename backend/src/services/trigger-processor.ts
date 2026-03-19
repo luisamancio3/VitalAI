@@ -146,7 +146,8 @@ async function getUserNotificationPreferences(userId: string): Promise<Notificat
       .where(eq(users.id, userId))
       .limit(1);
     return (user?.notificationPreferences as NotificationPreferences) ?? {};
-  } catch {
+  } catch (error) {
+    console.warn(`[TriggerProcessor] Failed to fetch preferences for ${userId}:`, error);
     return {};
   }
 }
@@ -166,7 +167,8 @@ async function getTodayNotificationCount(userId: string): Promise<number> {
         ),
       );
     return result[0]?.count ?? 0;
-  } catch {
+  } catch (error) {
+    console.warn(`[TriggerProcessor] Failed to count notifications for ${userId}:`, error);
     return 0;
   }
 }

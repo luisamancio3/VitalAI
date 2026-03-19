@@ -31,10 +31,7 @@ final class APIService {
     private init() {
         let urlString = Bundle.main.infoDictionary?["API_BASE_URL"] as? String
             ?? "https://api.vitalai.com/api/v1"
-        guard let url = URL(string: urlString) else {
-            fatalError("Invalid API_BASE_URL: \(urlString)")
-        }
-        self.baseURL = url
+        self.baseURL = URL(string: urlString) ?? URL(string: "https://api.vitalai.com/api/v1")!
     }
 
     // MARK: - Auth

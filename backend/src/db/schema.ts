@@ -27,6 +27,7 @@ export const healthEvents = pgTable("health_events", {
 }, (table) => [
   index("idx_health_events_user_id").on(table.userId),
   index("idx_health_events_trigger_type").on(table.triggerType),
+  index("idx_health_events_user_created").on(table.userId, table.createdAt),
 ]);
 
 // notification_log table
@@ -44,6 +45,7 @@ export const notificationLog = pgTable("notification_log", {
 }, (table) => [
   index("idx_notification_log_user_id").on(table.userId),
   index("idx_notification_log_event_id").on(table.eventId),
+  index("idx_notification_log_user_delivered_created").on(table.userId, table.delivered, table.createdAt),
 ]);
 
 // nutrition_profiles table

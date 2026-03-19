@@ -118,6 +118,7 @@ struct NutritionView: View {
                 await loadHistory()
             }
         } catch {
+            print("[NutritionView] Error checking profile: \(error)")
             hasProfile = false
         }
 

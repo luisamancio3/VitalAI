@@ -14,7 +14,7 @@ struct WatchDashboardView: View {
                     // Health Score
                     Text("\(sessionManager.healthScore)")
                         .font(.system(size: 44, weight: .bold))
-                        .foregroundStyle(Color(hex: "2bd4a7"))
+                        .foregroundStyle(Color.vitalPrimary)
 
                     Text("Health Score")
                         .font(.caption2)
@@ -50,7 +50,7 @@ struct WatchDashboardView: View {
                     VStack(spacing: 8) {
                         Image(systemName: "iphone.and.arrow.forward")
                             .font(.title2)
-                            .foregroundStyle(Color(hex: "2bd4a7"))
+                            .foregroundStyle(Color.vitalPrimary)
                         Text("Conecte o iPhone para ver seus dados")
                             .font(.caption)
                             .foregroundStyle(.secondary)

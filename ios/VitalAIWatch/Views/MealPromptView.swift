@@ -10,7 +10,7 @@ struct MealPromptView: View {
         VStack(spacing: 12) {
             Image(systemName: "fork.knife")
                 .font(.title)
-                .foregroundStyle(Color(hex: "2bd4a7"))
+                .foregroundStyle(Color.vitalPrimary)
 
             Text("Comendo agora?")
                 .font(.headline)
@@ -23,7 +23,7 @@ struct MealPromptView: View {
                     )
                     dismiss()
                 }
-                .tint(Color(hex: "2bd4a7"))
+                .tint(Color.vitalPrimary)
 
                 Button("Não") {
                     dismiss()

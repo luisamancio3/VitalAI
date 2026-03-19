@@ -278,7 +278,7 @@ final class TriggerEngine: ObservableObject {
     /// inactivity: no step increase for 2h during 8am-10pm
     private func scheduleInactivityCheck() {
         inactivityTimer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { [weak self] _ in
-            Task { @MainActor [weak self] in
+            Task { @MainActor in
                 self?.checkInactivity()
             }
         }

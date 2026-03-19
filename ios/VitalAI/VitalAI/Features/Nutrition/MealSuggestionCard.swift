@@ -34,7 +34,7 @@ struct MealSuggestionCard: View {
                         .font(.vitalMicro)
                         .foregroundStyle(.secondary)
 
-                    Label("\(suggestion.recipe.servings) porção", systemImage: "person")
+                    Label("\(suggestion.recipe.servings) \(suggestion.recipe.servings > 1 ? "porções" : "porção")", systemImage: "person")
                         .font(.vitalMicro)
                         .foregroundStyle(.secondary)
                 }

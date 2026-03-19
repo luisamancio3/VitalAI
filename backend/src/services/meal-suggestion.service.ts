@@ -94,7 +94,8 @@ export async function suggestMeal(userId: string, context: string): Promise<Meal
   let message: string;
   try {
     message = await generateMessage(systemPrompt, userContext);
-  } catch {
+  } catch (error) {
+    console.warn("[MealSuggestion] Claude generation failed, using fallback:", error);
     message = `Que tal experimentar ${recipe.name}? Uma ótima opção para agora!`;
   }
 
@@ -102,7 +103,7 @@ export async function suggestMeal(userId: string, context: string): Promise<Meal
     recipe: {
       id: recipe._id?.toString() ?? "unknown",
       name: recipe.name ?? "Receita",
-      description: recipe.description,
+      description: recipe.description ?? undefined,
       macros: recipe.macros ?? { calories: 0, protein: 0, carbs: 0, fat: 0 },
       prepTime: recipe.prepTime ?? 20,
       difficulty: recipe.difficulty ?? "easy",
