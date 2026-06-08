@@ -118,8 +118,8 @@ para(tf3, "Luis Amancio  ·  June 2026", 14, PP_ALIGN.CENTER, color=DIM, first=T
 s = slide()
 heading(s, "The Problem", size=36, top=Inches(0.7))
 stats = [("538M", "wearables shipped in 2024"),
-         ("80%", "of users abandon nutrition\napps within 2 weeks"),
-         ("10-15%", "average retention for health\napps after 30 days")]
+         ("86%", "of users abandon diet &\nnutrition apps"),
+         ("~3%", "health & fitness app\nretention at day 30")]
 xs = [Inches(1.0), Inches(5.1), Inches(9.2)]
 for (num, lab), x in zip(stats, xs):
     tf = textbox(s, x, Inches(2.4), Inches(3.1), Inches(1.2), MSO_ANCHOR.TOP)

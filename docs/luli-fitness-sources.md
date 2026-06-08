@@ -22,32 +22,48 @@ IDC reported global wearable shipments reaching approximately **538 million unit
 
 ---
 
-### 80% of users abandon nutrition apps within 2 weeks
+### 86% of users abandon diet & nutrition apps
 
-**Source:** Multiple industry analyses and dietary self-monitoring studies.
+**Primary source:** Roberts et al., *"When and Why Adults Abandon Lifestyle Behavior and Mental Health Mobile Apps: Scoping Review,"* **Journal of Medical Internet Research (JMIR), 2024.** A peer-reviewed scoping review of mobile health app abandonment.
 
-Across sources, **70–80% of users abandon diet and nutrition apps within the first two weeks**, primarily because manual food logging is too time-consuming (15–23 minutes per day), data feels unreliable, or the experience feels stressful. We cite the conservative-but-well-supported 80% figure.
+Exact findings from the review:
 
-- Market.us: [Diet and Nutrition Apps Statistics and Facts](https://media.market.us/diet-and-nutrition-apps-statistics/) — 70% abandon within 2 weeks if too complex/time-consuming
-- Kygo: [Why 80% of People Quit Food Logging Apps](https://www.kygo.app/post/why-80-of-people-quit-food-logging-apps-and-how-to-actually-stick-with-it)
+- **Diet apps: 86% abandonment rate** — the figure cited on the slide
+- Fitness apps: **69% abandoned within 90 days**; health apps: **66% within 90 days**
+- **Median 70% of users discontinue within the first 100 days**
+- For comparison, the average across *all* app categories is 52% — health/diet apps are abandoned faster than the norm
+- Abandonment follows a curvilinear pattern: sharp drop-off soon after install, then a slowing rate
+
+**Citation:** JMIR 2024;26:e56897 — [https://www.jmir.org/2024/1/e56897](https://www.jmir.org/2024/1/e56897)
+
+Supporting peer-reviewed reviews:
 - NIH/PMC: [Barriers to and Facilitators for Using Nutrition Apps: Systematic Review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8409150/)
-- NIH/PMC: [When and Why Adults Abandon Lifestyle Behavior and Mental Health Mobile Apps](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11694054/)
 
-**Why this matters for VitalAI:** The #1 cited reason for abandonment is the burden of manual logging. This is precisely the problem automatic meal detection is designed to eliminate.
+**Why this matters for VitalAI:** The #1 cited reason for abandonment is the burden of manual food logging. This is precisely the problem automatic meal detection is designed to eliminate.
+
+*Note: An earlier draft of the deck cited "80% within 2 weeks." That specific framing traces only to marketing blogs, not primary research. We replaced it with the peer-reviewed 86% diet-app figure, which is both more defensible and more striking.*
 
 ---
 
-### 10–15% average retention for health apps after 30 days
+### ~3% health & fitness app retention at day 30
 
-**Source:** Mobile app retention benchmark reports.
+**Primary source:** **AppsFlyer App Retention Benchmarks (2024 edition)** — the mobile attribution industry's standard benchmark dataset, measured across billions of app installs.
 
-Day-30 retention for health & fitness apps varies by methodology, but **average performers land in the ~8–20% range**, with only top-tier apps reaching 25%+. Our 10–15% figure sits in the realistic middle of that band.
+Exact findings:
 
+- **Health & fitness day-30 retention: 2.78%** (≈3%) — the figure cited on the slide
+- For context, the day-30 benchmark across *all* verticals is ~5% — health & fitness underperforms the cross-industry average
+- **Statista** corroborates: ~3.5–4% day-30 retention for the category
+- Only dedicated, heavily gamified fitness apps reach **8–12%**; top performers ~25%
+
+**Citations:**
+- AppsFlyer: [App Retention Benchmarks](https://www.appsflyer.com/infograms/app-retention-benchmarks/)
+- Statista: [Mobile app user retention rate by category](https://www.statista.com/statistics/259329/ios-and-android-app-user-retention-rate/)
 - Business of Apps: [Health & Fitness App Benchmarks](https://www.businessofapps.com/data/health-fitness-app-benchmarks/)
-- Plotline: [Retention Rates for Mobile Apps by Industry](https://www.plotline.so/blog/retention-rates-mobile-apps-by-industry)
-- Snoopr: [Mobile App Retention Benchmarks 2026](https://www.snoopr.co/blog/mobile-app-retention-benchmarks-2026-what-good-looks-like-for-fitness-ecommerce-gaming-and-more)
 
-**VitalAI's target:** 40%+ daily active users after 30 days — well above category average — by replacing passive dashboards with proactive, contextual engagement.
+**VitalAI's target:** 40%+ daily active users after 30 days — roughly 10x the category benchmark — by replacing passive dashboards with proactive, contextual engagement.
+
+*Note: An earlier draft cited "10–15% retention." Primary benchmark data (AppsFlyer/Statista) actually puts the category at ~3%, so the real number is lower — and makes the retention problem the deck describes even more acute.*
 
 ---
 
