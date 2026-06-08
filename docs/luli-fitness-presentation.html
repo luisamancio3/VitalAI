@@ -92,8 +92,8 @@
         .timeline-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 22px;
-            gap: 15px;
+            margin-bottom: 12px;
+            gap: 12px;
         }
         .timeline-time {
             font-size: 0.7em;
@@ -105,23 +105,23 @@
         .timeline-msg {
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
-            padding: 12px 18px;
-            font-size: 0.6em;
+            padding: 8px 14px;
+            font-size: 0.55em;
             color: #ddd;
-            line-height: 1.5;
+            line-height: 1.4;
             flex: 1;
         }
         .challenge-card {
             background: rgba(255, 112, 67, 0.06);
             border-left: 3px solid #ff7043;
-            padding: 15px 20px;
-            margin: 12px auto;
+            padding: 10px 16px;
+            margin: 8px auto;
             text-align: left;
             max-width: 800px;
             border-radius: 0 8px 8px 0;
         }
         .challenge-card p {
-            font-size: 0.65em;
+            font-size: 0.6em;
             margin: 0;
             color: #cccccc;
         }
@@ -131,14 +131,14 @@
         .layer-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 10px;
             max-width: 800px;
-            margin: 20px auto;
+            margin: 15px auto;
         }
         .layer-card {
             background: rgba(255,255,255,0.04);
             border-radius: 10px;
-            padding: 18px;
+            padding: 14px;
             text-align: left;
         }
         .layer-card h4 {
@@ -311,8 +311,7 @@
     <!-- SLIDE 8: Challenge - Proactive -->
     <section>
         <h3>Differentiator 1 &mdash; The Challenges</h3>
-        <h2 class="warn" style="font-size: 1.3em;">Proactivity is a double-edged sword</h2>
-        <br>
+        <h2 class="warn" style="font-size: 1.1em;">Proactivity is a double-edged sword</h2>
         <div class="challenge-card">
             <p><strong>Notification fatigue is the #1 risk.</strong> If notifications feel irrelevant or too frequent, users disable them and never come back. Calibrating this requires real data from real users.</p>
         </div>
@@ -328,8 +327,7 @@
     <section>
         <h3>Differentiator 2</h3>
         <h2>Automatic Meal Detection</h2>
-        <p style="font-size: 0.8em; color: #aaa;">The end of manual logging &mdash; the #1 reason for nutrition app abandonment</p>
-        <br>
+        <p style="font-size: 0.75em; color: #aaa;">The end of manual logging &mdash; the #1 reason for nutrition app abandonment</p>
         <div class="layer-grid">
             <div class="layer-card">
                 <h4>Layer 1: Watch Gesture</h4>
@@ -357,19 +355,18 @@
     <!-- SLIDE 10: Challenge - Meal Detection -->
     <section>
         <h3>Differentiator 2 &mdash; The Challenges</h3>
-        <h2 class="warn" style="font-size: 1.3em;">The hardest technical challenge in the product</h2>
-        <br>
+        <h2 class="warn" style="font-size: 1.1em;">The hardest technical challenge in the product</h2>
         <div class="challenge-card">
-            <p><strong>The ML detection model doesn't exist yet.</strong> Published research achieves 85% precision / 81% recall in controlled conditions. Real-world accuracy will be lower. Training requires real data from real users eating in different ways.</p>
+            <p><strong>The ML detection model doesn't exist yet.</strong> Published research achieves 85% precision / 81% recall in controlled conditions. Real-world will be lower. Training requires real eating data from diverse users.</p>
         </div>
         <div class="challenge-card">
-            <p><strong>Frequent false positives.</strong> Brushing teeth, drinking water, scratching your face &mdash; all involve hand-to-mouth movement. If the watch asks "Eating now?" while you're brushing your teeth, user trust erodes.</p>
+            <p><strong>Frequent false positives.</strong> Brushing teeth, drinking water, scratching your face &mdash; all involve hand-to-mouth movement. If the watch asks "Eating now?" while brushing teeth, user trust erodes.</p>
         </div>
         <div class="challenge-card">
-            <p><strong>Watch battery is a real constraint.</strong> Continuous accelerometer + gyroscope monitoring on a device with a coin-sized battery. If VitalAI visibly drains battery, users will uninstall.</p>
+            <p><strong>Watch battery is a real constraint.</strong> Continuous accelerometer + gyroscope monitoring on a coin-sized battery. If VitalAI visibly drains battery, users uninstall.</p>
         </div>
         <div class="challenge-card">
-            <p><strong>Intentional confirmation.</strong> We chose to always ask for a 1-tap confirmation. It will never be "zero friction" &mdash; but it keeps users conscious of what they eat and ensures data quality.</p>
+            <p><strong>Intentional confirmation.</strong> We always ask for a 1-tap confirmation. Never "zero friction" &mdash; but keeps users conscious of what they eat and ensures data quality.</p>
         </div>
     </section>
 
@@ -389,8 +386,7 @@
     <!-- SLIDE 12: Challenge - Feedback Loop -->
     <section>
         <h3>Differentiator 3 &mdash; The Challenges</h3>
-        <h2 class="warn" style="font-size: 1.3em;">From "simple" to "intelligent" is a big leap</h2>
-        <br>
+        <h2 class="warn" style="font-size: 1.1em;">From "simple" to "intelligent" is a big leap</h2>
         <div class="challenge-card">
             <p><strong>Current learning is primitive.</strong> Today, the system only excludes recipes rated &le; 2 stars. It doesn't understand ingredients, flavors, or contextual patterns. Real personalization requires a recommendation model with ML.</p>
         </div>
@@ -417,9 +413,8 @@
                 <tr><td><span class="accent">VitalAI</span></td><td colspan="2"><span class="accent">Proactivity + meal detection + feedback loop</span></td></tr>
             </tbody>
         </table>
-        <br>
         <div class="challenge-card" style="border-left-color: #ff7043;">
-            <p><strong>Honest risk:</strong> If Apple or Google decide to build proactive coaching natively, they have distribution we can never match. Our defense is the nutrition feedback loop and speed of iteration.</p>
+            <p><strong>Honest risk:</strong> If Apple or Google build proactive coaching natively, they have distribution we can never match. Our defense is the nutrition feedback loop and speed of iteration.</p>
         </div>
     </section>
 
@@ -456,26 +451,21 @@
                 <tr><td>Pro</td><td>Everything + monthly report + PDF for professionals</td><td>~$16/mo</td></tr>
             </tbody>
         </table>
-        <br>
         <div class="challenge-card">
-            <p><strong>Honest unknown:</strong> We have no willingness-to-pay data yet. The Free tier may be "good enough" for most users. The weekly report is our best bet as a conversion anchor &mdash; but it needs to be validated.</p>
+            <p><strong>Honest unknown:</strong> We have no willingness-to-pay data yet. The Free tier may be "good enough" for most users. The weekly report is our best conversion anchor &mdash; but needs validation.</p>
         </div>
-        <br>
-        <p style="font-size: 0.65em; color: #aaa;"><strong class="accent">B2B potential:</strong> Companies offer VitalAI as an employee health benefit &mdash; ~$6/employee/month. Could be stronger than B2C.</p>
+        <p style="font-size: 0.65em; color: #aaa; margin-top: 10px;"><strong class="accent">B2B potential:</strong> Companies offer VitalAI as an employee health benefit &mdash; ~$6/employee/month. Could be stronger than B2C.</p>
     </section>
 
     <!-- SLIDE 16: Regulatory -->
     <section>
         <h2>Regulatory &amp; Privacy</h2>
-        <br>
         <div class="challenge-card" style="border-left-color: #4fc3f7; background: rgba(79,195,247,0.06);">
-            <p style="color: #ddd;"><strong style="color: #4fc3f7;">Positioning: Wellness, not diagnosis.</strong> "Your HRV is low, try breathing" = wellness. "Your heart rate pattern suggests arrhythmia risk" = medical claim (regulatory territory). The line gets blurrier as we add features.</p>
+            <p style="color: #ddd;"><strong style="color: #4fc3f7;">Positioning: Wellness, not diagnosis.</strong> "Your HRV is low, try breathing" = wellness. "Your heart rate suggests arrhythmia risk" = medical claim (regulatory territory). The line gets blurrier as we add features.</p>
         </div>
-        <br>
         <div class="challenge-card" style="border-left-color: #4fc3f7; background: rgba(79,195,247,0.06);">
-            <p style="color: #ddd;"><strong style="color: #4fc3f7;">Data protection (LGPD/GDPR).</strong> Health data is "sensitive data." Explicit consent, right to deletion, data portability required. Architecture designed for this. Implementation is partial &mdash; must be completed before launch.</p>
+            <p style="color: #ddd;"><strong style="color: #4fc3f7;">Data protection (LGPD/GDPR).</strong> Health data is "sensitive data." Explicit consent, right to deletion, portability required. Architecture designed for this &mdash; implementation partial, must complete before launch.</p>
         </div>
-        <br>
         <div class="challenge-card" style="border-left-color: #4fc3f7; background: rgba(79,195,247,0.06);">
             <p style="color: #ddd;"><strong style="color: #4fc3f7;">Privacy by design.</strong> On-device processing &mdash; raw biometric data never leaves the device. Only classified events are sent to the backend.</p>
         </div>
@@ -536,17 +526,7 @@
         <p style="font-size: 0.55em; color: #555;">Full technical documentation available on request.</p>
     </section>
 
-    <!-- SLIDE 19: Key Questions -->
-    <section>
-        <h2>Questions to Discuss</h2>
-        <br>
-        <p class="fragment" style="font-size: 0.8em; text-align: left; max-width: 700px; margin: 15px auto;"><span class="accent">1.</span> Does Luli's user base skew Apple Watch or Android? This defines our platform strategy.</p>
-        <p class="fragment" style="font-size: 0.8em; text-align: left; max-width: 700px; margin: 15px auto;"><span class="accent">2.</span> Would Luli's trainers and nutritionists validate the AI suggestions? Professional oversight could be both a quality and marketing differentiator.</p>
-        <p class="fragment" style="font-size: 0.8em; text-align: left; max-width: 700px; margin: 15px auto;"><span class="accent">3.</span> B2B (corporate wellness) or B2C (subscriptions)? This changes product priorities significantly.</p>
-        <p class="fragment" style="font-size: 0.8em; text-align: left; max-width: 700px; margin: 15px auto;"><span class="accent">4.</span> What's the expected timeline? iOS beta in 2-3 months. Android adds 4-6. Full launch in 6-9 months.</p>
-    </section>
-
-    <!-- SLIDE 20: Close -->
+    <!-- SLIDE 19: Close -->
     <section>
         <br><br>
         <p class="big-question">I'm not selling a finished product.<br><br>I'm showing a technical foundation,<br>a clear-eyed view of the hard problems,<br>and the conviction that together<br>we can solve them.</p>
