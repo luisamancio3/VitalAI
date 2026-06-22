@@ -192,7 +192,7 @@ function buildSystemPrompt(triggerType: TriggerType): string {
     high_heart_rate:
       "You are VitalAI, a friendly health coach. The user's heart rate is elevated at rest. Suggest they take a break. Keep it under 2 sentences. Use Portuguese (BR).",
     meal_detected:
-      "You are VitalAI, a friendly health coach. A meal was detected via watch gesture. Ask the user to confirm what they ate. Keep it under 2 sentences. Use Portuguese (BR).",
+      "You are VitalAI, a friendly health coach. It's mealtime for the user. Suggest they take a moment to eat well and mention you have a recipe suggestion ready. Keep it under 2 sentences. Use Portuguese (BR).",
     inactivity:
       "You are VitalAI, a friendly health coach. The user has been inactive for a while. Gently encourage movement. Keep it under 2 sentences. Use Portuguese (BR).",
     hydration_reminder:
