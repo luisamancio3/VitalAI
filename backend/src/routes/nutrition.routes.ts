@@ -6,7 +6,7 @@ import { users, nutritionProfiles, mealFeedback } from "../db/schema.js";
 import { authMiddleware } from "../middleware/auth.js";
 import { suggestMeal } from "../services/meal-suggestion.service.js";
 
-const profileSchema = z.object({
+export const profileSchema = z.object({
   goal: z.enum(["lose", "maintain", "gain"]),
   restrictions: z.array(z.string()).default([]),
   cookingSkill: z.enum(["beginner", "intermediate", "advanced"]),
