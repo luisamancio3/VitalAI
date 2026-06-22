@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.routes.js";
 import eventsRoutes from "./routes/events.routes.js";
 import nutritionRoutes from "./routes/nutrition.routes.js";
 import reportsRoutes from "./routes/reports.routes.js";
+import { startScheduler } from "./scheduler.js";
 
 const app = Fastify({ logger: true });
 
@@ -44,6 +45,7 @@ const host = process.env.HOST || "0.0.0.0";
 
 try {
   await app.listen({ port, host });
+  startScheduler();
 } catch (err) {
   app.log.error(err);
   process.exit(1);
