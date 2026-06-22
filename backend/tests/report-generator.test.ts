@@ -9,16 +9,24 @@ vi.mock("../src/config/firebase.js", () => ({
   sendPushNotification: vi.fn().mockResolvedValue("mock-message-id"),
 }));
 
+// Build an array-like result that also has a .limit() method for chaining.
+// This lets `await db.select().from().where()` be iterable AND
+// `db.select().from().where().limit(1)` work for prev-week queries.
+function makeResult(items: unknown[] = []) {
+  const arr = [...items];
+  (arr as any).limit = vi.fn().mockResolvedValue([]);
+  return arr;
+}
+
 vi.mock("../src/config/database.js", () => {
-  const mockDb = {
-    insert: vi.fn().mockReturnThis(),
-    values: vi.fn().mockReturnThis(),
-    returning: vi.fn().mockResolvedValue([{ id: "report-uuid-001" }]),
-    select: vi.fn().mockReturnThis(),
-    from: vi.fn().mockReturnThis(),
-    where: vi.fn().mockReturnThis(),
-    limit: vi.fn().mockResolvedValue([]),
-  };
+  const mockDb: Record<string, ReturnType<typeof vi.fn>> = {};
+  const chainMethods = ["select", "from", "insert", "values", "orderBy", "groupBy", "having", "update", "set"];
+  for (const m of chainMethods) {
+    mockDb[m] = vi.fn().mockReturnValue(mockDb);
+  }
+  mockDb.where = vi.fn().mockReturnValue(makeResult());
+  mockDb.limit = vi.fn().mockResolvedValue([]);
+  mockDb.returning = vi.fn().mockResolvedValue([{ id: "report-uuid-001" }]);
   const mockRedis = {
     get: vi.fn().mockResolvedValue(null),
     setex: vi.fn().mockResolvedValue("OK"),
@@ -28,8 +36,9 @@ vi.mock("../src/config/database.js", () => {
 
 vi.mock("../src/db/schema.js", () => ({
   healthEvents: { userId: "health_events.user_id", createdAt: "health_events.created_at", triggerType: "health_events.trigger_type" },
-  weeklyReports: { id: "weekly_reports.id", userId: "weekly_reports.user_id" },
+  weeklyReports: { id: "weekly_reports.id", userId: "weekly_reports.user_id", weekStart: "weekly_reports.week_start", metrics: "weekly_reports.metrics" },
   notificationLog: { userId: "notification_log.user_id", delivered: "notification_log.delivered", createdAt: "notification_log.created_at" },
+  mealFeedback: { userId: "meal_feedback.user_id", createdAt: "meal_feedback.created_at" },
   users: { id: "users.id", fcmToken: "users.fcm_token" },
 }));
 
@@ -47,11 +56,13 @@ describe("generateWeeklyReport", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // Default: no events this week, no notifications
-    (db.where as ReturnType<typeof vi.fn>).mockResolvedValue([]);
-    // Notification count query returns 0
-    (db.limit as ReturnType<typeof vi.fn>).mockResolvedValue([]);
-    // Insert report returns id
+    // Default: where() returns an empty iterable with .limit() stub.
+    // Call order inside aggregateWeeklyMetrics:
+    //   1) health events query  → where() returns iterable
+    //   2) notification count   → where() returns iterable
+    //   3) meal feedback        → where() returns iterable
+    //   4) prev-week report     → where().limit(1) → limit resolves to []
+    (db.where as ReturnType<typeof vi.fn>).mockReturnValue(makeResult());
     (db.returning as ReturnType<typeof vi.fn>).mockResolvedValue([{ id: "report-uuid-001" }]);
   });
 
@@ -71,7 +82,25 @@ describe("generateWeeklyReport", () => {
     );
   });
 
-  it("should pass aggregated metrics as JSON to Claude", async () => {
+  it("should include nutrition section in system prompt", async () => {
+    await generateWeeklyReport("user-123");
+
+    expect(generateMessage).toHaveBeenCalledWith(
+      expect.stringContaining("Nutrition summary"),
+      expect.any(String),
+    );
+  });
+
+  it("should include week-over-week section in system prompt", async () => {
+    await generateWeeklyReport("user-123");
+
+    expect(generateMessage).toHaveBeenCalledWith(
+      expect.stringContaining("Week-over-week comparison"),
+      expect.any(String),
+    );
+  });
+
+  it("should pass metrics with nutrition and comparison fields to Claude", async () => {
     await generateWeeklyReport("user-123");
 
     const metricsArg = (generateMessage as ReturnType<typeof vi.fn>).mock.calls[0][1];
@@ -82,6 +111,11 @@ describe("generateWeeklyReport", () => {
     expect(metrics).toHaveProperty("avgSleepHours");
     expect(metrics).toHaveProperty("notificationCount");
     expect(metrics).toHaveProperty("eventsByType");
+    expect(metrics).toHaveProperty("nutrition");
+    expect(metrics.nutrition).toHaveProperty("mealsLogged");
+    expect(metrics.nutrition).toHaveProperty("avgRating");
+    expect(metrics.nutrition).toHaveProperty("topContext");
+    expect(metrics).toHaveProperty("comparison");
   });
 
   it("should store the report in the database", async () => {
@@ -128,21 +162,25 @@ describe("generateWeeklyReport", () => {
     expect(deliverNotification).not.toHaveBeenCalled();
   });
 
-  it("should aggregate metrics from health events", async () => {
-    (db.where as ReturnType<typeof vi.fn>).mockResolvedValueOnce([
-      { triggerType: "morning_sleep", payload: { hours: 7.5 } },
-      { triggerType: "morning_sleep", payload: { hours: 6.0 } },
-      { triggerType: "post_workout", payload: { durationMinutes: 45 } },
-      { triggerType: "post_workout", payload: { durationMinutes: 30 } },
-      { triggerType: "high_heart_rate", payload: { currentBPM: 110 } },
-      { triggerType: "low_hrv", payload: { currentHRV: 25 } },
-    ]);
+  it("should aggregate health event metrics from payloads", async () => {
+    // First where() call = health events query → return event data
+    // Subsequent where() calls → empty makeResult (default chaining)
+    (db.where as ReturnType<typeof vi.fn>)
+      .mockReturnValueOnce(makeResult([
+        { triggerType: "morning_sleep", payload: { hours: 7.5 } },
+        { triggerType: "morning_sleep", payload: { hours: 6.0 } },
+        { triggerType: "post_workout", payload: { durationMinutes: 45 } },
+        { triggerType: "post_workout", payload: { durationMinutes: 30 } },
+        { triggerType: "high_heart_rate", payload: { currentBPM: 110 } },
+        { triggerType: "low_hrv", payload: { currentHRV: 25 } },
+      ]))
+      .mockReturnValue(makeResult());
 
     await generateWeeklyReport("user-active");
 
     const metricsArg = (generateMessage as ReturnType<typeof vi.fn>).mock.calls[0][1];
     const metrics = JSON.parse(metricsArg);
-    expect(metrics.avgSleepHours).toBe(6.8); // (7.5 + 6.0) / 2 rounded to 1 decimal
+    expect(metrics.avgSleepHours).toBe(6.8);
     expect(metrics.workoutCount).toBe(2);
     expect(metrics.avgHeartRate).toBe(110);
     expect(metrics.avgHrv).toBe(25);
@@ -155,8 +193,6 @@ describe("generateWeeklyReport", () => {
   });
 
   it("should return null metrics when no events exist", async () => {
-    (db.where as ReturnType<typeof vi.fn>).mockResolvedValueOnce([]);
-
     await generateWeeklyReport("user-inactive");
 
     const metricsArg = (generateMessage as ReturnType<typeof vi.fn>).mock.calls[0][1];
@@ -165,32 +201,102 @@ describe("generateWeeklyReport", () => {
     expect(metrics.avgHrv).toBeNull();
     expect(metrics.avgSleepHours).toBeNull();
     expect(metrics.workoutCount).toBe(0);
+    expect(metrics.nutrition.mealsLogged).toBe(0);
+    expect(metrics.nutrition.avgRating).toBeNull();
   });
 
-  it("should include fallback sleep info in fallback report", async () => {
-    (db.where as ReturnType<typeof vi.fn>).mockResolvedValueOnce([
-      { triggerType: "morning_sleep", payload: { hours: 7.0 } },
-      { triggerType: "post_workout", payload: { durationMinutes: 40 } },
-    ]);
+  it("should aggregate nutrition metrics from meal feedback", async () => {
+    // where() call order: 1=health events, 2=notification count, 3=meal feedback, 4=prev report
+    let whereCallCount = 0;
+    (db.where as ReturnType<typeof vi.fn>).mockImplementation(() => {
+      whereCallCount++;
+      if (whereCallCount === 3) {
+        // meal feedback query — return feedback rows (iterable, with .limit())
+        return makeResult([
+          { rating: 4, context: "lunch" },
+          { rating: 5, context: "lunch" },
+          { rating: 3, context: "dinner" },
+        ]);
+      }
+      // All other calls — empty iterable with .limit()
+      return makeResult();
+    });
+
+    await generateWeeklyReport("user-nutrition");
+
+    const metricsArg = (generateMessage as ReturnType<typeof vi.fn>).mock.calls[0][1];
+    const metrics = JSON.parse(metricsArg);
+    expect(metrics.nutrition.mealsLogged).toBe(3);
+    expect(metrics.nutrition.avgRating).toBe(4);
+    expect(metrics.nutrition.topContext).toBe("lunch");
+  });
+
+  it("should include comparison with previous week when available", async () => {
+    let whereCallCount = 0;
+    (db.where as ReturnType<typeof vi.fn>).mockImplementation(() => {
+      whereCallCount++;
+      if (whereCallCount === 4) {
+        // prev-week report query — needs .limit(1) to return prev report
+        const result = makeResult();
+        (result as any).limit = vi.fn().mockResolvedValue([{
+          metrics: {
+            avgSleepHours: 6.0,
+            workoutCount: 1,
+            nutrition: { mealsLogged: 2 },
+          },
+        }]);
+        return result;
+      }
+      return makeResult();
+    });
+
+    await generateWeeklyReport("user-compare");
+
+    const metricsArg = (generateMessage as ReturnType<typeof vi.fn>).mock.calls[0][1];
+    const metrics = JSON.parse(metricsArg);
+    expect(metrics.comparison).not.toBeNull();
+    expect(metrics.comparison).toHaveProperty("sleepDelta");
+    expect(metrics.comparison).toHaveProperty("workoutDelta");
+    expect(metrics.comparison).toHaveProperty("mealsDelta");
+    expect(metrics.comparison).toHaveProperty("trend");
+  });
+
+  it("should set comparison to null when no previous week report exists", async () => {
+    await generateWeeklyReport("user-first-week");
+
+    const metricsArg = (generateMessage as ReturnType<typeof vi.fn>).mock.calls[0][1];
+    const metrics = JSON.parse(metricsArg);
+    expect(metrics.comparison).toBeNull();
+  });
+
+  it("should include nutrition in fallback report", async () => {
+    let whereCallCount = 0;
+    (db.where as ReturnType<typeof vi.fn>).mockImplementation(() => {
+      whereCallCount++;
+      if (whereCallCount === 3) {
+        return makeResult([
+          { rating: 4, context: "lunch" },
+          { rating: 5, context: "dinner" },
+        ]);
+      }
+      return makeResult();
+    });
     (generateMessage as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("API down"));
 
     const result = await generateWeeklyReport("user-fallback");
 
-    expect(result).toContain("7 horas");
-    expect(result).toContain("1 treino");
+    expect(result).toContain("2 refeições");
   });
 });
 
 describe("generateReportsForAllUsers", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    (db.where as ReturnType<typeof vi.fn>).mockResolvedValue([]);
-    (db.limit as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+    (db.where as ReturnType<typeof vi.fn>).mockReturnValue(makeResult());
     (db.returning as ReturnType<typeof vi.fn>).mockResolvedValue([{ id: "report-uuid" }]);
   });
 
   it("should generate reports for all users and return count", async () => {
-    // Mock db.select().from(users) to return user list
     (db.from as ReturnType<typeof vi.fn>).mockResolvedValueOnce([
       { id: "user-1" },
       { id: "user-2" },
@@ -209,7 +315,6 @@ describe("generateReportsForAllUsers", () => {
       { id: "user-ok-2" },
     ]);
 
-    // Fail on the second user's insert
     let callCount = 0;
     (db.returning as ReturnType<typeof vi.fn>).mockImplementation(() => {
       callCount++;
