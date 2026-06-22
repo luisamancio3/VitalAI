@@ -12,20 +12,20 @@ export const profileSchema = z.object({
   cookingSkill: z.enum(["beginner", "intermediate", "advanced"]),
 });
 
-const profilePatchSchema = z.object({
+export const profilePatchSchema = z.object({
   goal: z.enum(["lose", "maintain", "gain"]).optional(),
   restrictions: z.array(z.string()).optional(),
   cookingSkill: z.enum(["beginner", "intermediate", "advanced"]).optional(),
 });
 
-const feedbackSchema = z.object({
+export const feedbackSchema = z.object({
   recipeId: z.string().min(1),
   rating: z.number().int().min(1).max(5),
   comment: z.string().max(200).optional(),
   context: z.string().optional(),
 });
 
-const suggestionQuerySchema = z.object({
+export const suggestionQuerySchema = z.object({
   context: z.enum(["post_workout", "breakfast", "lunch", "dinner", "snack"]).optional(),
 });
 
