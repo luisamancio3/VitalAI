@@ -1,6 +1,5 @@
-import { eq } from "drizzle-orm";
 import { redis, db } from "../config/database.js";
-import { users, nutritionProfiles } from "../db/schema.js";
+import { nutritionProfiles } from "../db/schema.js";
 import { processEvent } from "./trigger-processor.js";
 
 interface MealWindow {

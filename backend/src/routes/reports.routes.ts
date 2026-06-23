@@ -3,7 +3,7 @@ import { eq, desc } from "drizzle-orm";
 import { db } from "../config/database.js";
 import { users, weeklyReports, monthlyReports } from "../db/schema.js";
 import { authMiddleware } from "../middleware/auth.js";
-import { generateWeeklyReport, generateReportsForAllUsers } from "../services/report-generator.js";
+import { generateWeeklyReport } from "../services/report-generator.js";
 import { generateMonthlyReport } from "../services/monthly-report.service.js";
 
 export default async function reportsRoutes(app: FastifyInstance) {

@@ -1,4 +1,4 @@
-import { eq, and, avg, lte, ne, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "../config/database.js";
 import { nutritionProfiles, mealFeedback } from "../db/schema.js";
 import { Recipe } from "../db/recipes.js";

@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
-import { processEvent, type TriggerType } from "../services/trigger-processor.js";
+import { processEvent } from "../services/trigger-processor.js";
 import { authMiddleware } from "../middleware/auth.js";
 import { db } from "../config/database.js";
 import { users } from "../db/schema.js";

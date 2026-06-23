@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
-import { eq, and, avg, lte } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "../config/database.js";
 import { users, nutritionProfiles, mealFeedback } from "../db/schema.js";
 import { authMiddleware } from "../middleware/auth.js";

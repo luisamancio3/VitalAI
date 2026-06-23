@@ -146,8 +146,41 @@ describe("TriggerProcessor", () => {
     );
   });
 
+  it("should reject event when trigger type is disabled by user", async () => {
+    (db.limit as ReturnType<typeof vi.fn>).mockResolvedValue([{
+      notificationPreferences: { disabledTriggers: ["inactivity", "hydration_reminder"] },
+    }]);
+
+    const result = await processEvent({
+      userId: "user-disabled",
+      triggerType: "inactivity",
+      payload: {},
+      timestamp: new Date().toISOString(),
+    });
+
+    expect(result.processed).toBe(false);
+    expect(result.reason).toBe("disabled");
+  });
+
+  it("should process event when trigger is not in disabled list", async () => {
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
+    (db.limit as ReturnType<typeof vi.fn>).mockResolvedValue([{
+      notificationPreferences: { disabledTriggers: ["inactivity"] },
+    }]);
+
+    const result = await processEvent({
+      userId: "user-partial-disable",
+      triggerType: "post_workout",
+      payload: { duration: 30 },
+      timestamp: new Date().toISOString(),
+    });
+
+    expect(result.processed).toBe(true);
+  });
+
   it("should return error reason when processing fails", async () => {
     const { generateMessage } = await import("../src/config/claude.js");
+    (db.limit as ReturnType<typeof vi.fn>).mockResolvedValue([{ notificationPreferences: {} }]);
     (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
     (generateMessage as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("API timeout"));
 
