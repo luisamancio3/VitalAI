@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 // Mock dependencies before importing the module under test
 vi.mock("../src/config/claude.js", () => ({
@@ -47,6 +47,12 @@ import { redis, db } from "../src/config/database.js";
 describe("TriggerProcessor", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(2026, 5, 23, 12, 0, 0)); // noon — outside quiet hours
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("should process event when not on cooldown", async () => {
