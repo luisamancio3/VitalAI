@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WatchDashboardView: View {
     @EnvironmentObject private var sessionManager: WatchSessionManager
+    @EnvironmentObject private var gestureDetector: MealGestureDetector
 
     private var hasData: Bool {
         sessionManager.healthScore > 0 || sessionManager.heartRate > 0 || sessionManager.sleepHours > 0
@@ -46,6 +47,17 @@ struct WatchDashboardView: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
+
+                    if gestureDetector.isMonitoring {
+                        Divider()
+                        HStack(spacing: 4) {
+                            Image(systemName: "fork.knife")
+                                .font(.caption2)
+                            Text("Detecção ativa")
+                                .font(.caption2)
+                        }
+                        .foregroundStyle(Color.vitalPrimary.opacity(0.7))
+                    }
                 } else {
                     VStack(spacing: 8) {
                         Image(systemName: "iphone.and.arrow.forward")
@@ -59,6 +71,9 @@ struct WatchDashboardView: View {
                 }
             }
             .padding()
+        }
+        .sheet(isPresented: $sessionManager.showMealPrompt) {
+            MealPromptView(source: .gesture, confidence: sessionManager.pendingMealConfidence)
         }
     }
 }

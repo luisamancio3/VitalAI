@@ -24,7 +24,7 @@ interface ClassifiedEvent {
 interface ProcessResult {
   processed: boolean;
   message?: string;
-  reason?: "cooldown" | "quiet_hours" | "daily_budget" | "disabled" | "error";
+  reason?: "cooldown" | "quiet_hours" | "daily_budget" | "disabled" | "rejected" | "error";
 }
 
 interface NotificationPreferences {
@@ -47,6 +47,20 @@ const COOLDOWN_MAP: Record<TriggerType, number> = {
 
 export async function processEvent(event: ClassifiedEvent): Promise<ProcessResult> {
   const { userId, triggerType } = event;
+
+  // 0. For gesture-sourced meal events, log rejection feedback without notifying
+  if (triggerType === "meal_detected" && event.payload.confirmed === false) {
+    await db
+      .insert(healthEvents)
+      .values({
+        userId,
+        triggerType,
+        payload: event.payload,
+        messageGenerated: null,
+        notificationSent: false,
+      });
+    return { processed: false, reason: "rejected" };
+  }
 
   // 1. Check disabled triggers
   const userPrefs = await getUserNotificationPreferences(userId);
@@ -198,7 +212,7 @@ function buildSystemPrompt(triggerType: TriggerType): string {
     high_heart_rate:
       "You are VitalAI, a friendly health coach. The user's heart rate is elevated at rest. Suggest they take a break. Keep it under 2 sentences. Use Portuguese (BR).",
     meal_detected:
-      "You are VitalAI, a friendly health coach. It's mealtime for the user. Suggest they take a moment to eat well and mention you have a recipe suggestion ready. Keep it under 2 sentences. Use Portuguese (BR).",
+      "You are VitalAI, a friendly health coach. A meal has been detected for the user (either by gesture recognition or routine). Suggest they take a moment to eat well and mention you have a recipe suggestion ready. If the payload contains 'source: gesture_confirmed', acknowledge that you noticed they started eating. Keep it under 2 sentences. Use Portuguese (BR).",
     inactivity:
       "You are VitalAI, a friendly health coach. The user has been inactive for a while. Gently encourage movement. Keep it under 2 sentences. Use Portuguese (BR).",
     hydration_reminder:

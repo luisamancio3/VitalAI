@@ -196,6 +196,52 @@ describe("TriggerProcessor", () => {
   });
 });
 
+describe("Gesture rejection feedback", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(2026, 5, 23, 12, 0, 0));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("should log rejected gesture without generating message", async () => {
+    const result = await processEvent({
+      userId: "user-gesture-reject",
+      triggerType: "meal_detected",
+      payload: { confirmed: false, source: "gesture_confirmed", confidence: 0.88 },
+      timestamp: new Date().toISOString(),
+    });
+
+    expect(result.processed).toBe(false);
+    expect(result.reason).toBe("rejected");
+    expect(result.message).toBeUndefined();
+    expect(db.insert).toHaveBeenCalled();
+  });
+
+  it("should process confirmed gesture as normal meal_detected", async () => {
+    const { generateMessage } = await import("../src/config/claude.js");
+    (generateMessage as ReturnType<typeof vi.fn>).mockResolvedValue("Bom apetite!");
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
+    (db.limit as ReturnType<typeof vi.fn>)
+      .mockResolvedValueOnce([{ notificationPreferences: {} }])
+      .mockResolvedValueOnce([{ count: 0 }]);
+    (db.returning as ReturnType<typeof vi.fn>).mockResolvedValue([{ id: "event-uuid-123" }]);
+
+    const result = await processEvent({
+      userId: "user-gesture-confirm",
+      triggerType: "meal_detected",
+      payload: { confirmed: true, source: "gesture_confirmed", confidence: 0.92 },
+      timestamp: new Date().toISOString(),
+    });
+
+    expect(result.processed).toBe(true);
+    expect(result.message).toBe("Bom apetite!");
+  });
+});
+
 describe("isInQuietHours", () => {
   it("should detect quiet hours wrapping midnight (22-7)", () => {
     expect(isInQuietHours(23, 22, 7)).toBe(true);

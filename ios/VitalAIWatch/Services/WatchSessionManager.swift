@@ -8,6 +8,8 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     @Published var heartRate: Int = 0
     @Published var sleepHours: Double = 0
     @Published var isReachable: Bool = false
+    @Published var showMealPrompt: Bool = false
+    var pendingMealConfidence: Double = 0
 
     override init() {
         super.init()
