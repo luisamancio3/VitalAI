@@ -24,13 +24,14 @@ interface ClassifiedEvent {
 interface ProcessResult {
   processed: boolean;
   message?: string;
-  reason?: "cooldown" | "quiet_hours" | "daily_budget" | "error";
+  reason?: "cooldown" | "quiet_hours" | "daily_budget" | "disabled" | "error";
 }
 
 interface NotificationPreferences {
   quietHoursStart?: number;
   quietHoursEnd?: number;
   dailyBudget?: number;
+  disabledTriggers?: string[];
 }
 
 // Cooldown periods per trigger type (in seconds)
@@ -47,8 +48,13 @@ const COOLDOWN_MAP: Record<TriggerType, number> = {
 export async function processEvent(event: ClassifiedEvent): Promise<ProcessResult> {
   const { userId, triggerType } = event;
 
-  // 1. Check quiet hours
+  // 1. Check disabled triggers
   const userPrefs = await getUserNotificationPreferences(userId);
+  if (userPrefs.disabledTriggers?.includes(triggerType)) {
+    return { processed: false, reason: "disabled" };
+  }
+
+  // 2. Check quiet hours
   const currentHour = new Date().getHours();
   const quietStart = userPrefs.quietHoursStart ?? 22;
   const quietEnd = userPrefs.quietHoursEnd ?? 7;
@@ -56,7 +62,7 @@ export async function processEvent(event: ClassifiedEvent): Promise<ProcessResul
     return { processed: false, reason: "quiet_hours" };
   }
 
-  // 2. Check daily notification budget
+  // 3. Check daily notification budget
   const todayCount = await getTodayNotificationCount(userId);
   const dailyBudget = userPrefs.dailyBudget ?? 6;
   if (todayCount >= dailyBudget) {

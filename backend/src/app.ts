@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.routes.js";
 import eventsRoutes from "./routes/events.routes.js";
 import nutritionRoutes from "./routes/nutrition.routes.js";
 import reportsRoutes from "./routes/reports.routes.js";
+import preferencesRoutes from "./routes/preferences.routes.js";
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = Fastify({ logger: false });
@@ -35,6 +36,7 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(eventsRoutes, { prefix: "/api/v1/events" });
   await app.register(nutritionRoutes, { prefix: "/api/v1/nutrition" });
   await app.register(reportsRoutes, { prefix: "/api/v1/reports" });
+  await app.register(preferencesRoutes, { prefix: "/api/v1/preferences" });
 
   return app;
 }
