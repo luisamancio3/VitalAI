@@ -1,7 +1,8 @@
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import mongoose from "mongoose";
-import Redis from "ioredis";
+import RedisModule from "ioredis";
+const Redis = RedisModule.default ?? RedisModule;
 import * as schema from "../db/schema.js";
 
 // PostgreSQL + TimescaleDB (via Drizzle ORM)
