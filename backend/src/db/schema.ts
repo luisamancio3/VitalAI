@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, boolean, jsonb, timestamp, index, integer } from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, boolean, jsonb, timestamp, index, integer, date } from "drizzle-orm/pg-core";
 
 // users table
 export const users = pgTable("users", {
@@ -84,4 +84,18 @@ export const weeklyReports = pgTable("weekly_reports", {
   createdAt: timestamp("created_at").defaultNow(),
 }, (table) => [
   index("idx_weekly_reports_user_id").on(table.userId),
+]);
+
+// monthly_reports table
+export const monthlyReports = pgTable("monthly_reports", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id).notNull(),
+  month: date("month").notNull(), // first day of month
+  weeksIncluded: integer("weeks_included").notNull(),
+  metrics: jsonb("metrics").notNull(),
+  reportText: text("report_text").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_monthly_reports_user_id").on(table.userId),
+  index("idx_monthly_reports_user_month").on(table.userId, table.month),
 ]);

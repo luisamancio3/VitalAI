@@ -1,6 +1,7 @@
 import cron from "node-cron";
 import { generateReportsForAllUsers } from "./services/report-generator.js";
 import { checkMealRoutines } from "./services/meal-routine.service.js";
+import { generateMonthlyReportsForAllUsers } from "./services/monthly-report.service.js";
 
 export function startScheduler() {
   // Weekly report: every Sunday at 3:00 AM (São Paulo timezone)
@@ -14,6 +15,22 @@ export function startScheduler() {
       console.log(`[Scheduler] Weekly reports done: ${count} reports in ${elapsed}s`);
     } catch (error) {
       console.error("[Scheduler] Weekly report generation failed:", error);
+    }
+  }, {
+    timezone: "America/Sao_Paulo",
+  });
+
+  // Monthly report: 1st of each month at 4:00 AM (São Paulo timezone)
+  cron.schedule("0 4 1 * *", async () => {
+    console.log("[Scheduler] Starting monthly report generation...");
+    const start = Date.now();
+
+    try {
+      const count = await generateMonthlyReportsForAllUsers();
+      const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+      console.log(`[Scheduler] Monthly reports done: ${count} reports in ${elapsed}s`);
+    } catch (error) {
+      console.error("[Scheduler] Monthly report generation failed:", error);
     }
   }, {
     timezone: "America/Sao_Paulo",
@@ -33,5 +50,5 @@ export function startScheduler() {
     timezone: "America/Sao_Paulo",
   });
 
-  console.log("[Scheduler] Cron jobs registered (weekly report: Sun 3:00 AM BRT, meal routine: every 30min 6-22h BRT)");
+  console.log("[Scheduler] Cron jobs registered (weekly: Sun 3AM, monthly: 1st 4AM, meals: 30min 6-22h BRT)");
 }

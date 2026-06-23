@@ -1,9 +1,10 @@
 import type { FastifyInstance } from "fastify";
 import { eq, desc } from "drizzle-orm";
 import { db } from "../config/database.js";
-import { users, weeklyReports } from "../db/schema.js";
+import { users, weeklyReports, monthlyReports } from "../db/schema.js";
 import { authMiddleware } from "../middleware/auth.js";
 import { generateWeeklyReport, generateReportsForAllUsers } from "../services/report-generator.js";
+import { generateMonthlyReport } from "../services/monthly-report.service.js";
 
 export default async function reportsRoutes(app: FastifyInstance) {
   app.addHook("preHandler", authMiddleware);
@@ -60,6 +61,37 @@ export default async function reportsRoutes(app: FastifyInstance) {
       return reply.status(201).send({ success: true, reportText });
     } catch (error) {
       request.log.error(error, "Failed to generate weekly report");
+      return reply.status(500).send({ error: "Internal server error" });
+    }
+  });
+
+  // GET /monthly — list monthly reports
+  app.get("/monthly", async (request, reply) => {
+    const auth0Id = request.userId;
+    const [user] = await db.select({ id: users.id }).from(users).where(eq(users.auth0Id, auth0Id)).limit(1);
+    if (!user) return reply.status(404).send({ error: "User not found" });
+
+    const reports = await db
+      .select()
+      .from(monthlyReports)
+      .where(eq(monthlyReports.userId, user.id))
+      .orderBy(desc(monthlyReports.month))
+      .limit(12);
+
+    return reply.status(200).send(reports);
+  });
+
+  // POST /monthly/generate — manually trigger monthly report
+  app.post("/monthly/generate", async (request, reply) => {
+    const auth0Id = request.userId;
+    const [user] = await db.select({ id: users.id }).from(users).where(eq(users.auth0Id, auth0Id)).limit(1);
+    if (!user) return reply.status(404).send({ error: "User not found" });
+
+    try {
+      const reportText = await generateMonthlyReport(user.id);
+      return reply.status(201).send({ success: true, reportText });
+    } catch (error) {
+      request.log.error(error, "Failed to generate monthly report");
       return reply.status(500).send({ error: "Internal server error" });
     }
   });
