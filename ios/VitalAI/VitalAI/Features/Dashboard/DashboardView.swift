@@ -104,6 +104,13 @@ struct DashboardView: View {
                                 unit: "horas",
                                 color: .vitalSlate600
                             )
+                            MetricCard(
+                                icon: "drop.fill",
+                                title: "Água",
+                                value: healthKitService.todayWaterMl.map { formatWater($0) } ?? "—",
+                                unit: "ml",
+                                color: .vitalAccentBlue
+                            )
                         }
                         .padding(.horizontal, VitalSpacing.lg)
                     }
@@ -147,6 +154,13 @@ struct DashboardView: View {
             heartRate: Int(healthKitService.latestHeartRate ?? 0),
             sleepHours: healthKitService.lastSleepHours ?? 0
         )
+    }
+
+    private func formatWater(_ ml: Double) -> String {
+        if ml >= 1000 {
+            return String(format: "%.1fL", ml / 1000.0)
+        }
+        return "\(Int(ml))"
     }
 
     private func formatSteps(_ steps: Int) -> String {

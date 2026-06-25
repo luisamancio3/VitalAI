@@ -10,6 +10,7 @@ final class HealthKitService: ObservableObject {
     @Published var lastSleepHours: Double?
     @Published var lastSleepQuality: String?  // "Bom"/"Regular"/"Ruim"
     @Published var lastWorkoutEndDate: Date?
+    @Published var todayWaterMl: Double?
 
     var isAvailable: Bool {
         HKHealthStore.isHealthDataAvailable()
@@ -32,12 +33,23 @@ final class HealthKitService: ObservableObject {
             types.insert(sleep)
         }
         types.insert(HKObjectType.workoutType())
+        if let water = HKQuantityType.quantityType(forIdentifier: .dietaryWater) {
+            types.insert(water)
+        }
+        return types
+    }()
+
+    private let writeTypes: Set<HKSampleType> = {
+        var types = Set<HKSampleType>()
+        if let water = HKQuantityType.quantityType(forIdentifier: .dietaryWater) {
+            types.insert(water)
+        }
         return types
     }()
 
     func requestAuthorization() async throws {
         guard isAvailable else { return }
-        try await healthStore.requestAuthorization(toShare: [], read: readTypes)
+        try await healthStore.requestAuthorization(toShare: writeTypes, read: readTypes)
         await checkAuthorizationStatus()
     }
 
@@ -60,7 +72,8 @@ final class HealthKitService: ObservableObject {
         async let steps: Void = fetchTodaySteps()
         async let sleep: Void = fetchLastNightSleep()
         async let workout: Void = fetchLastWorkout()
-        _ = await (hr, hrv, steps, sleep, workout)
+        async let water: Void = fetchTodayWater()
+        _ = await (hr, hrv, steps, sleep, workout, water)
     }
 
     func fetchLatestHeartRate() async {
@@ -195,6 +208,34 @@ final class HealthKitService: ObservableObject {
         lastWorkoutEndDate = result
     }
 
+    func fetchTodayWater() async {
+        guard let waterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else { return }
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: Date())
+        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: Date(), options: .strictStartDate)
+
+        let result: Double? = await withCheckedContinuation { continuation in
+            let query = HKStatisticsQuery(
+                quantityType: waterType,
+                quantitySamplePredicate: predicate,
+                options: .cumulativeSum
+            ) { _, statistics, _ in
+                let value = statistics?.sumQuantity()?.doubleValue(for: .literUnit(with: .milli))
+                continuation.resume(returning: value)
+            }
+            healthStore.execute(query)
+        }
+        todayWaterMl = result
+    }
+
+    func saveWaterIntake(milliliters: Double) async throws {
+        guard let waterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else { return }
+        let quantity = HKQuantity(unit: .literUnit(with: .milli), doubleValue: milliliters)
+        let sample = HKQuantitySample(type: waterType, quantity: quantity, start: Date(), end: Date())
+        try await healthStore.save(sample)
+        await fetchTodayWater()
+    }
+
     // MARK: - Background Delivery
 
     func setupBackgroundDelivery() {
@@ -206,6 +247,7 @@ final class HealthKitService: ObservableObject {
             (HKQuantityType(.stepCount), "steps"),
             (HKCategoryType(.sleepAnalysis), "sleep"),
             (HKObjectType.workoutType(), "workout"),
+            (HKQuantityType(.dietaryWater), "water"),
         ]
 
         for (type, name) in typesAndNames {

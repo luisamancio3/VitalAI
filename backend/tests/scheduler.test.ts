@@ -12,6 +12,10 @@ vi.mock("../src/services/monthly-report.service.js", () => ({
   generateMonthlyReportsForAllUsers: vi.fn().mockResolvedValue(4),
 }));
 
+vi.mock("../src/services/hydration.service.js", () => ({
+  checkHydrationForAllUsers: vi.fn().mockResolvedValue(2),
+}));
+
 const mockSchedule = vi.fn();
 vi.mock("node-cron", () => ({
   default: { schedule: (...args: unknown[]) => mockSchedule(...args) },
@@ -21,16 +25,17 @@ import { startScheduler } from "../src/scheduler.js";
 import { generateReportsForAllUsers } from "../src/services/report-generator.js";
 import { checkMealRoutines } from "../src/services/meal-routine.service.js";
 import { generateMonthlyReportsForAllUsers } from "../src/services/monthly-report.service.js";
+import { checkHydrationForAllUsers } from "../src/services/hydration.service.js";
 
 describe("Scheduler", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("should register three cron jobs on startup", () => {
+  it("should register four cron jobs on startup", () => {
     startScheduler();
 
-    expect(mockSchedule).toHaveBeenCalledTimes(3);
+    expect(mockSchedule).toHaveBeenCalledTimes(4);
   });
 
   it("should schedule weekly report for Sundays at 3:00 AM", () => {
@@ -108,6 +113,32 @@ describe("Scheduler", () => {
     startScheduler();
 
     const callback = mockSchedule.mock.calls[2][1] as () => Promise<void>;
+    await expect(callback()).resolves.toBeUndefined();
+  });
+
+  it("should schedule hydration check every 45 min from 7-21h", () => {
+    startScheduler();
+
+    const [cronExpression, , options] = mockSchedule.mock.calls[3];
+    expect(cronExpression).toBe("0,45 7-21 * * *");
+    expect(options).toEqual({ timezone: "America/Sao_Paulo" });
+  });
+
+  it("should call checkHydrationForAllUsers when hydration cron fires", async () => {
+    startScheduler();
+
+    const callback = mockSchedule.mock.calls[3][1] as () => Promise<void>;
+    await callback();
+
+    expect(checkHydrationForAllUsers).toHaveBeenCalledOnce();
+  });
+
+  it("should not throw when hydration check fails", async () => {
+    (checkHydrationForAllUsers as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("DB down"));
+
+    startScheduler();
+
+    const callback = mockSchedule.mock.calls[3][1] as () => Promise<void>;
     await expect(callback()).resolves.toBeUndefined();
   });
 });

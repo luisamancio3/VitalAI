@@ -100,6 +100,18 @@ export const monthlyReports = pgTable("monthly_reports", {
   index("idx_monthly_reports_user_month").on(table.userId, table.month),
 ]);
 
+// hydration_logs table
+export const hydrationLogs = pgTable("hydration_logs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id).notNull(),
+  amountMl: integer("amount_ml").notNull(),
+  source: text("source").notNull().default("manual"), // "manual" | "quick_add" | "siri"
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_hydration_logs_user_id").on(table.userId),
+  index("idx_hydration_logs_user_created").on(table.userId, table.createdAt),
+]);
+
 // stress_scores table
 export const stressScores = pgTable("stress_scores", {
   id: uuid("id").primaryKey().defaultRandom(),

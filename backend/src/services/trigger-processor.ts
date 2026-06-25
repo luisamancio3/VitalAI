@@ -235,7 +235,7 @@ function buildSystemPrompt(triggerType: TriggerType): string {
     inactivity:
       "You are VitalAI, a friendly health coach. The user has been inactive for a while. Gently encourage movement. Keep it under 2 sentences. Use Portuguese (BR).",
     hydration_reminder:
-      "You are VitalAI, a friendly health coach. Remind the user to drink water. Keep it under 2 sentences. Use Portuguese (BR).",
+      "You are VitalAI, a friendly health coach. Remind the user to drink water. The payload contains their progress (todayTotalMl, goalMl, progress%). If progress is low, be more encouraging. If they recently worked out, emphasize rehydration. Keep it under 2 sentences. Use Portuguese (BR).",
   };
   return prompts[triggerType];
 }

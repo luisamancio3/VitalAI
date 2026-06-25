@@ -198,6 +198,43 @@ final class APIService {
         return try decoder.decode([MealFeedbackItem].self, from: data)
     }
 
+    // MARK: - Hydration
+
+    func logWaterIntake(amountMl: Int, source: String = "manual", accessToken: String) async throws -> HydrationLogResponse {
+        let body: [String: Any] = [
+            "amount_ml": amountMl,
+            "source": source,
+        ]
+
+        var request = URLRequest(url: baseURL.appendingPathComponent("hydration/log"))
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            let code = (response as? HTTPURLResponse)?.statusCode ?? -1
+            throw APIError.httpError(statusCode: code)
+        }
+        return try decoder.decode(HydrationLogResponse.self, from: data)
+    }
+
+    func getHydrationStatus(accessToken: String) async throws -> HydrationStatus {
+        var request = URLRequest(url: baseURL.appendingPathComponent("hydration/status"))
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            let code = (response as? HTTPURLResponse)?.statusCode ?? -1
+            throw APIError.httpError(statusCode: code)
+        }
+        return try decoder.decode(HydrationStatus.self, from: data)
+    }
+
     // MARK: - Stress
 
     func assessStress(currentHRV: Double, averageHRV: Double, currentHR: Double, averageHR: Double, accessToken: String) async throws -> StressAssessment {
@@ -314,6 +351,19 @@ struct WeeklyReport: Codable, Identifiable {
     let weekEnd: String
     let metrics: ReportMetrics?
     let reportText: String
+}
+
+struct HydrationLogResponse: Codable {
+    let id: String
+    let todayTotalMl: Int
+}
+
+struct HydrationStatus: Codable {
+    let todayTotalMl: Int
+    let goalMl: Int
+    let progress: Double
+    let lastIntakeAt: String?
+    let nextReminderIn: Int?
 }
 
 struct StressAssessment: Codable {

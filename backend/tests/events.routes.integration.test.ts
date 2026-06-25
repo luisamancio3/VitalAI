@@ -34,6 +34,7 @@ vi.mock("../src/db/schema.js", () => ({
   weeklyReports: { id: "weekly_reports.id", userId: "weekly_reports.user_id", weekStart: "weekly_reports.week_start" },
   notificationLog: { userId: "notification_log.user_id", delivered: "notification_log.delivered", createdAt: "notification_log.created_at" },
   stressScores: { id: "stress_scores.id", userId: "stress_scores.user_id", createdAt: "stress_scores.created_at" },
+  hydrationLogs: { id: "hydration_logs.id", userId: "hydration_logs.user_id", amountMl: "hydration_logs.amount_ml", source: "hydration_logs.source", createdAt: "hydration_logs.created_at" },
 }));
 
 vi.mock("../src/config/claude.js", () => ({

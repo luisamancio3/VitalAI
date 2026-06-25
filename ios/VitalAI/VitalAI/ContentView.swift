@@ -55,6 +55,10 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Nutrição", systemImage: "fork.knife")
                 }
+            HydrationView()
+                .tabItem {
+                    Label("Água", systemImage: "drop.fill")
+                }
             StressManagementView()
                 .tabItem {
                     Label("Estresse", systemImage: "brain.head.profile")

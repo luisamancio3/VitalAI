@@ -37,6 +37,11 @@ final class TriggerEngine: ObservableObject {
         }
     }
 
+    private var lastHydrationReminder: Date {
+        get { defaults.object(forKey: "triggerEngine.lastHydrationReminder") as? Date ?? .distantPast }
+        set { defaults.set(newValue, forKey: "triggerEngine.lastHydrationReminder") }
+    }
+
     private var lastAveragesRefresh: Date {
         get { defaults.object(forKey: "triggerEngine.lastAvgRefresh") as? Date ?? .distantPast }
         set { defaults.set(newValue, forKey: "triggerEngine.lastAvgRefresh") }
@@ -289,10 +294,24 @@ final class TriggerEngine: ObservableObject {
         guard hour >= 8 && hour < 22 else { return }
 
         let timeSinceLastStep = Date().timeIntervalSince(lastStepUpdate)
-        guard timeSinceLastStep >= 7200 else { return } // 2 hours
+        if timeSinceLastStep >= 7200 { // 2 hours
+            fireTrigger(type: "inactivity", payload: [
+                "inactiveMinutes": Int(timeSinceLastStep / 60),
+            ])
+        }
 
-        fireTrigger(type: "inactivity", payload: [
-            "inactiveMinutes": Int(timeSinceLastStep / 60),
+        checkHydration(hour: hour)
+    }
+
+    private func checkHydration(hour: Int) {
+        guard hour >= 7 && hour < 22 else { return }
+
+        let timeSinceLastReminder = Date().timeIntervalSince(lastHydrationReminder)
+        guard timeSinceLastReminder >= 5400 else { return } // 90 minutes
+
+        lastHydrationReminder = Date()
+        fireTrigger(type: "hydration_reminder", payload: [
+            "minutesSinceLastReminder": Int(timeSinceLastReminder / 60),
         ])
     }
 

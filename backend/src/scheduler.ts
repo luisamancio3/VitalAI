@@ -2,6 +2,7 @@ import cron from "node-cron";
 import { generateReportsForAllUsers } from "./services/report-generator.js";
 import { checkMealRoutines } from "./services/meal-routine.service.js";
 import { generateMonthlyReportsForAllUsers } from "./services/monthly-report.service.js";
+import { checkHydrationForAllUsers } from "./services/hydration.service.js";
 
 export function startScheduler() {
   // Weekly report: every Sunday at 3:00 AM (São Paulo timezone)
@@ -50,5 +51,19 @@ export function startScheduler() {
     timezone: "America/Sao_Paulo",
   });
 
-  console.log("[Scheduler] Cron jobs registered (weekly: Sun 3AM, monthly: 1st 4AM, meals: 30min 6-22h BRT)");
+  // Hydration check: every 45 minutes during waking hours (7 AM - 10 PM)
+  cron.schedule("0,45 7-21 * * *", async () => {
+    try {
+      const count = await checkHydrationForAllUsers();
+      if (count > 0) {
+        console.log(`[Scheduler] Hydration reminders sent: ${count}`);
+      }
+    } catch (error) {
+      console.error("[Scheduler] Hydration check failed:", error);
+    }
+  }, {
+    timezone: "America/Sao_Paulo",
+  });
+
+  console.log("[Scheduler] Cron jobs registered (weekly: Sun 3AM, monthly: 1st 4AM, meals: 30min 6-22h, hydration: 45min 7-22h BRT)");
 }

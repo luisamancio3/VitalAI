@@ -35,6 +35,7 @@ vi.mock("../src/db/schema.js", () => ({
   weeklyReports: { id: "weekly_reports.id", userId: "weekly_reports.user_id" },
   notificationLog: {},
   stressScores: { id: "stress_scores.id", userId: "stress_scores.user_id", createdAt: "stress_scores.created_at" },
+  hydrationLogs: { id: "hydration_logs.id", userId: "hydration_logs.user_id", amountMl: "hydration_logs.amount_ml", source: "hydration_logs.source", createdAt: "hydration_logs.created_at" },
 }));
 
 vi.mock("../src/services/meal-suggestion.service.js", () => ({
