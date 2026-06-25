@@ -32,6 +32,7 @@ vi.mock("../src/db/schema.js", () => ({
   healthEvents: { id: "health_events.id" },
   weeklyReports: { id: "weekly_reports.id", userId: "weekly_reports.user_id", weekStart: "weekly_reports.week_start" },
   notificationLog: {},
+  stressScores: { id: "stress_scores.id", userId: "stress_scores.user_id", createdAt: "stress_scores.created_at" },
 }));
 
 vi.mock("../src/config/claude.js", () => ({

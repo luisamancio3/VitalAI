@@ -198,6 +198,31 @@ final class APIService {
         return try decoder.decode([MealFeedbackItem].self, from: data)
     }
 
+    // MARK: - Stress
+
+    func assessStress(currentHRV: Double, averageHRV: Double, currentHR: Double, averageHR: Double, accessToken: String) async throws -> StressAssessment {
+        let body: [String: Any] = [
+            "current_hrv": currentHRV,
+            "average_hrv": averageHRV,
+            "current_hr": currentHR,
+            "average_hr": averageHR,
+        ]
+
+        var request = URLRequest(url: baseURL.appendingPathComponent("stress/assess"))
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            let code = (response as? HTTPURLResponse)?.statusCode ?? -1
+            throw APIError.httpError(statusCode: code)
+        }
+        return try decoder.decode(StressAssessment.self, from: data)
+    }
+
     // MARK: - Reports
 
     func getWeeklyReports(accessToken: String) async throws -> [WeeklyReportSummary] {
@@ -289,6 +314,12 @@ struct WeeklyReport: Codable, Identifiable {
     let weekEnd: String
     let metrics: ReportMetrics?
     let reportText: String
+}
+
+struct StressAssessment: Codable {
+    let score: Int
+    let level: String
+    let recommendation: String
 }
 
 struct ReportMetrics: Codable {

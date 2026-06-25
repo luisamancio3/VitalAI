@@ -34,6 +34,8 @@ vi.mock("../src/db/schema.js", () => ({
   healthEvents: { userId: "health_events.user_id", createdAt: "health_events.created_at", triggerType: "health_events.trigger_type" },
   weeklyReports: { id: "weekly_reports.id", userId: "weekly_reports.user_id", weekStart: "weekly_reports.week_start", weekEnd: "weekly_reports.week_end", createdAt: "weekly_reports.created_at", metrics: "weekly_reports.metrics" },
   notificationLog: { userId: "notification_log.user_id", delivered: "notification_log.delivered", createdAt: "notification_log.created_at" },
+  monthlyReports: { userId: "monthly_reports.user_id", month: "monthly_reports.month" },
+  stressScores: { id: "stress_scores.id", userId: "stress_scores.user_id", createdAt: "stress_scores.created_at" },
 }));
 
 vi.mock("../src/config/claude.js", () => ({

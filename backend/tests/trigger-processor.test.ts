@@ -41,6 +41,10 @@ vi.mock("../src/services/notification.service.js", () => ({
   deliverNotification: vi.fn().mockResolvedValue({ success: true, messageId: "msg-123" }),
 }));
 
+vi.mock("../src/services/stress-detection.service.js", () => ({
+  assessStress: vi.fn().mockResolvedValue({ score: 45, level: "moderate" }),
+}));
+
 import { processEvent, isInQuietHours } from "../src/services/trigger-processor.js";
 import { redis, db } from "../src/config/database.js";
 

@@ -3,6 +3,7 @@ import { generateMessage } from "../config/claude.js";
 import { redis, db } from "../config/database.js";
 import { healthEvents, notificationLog, users } from "../db/schema.js";
 import { getUserFcmToken, deliverNotification } from "./notification.service.js";
+import { assessStress } from "./stress-detection.service.js";
 
 // Trigger types from the watch/phone classified events
 export type TriggerType =
@@ -133,6 +134,24 @@ export async function processEvent(event: ClassifiedEvent): Promise<ProcessResul
           .update(healthEvents)
           .set({ notificationSent: true })
           .where(eq(healthEvents.id, insertedEvent.id));
+      }
+    }
+
+    // Generate stress assessment for low_hrv events
+    if (triggerType === "low_hrv") {
+      try {
+        const payload = event.payload as { currentHRV?: number; averageHRV?: number; currentBPM?: number; averageBPM?: number };
+        if (payload.currentHRV && payload.averageHRV) {
+          await assessStress(
+            userId,
+            payload.currentHRV,
+            payload.averageHRV,
+            payload.currentBPM ?? 70,
+            payload.averageBPM ?? 65,
+          );
+        }
+      } catch (stressError) {
+        console.warn(`[TriggerProcessor] Stress assessment failed for ${userId}:`, stressError);
       }
     }
 

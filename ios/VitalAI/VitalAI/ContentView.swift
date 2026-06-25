@@ -55,6 +55,10 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Nutrição", systemImage: "fork.knife")
                 }
+            StressManagementView()
+                .tabItem {
+                    Label("Estresse", systemImage: "brain.head.profile")
+                }
             ReportsHubView()
                 .tabItem {
                     Label("Relatórios", systemImage: "chart.line.uptrend.xyaxis")

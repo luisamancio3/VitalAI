@@ -99,3 +99,17 @@ export const monthlyReports = pgTable("monthly_reports", {
   index("idx_monthly_reports_user_id").on(table.userId),
   index("idx_monthly_reports_user_month").on(table.userId, table.month),
 ]);
+
+// stress_scores table
+export const stressScores = pgTable("stress_scores", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id).notNull(),
+  score: integer("score").notNull(), // 0-100
+  level: text("level").notNull(), // "low" | "moderate" | "high" | "very_high"
+  factors: jsonb("factors").notNull(), // { hrv, heartRate, timeOfDay, recentActivity }
+  recommendation: text("recommendation"),
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_stress_scores_user_id").on(table.userId),
+  index("idx_stress_scores_user_created").on(table.userId, table.createdAt),
+]);
