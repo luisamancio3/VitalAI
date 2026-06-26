@@ -1,0 +1,35 @@
+{
+  "train_size": 42541,
+  "test_size": 10773,
+  "cv_precision": 0.7891,
+  "cv_recall": 0.8431,
+  "cv_f1": 0.8152,
+  "test_precision": 0.779,
+  "test_recall": 0.8098,
+  "test_f1": 0.7941,
+  "confusion_matrix": {
+    "tp": 4276,
+    "fp": 1213,
+    "fn": 1004,
+    "tn": 4280
+  },
+  "feature_importances": {
+    "accel_std_z": 0.4662,
+    "accel_ptp_y": 0.1003,
+    "gyro_std_z": 0.0813,
+    "accel_mean_y": 0.0751,
+    "accel_ptp_x": 0.0692,
+    "accel_mean_z": 0.0375,
+    "jerk_mean": 0.0294,
+    "accel_std_x": 0.028,
+    "accel_ptp_z": 0.025,
+    "sma": 0.0228,
+    "zcr_z": 0.0168,
+    "gyro_std_y": 0.0151,
+    "accel_std_y": 0.0117,
+    "accel_mean_x": 0.0103,
+    "gyro_mean_y": 0.0069,
+    "gyro_mean_z": 0.0044,
+    "dom_freq_z": 0.0
+  }
+}

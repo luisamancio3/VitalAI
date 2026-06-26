@@ -21,7 +21,7 @@ Key decisions:
   (eating gestures are 0.2-2 Hz, well within Nyquist)
 - Map "bite" gestures → eating (label=1), everything else → non-eating (label=0)
 - "drink" is kept as non-eating since our detector targets food intake specifically
-- Windows with >50% bite samples are labeled eating
+- Windows with >5% bite samples are labeled eating
 - 80/20 train/test split by participant (not by window) to avoid data leakage
 """
 
@@ -195,80 +195,111 @@ def create_label_array(n_samples: int, gestures: list[dict]) -> tuple[np.ndarray
     return labels, activities
 
 
-def process_participant(sensor_data: np.ndarray, gestures: list[dict],
-                        participant: str, window_id_offset: int) -> tuple[list[dict], int]:
+def process_participant_to_arrays(sensor_data: np.ndarray, gestures: list[dict],
+                                   participant: str, window_id_offset: int) -> tuple[np.ndarray, int, int]:
     """Process one participant's data into 15-second windows.
 
-    Steps:
-    1. Convert volts to physical units (g, rad/s)
-    2. Create per-sample labels from gesture annotations
-    3. Upsample from 15 Hz to 50 Hz
-    4. Cut into 15-second windows (750 samples) with 50% overlap
-    5. Label each window by majority vote
+    Returns a numpy array of shape (n_windows, SAMPLES_PER_WINDOW, 10) where
+    the 10 columns are: window_id, sample_idx, label, accel_x..z, gyro_x..z,
+    plus eating_count for stats. Returns (array, n_windows, n_eating_windows).
     """
     n_samples_original = sensor_data.shape[0]
+    if n_samples_original < CLEMSON_SAMPLES_PER_WINDOW:
+        return np.empty((0, TARGET_SAMPLES_PER_WINDOW, 8)), 0, 0
 
     # Convert sensor values from volts to physical units
     accel_x = volts_to_g(sensor_data[:, 0])
     accel_y = volts_to_g(sensor_data[:, 1])
     accel_z = volts_to_g(sensor_data[:, 2])
-
-    # Gyro columns: yaw, pitch, roll → map to x, y, z
     gyro_x = volts_to_rads(sensor_data[:, 3])
     gyro_y = volts_to_rads(sensor_data[:, 4])
     gyro_z = volts_to_rads(sensor_data[:, 5])
 
-    # Create label array at original sample rate
     labels_orig, activities_orig = create_label_array(n_samples_original, gestures)
 
     # Upsample all channels from 15 Hz to 50 Hz
-    channels = [accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z]
-    upsampled = [upsample_signal(ch, CLEMSON_SAMPLE_RATE, TARGET_SAMPLE_RATE) for ch in channels]
+    channels = np.column_stack([accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z])
+    n_target = int(n_samples_original * TARGET_SAMPLE_RATE / CLEMSON_SAMPLE_RATE)
 
-    # Upsample labels (nearest-neighbor to preserve boundaries)
-    n_target = len(upsampled[0])
+    x_orig = np.arange(n_samples_original)
+    x_target = np.linspace(0, n_samples_original - 1, n_target)
+
+    upsampled = np.zeros((n_target, 6))
+    for col in range(6):
+        f = interpolate.interp1d(x_orig, channels[:, col], kind="linear", fill_value="extrapolate")
+        upsampled[:, col] = f(x_target)
+
+    # Upsample labels (nearest-neighbor)
     label_indices = np.round(np.linspace(0, n_samples_original - 1, n_target)).astype(int)
     labels_up = labels_orig[label_indices]
     activities_up = activities_orig[label_indices]
 
     # Create windows with 50% overlap
-    step = TARGET_SAMPLES_PER_WINDOW // 2  # 375 samples
-    rows = []
-    window_count = 0
+    step = TARGET_SAMPLES_PER_WINDOW // 2
+    window_starts = list(range(0, n_target - TARGET_SAMPLES_PER_WINDOW + 1, step))
+    n_windows = len(window_starts)
 
-    for start in range(0, n_target - TARGET_SAMPLES_PER_WINDOW + 1, step):
+    if n_windows == 0:
+        return np.empty((0, TARGET_SAMPLES_PER_WINDOW, 8)), 0, 0
+
+    # Pre-allocate: columns = [window_id, sample_idx, label, ax, ay, az, gx, gy, gz]
+    # We'll build window metadata separately
+    window_labels = np.zeros(n_windows, dtype=int)
+    window_activities = []
+    window_data = np.zeros((n_windows, TARGET_SAMPLES_PER_WINDOW, 6))
+
+    for wi, start in enumerate(window_starts):
         end = start + TARGET_SAMPLES_PER_WINDOW
-        window_labels = labels_up[start:end]
-        window_activities = activities_up[start:end]
+        window_data[wi] = upsampled[start:end]
 
-        # Window label: majority vote
-        eating_ratio = window_labels.mean()
-        window_label = 1 if eating_ratio > 0.5 else 0
+        eating_ratio = labels_up[start:end].mean()
+        window_labels[wi] = 1 if eating_ratio > 0.05 else 0
 
-        # Window activity: most common activity
-        unique, counts = np.unique(window_activities, return_counts=True)
-        window_activity = unique[np.argmax(counts)]
+        unique, counts = np.unique(activities_up[start:end], return_counts=True)
+        window_activities.append(unique[np.argmax(counts)])
 
-        wid = window_id_offset + window_count
+    n_eating = int(window_labels.sum())
+    return (window_data, window_labels, window_activities, window_id_offset, n_windows, n_eating)
 
-        for sample_idx in range(TARGET_SAMPLES_PER_WINDOW):
+
+def write_windows_to_parquet(window_result, output_path: Path, window_id_offset: int, append: bool = False):
+    """Write processed windows to parquet, expanding to per-sample rows.
+
+    Memory-efficient: processes one file's windows at a time.
+    """
+    window_data, window_labels, window_activities, _, n_windows, _ = window_result
+
+    if n_windows == 0:
+        return
+
+    rows = []
+    for wi in range(n_windows):
+        wid = window_id_offset + wi
+        label = int(window_labels[wi])
+        activity = window_activities[wi]
+
+        for si in range(TARGET_SAMPLES_PER_WINDOW):
             rows.append({
                 "window_id": wid,
-                "sample_idx": sample_idx,
-                "activity": window_activity,
-                "label": window_label,
-                "accel_x": upsampled[0][start + sample_idx],
-                "accel_y": upsampled[1][start + sample_idx],
-                "accel_z": upsampled[2][start + sample_idx],
-                "gyro_x": upsampled[3][start + sample_idx],
-                "gyro_y": upsampled[4][start + sample_idx],
-                "gyro_z": upsampled[5][start + sample_idx],
-                "participant": participant,
+                "sample_idx": si,
+                "activity": activity,
+                "label": label,
+                "accel_x": float(window_data[wi, si, 0]),
+                "accel_y": float(window_data[wi, si, 1]),
+                "accel_z": float(window_data[wi, si, 2]),
+                "gyro_x": float(window_data[wi, si, 3]),
+                "gyro_y": float(window_data[wi, si, 4]),
+                "gyro_z": float(window_data[wi, si, 5]),
             })
 
-        window_count += 1
+    chunk_df = pd.DataFrame(rows)
 
-    return rows, window_count
+    if append and output_path.exists():
+        existing = pd.read_parquet(output_path)
+        combined = pd.concat([existing, chunk_df], ignore_index=True)
+        combined.to_parquet(output_path, index=False)
+    else:
+        chunk_df.to_parquet(output_path, index=False)
 
 
 def main():
@@ -278,27 +309,6 @@ def main():
     sensor_dir = data_dir / "sensor_data"
     gesture_dir = data_dir / "gesture_gt"
 
-    # Find the actual data directories (may be nested after extraction)
-    # Clemson zips sometimes have a top-level folder
-    sensor_candidates = list(sensor_dir.rglob("p0*"))
-    if not sensor_candidates:
-        # Try one level deeper
-        for subdir in sensor_dir.iterdir():
-            if subdir.is_dir():
-                sensor_candidates = list(subdir.rglob("p0*"))
-                if sensor_candidates:
-                    sensor_dir = subdir
-                    break
-
-    gesture_candidates = list(gesture_dir.rglob("p0*"))
-    if not gesture_candidates:
-        for subdir in gesture_dir.iterdir():
-            if subdir.is_dir():
-                gesture_candidates = list(subdir.rglob("p0*"))
-                if gesture_candidates:
-                    gesture_dir = subdir
-                    break
-
     print("Clemson Cafeteria → VitalAI Pipeline Converter")
     print("=" * 55)
     print(f"Sensor data dir:  {sensor_dir}")
@@ -306,22 +316,17 @@ def main():
     print(f"Output dir:       {output_dir}")
     print()
 
-    # Find matching sensor + gesture file pairs
     matches = find_matching_files(sensor_dir, gesture_dir)
 
     if not matches:
         print("ERROR: No matching sensor/gesture file pairs found.")
-        print()
-        print("Expected directory structure:")
-        print(f"  {sensor_dir}/p001/c1/filename.txt")
-        print(f"  {gesture_dir}/p001/c1/filename.txt")
-        print()
-        print("Make sure you ran download_clemson.py first.")
+        print(f"  Checked: {sensor_dir}")
+        print(f"  Against: {gesture_dir}")
+        print("  Make sure you ran download_clemson.py first.")
         return
 
     print(f"Found {len(matches)} sensor/gesture file pairs")
 
-    # Get unique participants and split 80/20 by participant
     participants = sorted(set(m["participant"] for m in matches))
     n_participants = len(participants)
     n_train = int(n_participants * 0.8)
@@ -334,13 +339,21 @@ def main():
     print(f"Participants: {n_participants} total, {len(train_participants)} train, {len(test_participants)} test")
     print()
 
-    # Process all files
-    train_rows = []
-    test_rows = []
+    train_path = output_dir / "train_raw.parquet"
+    test_path = output_dir / "test_raw.parquet"
+
+    # Remove old files to start fresh
+    train_path.unlink(missing_ok=True)
+    test_path.unlink(missing_ok=True)
+
     train_window_offset = 0
     test_window_offset = 0
     total_eating_windows = 0
     total_windows = 0
+    BATCH_SIZE = 20
+
+    train_batch = []
+    test_batch = []
 
     for i, match in enumerate(matches):
         sensor_data = load_sensor_file(match["sensor_file"])
@@ -354,55 +367,50 @@ def main():
         is_train = match["participant"] in train_participants
 
         if is_train:
-            rows, n_windows = process_participant(
+            result = process_participant_to_arrays(
                 sensor_data, gestures, match["participant"], train_window_offset
             )
-            train_rows.extend(rows)
-            train_window_offset += n_windows
+            _, _, _, _, n_w, n_eat = result
+            train_window_offset += n_w
+            train_batch.append(result)
         else:
-            rows, n_windows = process_participant(
+            result = process_participant_to_arrays(
                 sensor_data, gestures, match["participant"], test_window_offset
             )
-            test_rows.extend(rows)
-            test_window_offset += n_windows
+            _, _, _, _, n_w, n_eat = result
+            test_window_offset += n_w
+            test_batch.append(result)
 
-        eating_in_session = sum(1 for r in rows if r["sample_idx"] == 0 and r["label"] == 1)
-        total_eating_windows += eating_in_session
-        total_windows += n_windows
+        total_eating_windows += n_eat
+        total_windows += n_w
+
+        # Flush batches to disk periodically to control memory
+        if len(train_batch) >= BATCH_SIZE:
+            flush_batch(train_batch, train_path)
+            train_batch = []
+        if len(test_batch) >= BATCH_SIZE:
+            flush_batch(test_batch, test_path)
+            test_batch = []
 
         if (i + 1) % 50 == 0 or i == len(matches) - 1:
             print(f"  Processed {i + 1}/{len(matches)} files... "
                   f"({total_windows} windows, {total_eating_windows} eating)")
 
+    # Flush remaining
+    if train_batch:
+        flush_batch(train_batch, train_path)
+    if test_batch:
+        flush_batch(test_batch, test_path)
+
     print()
 
-    # Save as parquet (same format as synthetic data)
-    if train_rows:
-        train_df = pd.DataFrame(train_rows)
-        # Drop participant column before saving (not in pipeline format)
-        participant_col = train_df.pop("participant")
-        train_path = output_dir / "train_raw.parquet"
-        train_df.to_parquet(train_path, index=False)
-        n_train_windows = train_df["window_id"].nunique()
-        n_train_eating = train_df[train_df["sample_idx"] == 0]["label"].sum()
-        print(f"Train set: {n_train_windows} windows ({n_train_eating} eating, "
-              f"{n_train_windows - n_train_eating} non-eating)")
-        print(f"  Saved to {train_path}")
-    else:
-        print("WARNING: No training data generated")
-
-    if test_rows:
-        test_df = pd.DataFrame(test_rows)
-        test_df.pop("participant")
-        test_path = output_dir / "test_raw.parquet"
-        test_df.to_parquet(test_path, index=False)
-        n_test_windows = test_df["window_id"].nunique()
-        n_test_eating = test_df[test_df["sample_idx"] == 0]["label"].sum()
-        print(f"Test set:  {n_test_windows} windows ({n_test_eating} eating, "
-              f"{n_test_windows - n_test_eating} non-eating)")
-        print(f"  Saved to {test_path}")
-    else:
-        print("WARNING: No test data generated")
+    for label, path, n_w in [("Train", train_path, train_window_offset), ("Test", test_path, test_window_offset)]:
+        if path.exists():
+            df = pd.read_parquet(path)
+            n_eating = df[df["sample_idx"] == 0]["label"].sum()
+            print(f"{label} set: {n_w} windows ({n_eating} eating, {n_w - n_eating} non-eating)")
+            print(f"  Saved to {path} ({path.stat().st_size / 1024 / 1024:.1f} MB)")
+            del df
 
     print()
     print("Conversion complete.")
@@ -410,9 +418,52 @@ def main():
           f"({total_eating_windows / max(1, total_windows) * 100:.1f}%)")
     print()
     print("Next steps:")
-    print("  1. python extract_features.py    # Extract 17 features per window")
-    print("  2. python train_model.py         # Train Gradient Boosting classifier")
-    print("  3. python export_coreml.py       # Export to Core ML for Apple Watch")
+    print("  1. python extract_features.py")
+    print("  2. python train_model.py")
+    print("  3. python export_coreml.py")
+
+
+def flush_batch(batch: list, output_path: Path):
+    """Expand a batch of window results into rows and append to parquet."""
+    all_rows = []
+    wid_offset = 0
+
+    for result in batch:
+        window_data, window_labels, window_activities, base_offset, n_windows, _ = result
+
+        for wi in range(n_windows):
+            wid = base_offset + wi
+            label = int(window_labels[wi])
+            activity = window_activities[wi]
+
+            for si in range(TARGET_SAMPLES_PER_WINDOW):
+                all_rows.append((
+                    wid, si, activity, label,
+                    float(window_data[wi, si, 0]),
+                    float(window_data[wi, si, 1]),
+                    float(window_data[wi, si, 2]),
+                    float(window_data[wi, si, 3]),
+                    float(window_data[wi, si, 4]),
+                    float(window_data[wi, si, 5]),
+                ))
+
+    if not all_rows:
+        return
+
+    chunk_df = pd.DataFrame(all_rows, columns=[
+        "window_id", "sample_idx", "activity", "label",
+        "accel_x", "accel_y", "accel_z", "gyro_x", "gyro_y", "gyro_z",
+    ])
+
+    if output_path.exists():
+        existing = pd.read_parquet(output_path)
+        combined = pd.concat([existing, chunk_df], ignore_index=True)
+        combined.to_parquet(output_path, index=False)
+        del existing, combined
+    else:
+        chunk_df.to_parquet(output_path, index=False)
+
+    del chunk_df, all_rows
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ outputs a binary classification (eating vs non-eating) with confidence score.
 
 Why Gradient Boosting:
 - Works well with small-medium tabular datasets
-- Handles class imbalance natively (eating is ~15% of windows)
+- Handles class imbalance via sample_weight (eating is ~0.7% of Clemson data)
 - Feature importances help validate the model learns real patterns
 - Converts cleanly to Core ML via coremltools
 - ~800KB model size after quantization (within spec target)
@@ -42,17 +42,25 @@ def train_and_evaluate(data_dir: Path) -> GradientBoostingClassifier:
     print(f"  Train: {len(X_train)} windows ({y_train.sum()} eating, {(1 - y_train).sum()} non-eating)")
     print(f"  Test:  {len(X_test)} windows ({y_test.sum()} eating, {(1 - y_test).sum()} non-eating)")
 
+    # Compute sample weights to handle class imbalance
+    n_pos = y_train.sum()
+    n_neg = len(y_train) - n_pos
+    ratio = n_neg / max(1, n_pos)
+    print(f"  Class ratio: {ratio:.1f}:1 (non-eating:eating)")
+
+    sample_weights = np.where(y_train == 1, ratio, 1.0)
+
     model = GradientBoostingClassifier(
-        n_estimators=150,
+        n_estimators=200,
         max_depth=4,
-        learning_rate=0.1,
+        learning_rate=0.05,
         subsample=0.8,
-        min_samples_leaf=5,
+        min_samples_leaf=10,
         random_state=42,
     )
 
     print("\nTraining Gradient Boosting classifier...")
-    model.fit(X_train, y_train)
+    model.fit(X_train, y_train, sample_weight=sample_weights)
 
     # Cross-validation on training set
     print("\n5-fold cross-validation on training set:")
