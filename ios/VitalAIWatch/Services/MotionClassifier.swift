@@ -59,9 +59,12 @@ final class MotionClassifier {
     func extractFeatures(from samples: [CMDeviceMotion]) -> MotionFeatures? {
         guard samples.count >= 500 else { return nil }
 
-        let accelX = samples.map { $0.userAcceleration.x }
-        let accelY = samples.map { $0.userAcceleration.y }
-        let accelZ = samples.map { $0.userAcceleration.z }
+        // Training data (Clemson) is raw accelerometer in g, which includes the
+        // gravity vector. CoreMotion's userAcceleration excludes gravity, so we
+        // add it back to match the distribution the model was trained on.
+        let accelX = samples.map { $0.userAcceleration.x + $0.gravity.x }
+        let accelY = samples.map { $0.userAcceleration.y + $0.gravity.y }
+        let accelZ = samples.map { $0.userAcceleration.z + $0.gravity.z }
         let gyroY = samples.map { $0.rotationRate.y }
         let gyroZ = samples.map { $0.rotationRate.z }
 
@@ -200,7 +203,10 @@ final class MotionClassifier {
                 crossings += 1
             }
         }
-        return crossings
+        // Match training: extract_features.py counts sign-change events then
+        // integer-divides by 2 (crossings // 2). Without this the on-device
+        // value is ~2x what the model saw in training.
+        return crossings / 2
     }
 
     private func dominantFrequency(_ signal: [Double], sampleRate: Double = 50.0) -> Double {
