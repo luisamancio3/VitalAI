@@ -34,7 +34,25 @@ vi.mock("../src/services/notification.service.js", () => ({
   deliverNotification: vi.fn().mockResolvedValue({ success: true, messageId: "m" }),
 }));
 
-import { calculateSmartInterval } from "../src/services/hydration.service.js";
+import { calculateSmartInterval, shouldSendReminder } from "../src/services/hydration.service.js";
+
+function makeStatus(overrides: Partial<{
+  todayTotalMl: number;
+  goalMl: number;
+  progress: number;
+  lastIntakeAt: string | null;
+  nextReminderIn: number | null;
+}> = {}) {
+  return {
+    todayTotalMl: 500,
+    goalMl: 2500,
+    progress: 0.2,
+    lastIntakeAt: new Date().toISOString(),
+    nextReminderIn: 0,
+    logs: [],
+    ...overrides,
+  };
+}
 
 describe("calculateSmartInterval", () => {
   it("should return base interval for normal conditions", () => {
@@ -140,5 +158,32 @@ describe("calculateSmartInterval", () => {
       todayProgress: 0.2,
     });
     expect(combined).toBe(45); // hits minimum
+  });
+});
+
+describe("shouldSendReminder", () => {
+  it("never reminds once the daily goal is met", () => {
+    const status = makeStatus({ progress: 1.0, nextReminderIn: 0 });
+    expect(shouldSendReminder(status, 15)).toBe(false);
+  });
+
+  it("reminds when no intake logged and morning is underway (>=9h)", () => {
+    const status = makeStatus({ lastIntakeAt: null, progress: 0 });
+    expect(shouldSendReminder(status, 10)).toBe(true);
+  });
+
+  it("stays quiet before 9am when no intake logged", () => {
+    const status = makeStatus({ lastIntakeAt: null, progress: 0 });
+    expect(shouldSendReminder(status, 7)).toBe(false);
+  });
+
+  it("reminds when the countdown has elapsed (nextReminderIn <= 0)", () => {
+    const status = makeStatus({ nextReminderIn: 0 });
+    expect(shouldSendReminder(status, 15)).toBe(true);
+  });
+
+  it("waits while the countdown is still running (nextReminderIn > 0)", () => {
+    const status = makeStatus({ nextReminderIn: 40 });
+    expect(shouldSendReminder(status, 15)).toBe(false);
   });
 });

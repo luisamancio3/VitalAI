@@ -109,7 +109,9 @@ export async function getHydrationStatus(userId: string): Promise<HydrationStatu
     .orderBy(desc(hydrationLogs.createdAt))
     .limit(50);
 
-  const todayTotalMl = logs.reduce((sum, l) => sum + l.amountMl, 0);
+  // Sum the full day in SQL, not the capped 50-row display list, so heavy
+  // loggers (many quick-adds) aren't undercounted.
+  const todayTotalMl = await getTodayTotalMl(userId);
   const goalMl = DEFAULT_DAILY_GOAL_ML;
   const progress = Math.min(todayTotalMl / goalMl, 1.0);
 
@@ -123,12 +125,18 @@ export async function getHydrationStatus(userId: string): Promise<HydrationStatu
   const recentWorkout = await hadRecentWorkout(userId);
   const currentHour = new Date().getHours();
 
-  const nextReminderIn = calculateSmartInterval({
+  const interval = calculateSmartInterval({
     minutesSinceLastIntake,
     recentWorkout,
     currentHour,
     todayProgress: progress,
   });
+
+  // Countdown until the next reminder is due, not the raw interval — a client
+  // showing "próximo lembrete em X min" needs time remaining. 0 = due now.
+  const nextReminderIn = lastLog
+    ? Math.max(0, Math.round(interval - minutesSinceLastIntake))
+    : 0;
 
   return {
     todayTotalMl,
@@ -171,9 +179,8 @@ export async function checkHydrationForAllUsers(): Promise<number> {
 
   for (const user of allUsers) {
     try {
-      const shouldRemind = await shouldSendHydrationReminder(user.id);
-      if (shouldRemind) {
-        const status = await getHydrationStatus(user.id);
+      const status = await getHydrationStatus(user.id);
+      if (shouldSendReminder(status, currentHour)) {
         await processEvent({
           userId: user.id,
           triggerType: "hydration_reminder",
@@ -197,21 +204,19 @@ export async function checkHydrationForAllUsers(): Promise<number> {
   return sent;
 }
 
-async function shouldSendHydrationReminder(userId: string): Promise<boolean> {
-  const status = await getHydrationStatus(userId);
-
+/**
+ * Pure reminder decision from a computed status. Exported for testing and to
+ * keep checkHydrationForAllUsers to a single status query per user.
+ */
+export function shouldSendReminder(status: HydrationStatus, currentHour: number): boolean {
   // Already met goal — no reminder needed
   if (status.progress >= 1.0) return false;
 
-  // No intake logged today and it's past 9am — definitely remind
-  if (!status.lastIntakeAt && new Date().getHours() >= 9) return true;
+  // No intake logged today — remind once the morning is underway
+  if (!status.lastIntakeAt) return currentHour >= 9;
 
-  if (!status.lastIntakeAt) return false;
-
-  const minutesSinceLastIntake = (Date.now() - new Date(status.lastIntakeAt).getTime()) / 60000;
-  const smartInterval = status.nextReminderIn ?? BASE_INTERVAL_MINUTES;
-
-  return minutesSinceLastIntake >= smartInterval;
+  // nextReminderIn is the countdown to the next reminder; 0 means it's due
+  return (status.nextReminderIn ?? 0) <= 0;
 }
 
 export async function getHydrationHistory(userId: string, days: number = 7) {
