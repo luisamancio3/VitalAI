@@ -135,7 +135,7 @@ final class MotionClassifier {
         }
 
         let label = prediction.featureValue(for: "label")?.int64Value ?? 0
-        let probs = prediction.featureValue(for: "labelProbability")?.dictionaryValue as? [Int64: Double]
+        let probs = prediction.featureValue(for: "classProbability")?.dictionaryValue as? [Int64: Double]
         let confidence = probs?[1] ?? (label == 1 ? 1.0 : 0.0)
 
         return ClassificationResult(
