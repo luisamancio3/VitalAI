@@ -15,6 +15,7 @@ vi.mock("../src/config/database.js", () => {
     set: vi.fn().mockResolvedValue("OK"),
     setex: vi.fn().mockResolvedValue("OK"),
     get: vi.fn().mockResolvedValue(null),
+    del: vi.fn().mockResolvedValue(1),
   };
   const mockDb = {
     insert: vi.fn().mockReturnThis(),
@@ -197,6 +198,25 @@ describe("TriggerProcessor", () => {
 
     expect(result.processed).toBe(false);
     expect(result.reason).toBe("error");
+  });
+
+  it("should release the cooldown when processing fails, allowing retry", async () => {
+    const { generateMessage } = await import("../src/config/claude.js");
+    (db.limit as ReturnType<typeof vi.fn>).mockResolvedValue([{ notificationPreferences: {} }]);
+    (redis.set as ReturnType<typeof vi.fn>).mockResolvedValue("OK");
+    (redis.del as ReturnType<typeof vi.fn>).mockClear();
+    (generateMessage as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("API timeout"));
+
+    await processEvent({
+      userId: "user-error",
+      triggerType: "morning_sleep",
+      payload: {},
+      timestamp: new Date().toISOString(),
+    });
+
+    // Cooldown must be cleared so a transient failure doesn't block the trigger
+    // for its full 24h window.
+    expect(redis.del).toHaveBeenCalledWith("cooldown:user-error:morning_sleep");
   });
 });
 

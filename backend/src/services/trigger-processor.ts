@@ -158,6 +158,10 @@ export async function processEvent(event: ClassifiedEvent): Promise<ProcessResul
     return { processed: true, message };
   } catch (error) {
     console.error(`[TriggerProcessor] Failed to process ${triggerType} for ${userId}:`, error);
+    // Release the cooldown so a transient failure (e.g. Claude API hiccup)
+    // doesn't suppress this trigger for its full window — up to 24h for
+    // morning_sleep. The next event should be free to retry.
+    await redis.del(cooldownKey).catch(() => {});
     return { processed: false, reason: "error" };
   }
 }

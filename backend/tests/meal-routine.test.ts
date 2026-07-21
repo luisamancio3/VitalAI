@@ -15,6 +15,7 @@ vi.mock("../src/config/database.js", () => {
     set: vi.fn().mockResolvedValue("OK"),
     setex: vi.fn().mockResolvedValue("OK"),
     exists: vi.fn().mockResolvedValue(0),
+    del: vi.fn().mockResolvedValue(1),
   };
   // Build a chainable mock where every method returns the mock itself,
   // except terminal methods (limit, returning) which resolve data.

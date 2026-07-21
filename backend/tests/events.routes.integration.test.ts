@@ -22,6 +22,7 @@ vi.mock("../src/config/database.js", () => {
     set: vi.fn().mockResolvedValue("OK"),
     setex: vi.fn().mockResolvedValue("OK"),
     exists: vi.fn().mockResolvedValue(0),
+    del: vi.fn().mockResolvedValue(1),
   };
   return { db: mockDb, redis: mockRedis };
 });
