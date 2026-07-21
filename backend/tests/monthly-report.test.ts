@@ -185,6 +185,22 @@ describe("generateMonthlyReport", () => {
       }),
     );
   });
+
+  it("summarizes the previous month, not the just-started current month", async () => {
+    vi.useFakeTimers();
+    // Cron fires 04:00 on the 1st — here, March 1st. The report must cover Feb.
+    vi.setSystemTime(new Date(2026, 2, 1, 4, 0, 0));
+    (db.where as ReturnType<typeof vi.fn>).mockReturnValue(makeResult([
+      { metrics: { avgSleepHours: 7, workoutCount: 2, nutrition: { mealsLogged: 3, avgRating: 4 } } },
+    ]));
+
+    await generateMonthlyReport("user-prev-month");
+
+    expect(db.values).toHaveBeenCalledWith(
+      expect.objectContaining({ month: "2026-02-01" }),
+    );
+    vi.useRealTimers();
+  });
 });
 
 describe("generateMonthlyReportsForAllUsers", () => {

@@ -23,8 +23,11 @@ Keep it under 500 words. Focus on patterns and long-term trends rather than indi
 
 export async function generateMonthlyReport(userId: string): Promise<string> {
   const now = new Date();
-  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+  // The monthly cron fires at 04:00 on the 1st, so summarize the month that
+  // just ended, not the just-started current month (which has no weekly
+  // reports yet and would always yield an empty summary).
+  const monthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const monthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999);
 
   const reports = await db
     .select()
