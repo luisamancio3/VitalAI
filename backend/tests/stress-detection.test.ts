@@ -87,6 +87,9 @@ describe("calculateStressScore", () => {
       recentActivityLevel: 1.0,
     });
     expect(activeResult.score).toBeLessThan(baseResult.score);
+    // Activity carries a 0.15 weight → full activity should shave a meaningful
+    // amount (up to 15 pts), not the ~3 pts the old *20 scaling produced.
+    expect(baseResult.score - activeResult.score).toBeGreaterThanOrEqual(10);
   });
 
   it("should clamp score between 0 and 100", () => {

@@ -79,7 +79,9 @@ export function calculateStressScore(factors: StressFactors): { score: number; l
   const hrvScore = Math.min(factors.hrvDeviation * 1.5, 100);
   const hrScore = Math.min(factors.heartRateElevation * 1.2, 100);
   const timeScore = factors.timeOfDayFactor * 100;
-  const activityAdjustment = factors.recentActivityLevel * 20;
+  // Normalize activity to 0-100 like the other components so its 0.15 weight
+  // actually contributes up to 15 points (was *20 → max 3 points, near-inert).
+  const activityAdjustment = factors.recentActivityLevel * 100;
 
   const rawScore = (hrvScore * hrvWeight)
     + (hrScore * hrWeight)
